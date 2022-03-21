@@ -28,16 +28,7 @@
             <a class="btn btn-light" href="/articles">Articles</a>
         </div>
         <div class="navbar-item">
-            <a class="btn btn-light" href="/">Platzhalter</a>
-        </div>
-        <div class="navbar-item">
-            <a class="btn btn-light" href="/">Platzhalter</a>
-        </div>
-        <div class="navbar-item">
-            <a class="btn btn-light" href="/">Platzhalter</a>
-        </div>
-        <div class="navbar-item">
-            <a class="btn btn-light" href="/">Platzhalter</a>
+            <a class="btn btn-light" href="/showLogin">login</a>
         </div>
     </nav>
     <!-- Ende Navbar -->

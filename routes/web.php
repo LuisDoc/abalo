@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AuthController;
 
 /*
     Home-Routen
@@ -19,4 +20,23 @@ Route::redirect('/home','/articles');
 */
 Route::get('/articles',[ArticleController::class,'showAllArticle']);
 Route::get('/articles/search',[ArticleController::class,'showArticle']);
+
+
+/*
+Authentication routes
+*/
+//Weiterleitung zu Views
+Route::get('/showLogin', function()
+{
+    return view('auth.login');
+});
+Route::get('/showRegister', function()
+{
+    return view('auth.register');
+});
+//Anmeldung
+Route::POST('/login',[AuthController::class,'login']);
+Route::POST('/register',[AuthController::class,'register']);
+
+
 
