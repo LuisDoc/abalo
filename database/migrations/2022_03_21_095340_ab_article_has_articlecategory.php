@@ -13,7 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('ab_article_has_articlecategory', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('ab_articlecategory_id');
+            $table->unsignedBigInteger('ab_article_id');
+            $table->foreign('ab_articlecategory_id')->references('id')->on('ab_articlecategory')->nullable(false);
+            $table->foreign('ab_article_id')->references('id')->on('ab_article')->unique()->nullable(false);
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ab_article_has_articlecategory');
     }
 };
