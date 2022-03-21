@@ -20,4 +20,5 @@ Route::get('/home', [HomeController::class,'getHome']);
 
 //Artikelansicht
 Route::get('/articles',[ArticleController::class,'showAllArticle']);
+Route::get('/articles/search',[ArticleController::class,'showArticle']);
 
