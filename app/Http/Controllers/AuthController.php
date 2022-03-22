@@ -45,7 +45,7 @@ class AuthController extends Controller
         );
         
         if(!Auth::attempt($userdata)){
-            return redirect('/showRegister');
+            return redirect('/showRegister')->withErrors(['error' => 'Anmeldung fehlgeschlagen']);;
         }
 
         return redirect('home');
