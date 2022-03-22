@@ -8,20 +8,26 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\DomainRules;
+use App\Models\User;
 use Hash;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller
 {
+    use AuthenticatesUsers;
+    public function username(){
+        return 'ab_mail';
+    }
+
     public function login(Request $request){
         $email = $request->email;
         $password = $request->passwort;
 
         //Suche nach einem Nutzer mit dieser Email
-        $User = ab_user::where('ab_mail','like',$email)->get()->first();
+        $User = User::where('ab_mail','like',$email)->get()->first();
         if(!$User){
             return view('auth.login')->withErrors(['email' => 'Es wurde kein Konto unter dieser Email gefunden']);
         }
@@ -33,9 +39,16 @@ class AuthController extends Controller
         }
         
         //Nutzer anmelden
+        $userdata = array(
+            'ab_mail'=>$request->email,
+            'password'=>$request->passwort
+        );
         
+        if(!Auth::attempt($userdata)){
+            return redirect('/showRegister');
+        }
 
-        return view('index');
+        return redirect('home');
     }
 
     public function register(Request $request){
@@ -54,19 +67,21 @@ class AuthController extends Controller
             return view('auth.register')->withErrors(['password_confirmation' => 'Die Passwörter sind nicht identisch']);
         }
         //Anlegen des neuen Nutzers
-        $user = new ab_user();
-        $user->ab_name = $request->name;
-        $user->ab_password = Hash::make($request->password);
-        $user->ab_mail = $request->email;
-        $user->save();
+        User::create([
+            'ab_mail' => $request->email,
+            'ab_name'=>$request->name,
+            'ab_password'=>Hash::make($request->password)
+            
+        ]);
 
-        return redirect('/');
+        return redirect('/showLogin');
     }
 
     public function signOut(){
-
-        dd($request);
-        return view('index');
+        session()->flush();
+        Auth::logout();
+        
+        return redirect('home');
     }
 
 

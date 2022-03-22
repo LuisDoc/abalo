@@ -27,7 +27,7 @@
                                     <button type="submit" class="btn btn-dark btn-block">Sign in</button>
                                 </div>
                             </form>
-                            <a href="/showRegister">Noch kein Konto ? Hier regestrieren!</a>
+                            <a href="/showRegister">Noch kein Konto ? Hier registrieren!</a>
                         </div>
                     </div>
                 </div>

@@ -30,6 +30,11 @@
         <div class="navbar-item">
             <a class="btn btn-light" href="/showLogin">login</a>
         </div>
+        @if(!Auth::guest())
+        <div class="navbar-item">
+            <a class="btn btn-light" href="/logout">Log out</a>
+        </div> 
+        @endif  
     </nav>
     <!-- Ende Navbar -->
     @yield('content')

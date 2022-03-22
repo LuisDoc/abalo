@@ -9,7 +9,7 @@ use App\Http\Controllers\AuthController;
     Home-Routen
 */
 Route::redirect('/','/articles');
-Route::redirect('/home','/articles');
+Route::redirect('/home','/articles')->middleware('auth');
 
 //Route::get('/', [HomeController::class,'getHome']);
 //Route::get('/home', [HomeController::class,'getHome']);
@@ -29,7 +29,7 @@ Authentication routes
 Route::get('/showLogin', function()
 {
     return view('auth.login');
-});
+})->name('login');;
 Route::get('/showRegister', function()
 {
     return view('auth.register');
@@ -37,6 +37,8 @@ Route::get('/showRegister', function()
 //Anmeldung
 Route::POST('/login',[AuthController::class,'login']);
 Route::POST('/register',[AuthController::class,'register']);
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
 
 
 
