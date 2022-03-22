@@ -56,7 +56,7 @@ class AuthController extends Controller
             Eingabevalidierung
         */
 
-        $User = ab_user::query()->where('ab_mail','like',$request->email)->get()->first();
+        $User = User::query()->where('ab_mail','like',$request->email)->get()->first();
         
         //Überprüfung der E-Mail
         if($User){
