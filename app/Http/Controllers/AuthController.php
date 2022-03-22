@@ -17,6 +17,22 @@ use Illuminate\Support\Facades\Log;
 class AuthController extends Controller
 {
     public function login(Request $request){
+        $email = $request->email;
+        $password = $request->passwort;
+
+        //Suche nach einem Nutzer mit dieser Email
+        $User = ab_user::where('ab_mail','like',$email)->get()->first();
+        if(!$User){
+            return view('auth.login')->withErrors(['email' => 'Es wurde kein Konto unter dieser Email gefunden']);
+        }
+
+
+        //Passwörter identisch ? 
+        if(!Hash::check($password,$User->ab_password)){
+            return view('auth.login')->withErrors(['password' => 'Passwort inkorrekt']);
+        }
+        
+        //Nutzer anmelden
         
 
         return view('index');
