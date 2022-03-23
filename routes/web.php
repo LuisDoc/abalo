@@ -8,11 +8,12 @@ use App\Http\Controllers\AuthController;
 /*
     Home-Routen
 */
-Route::redirect('/','/articles');
+/*
+Route::redirect('/','/articles')->middleware('auth');
 Route::redirect('/home','/articles')->middleware('auth');
-
-//Route::get('/', [HomeController::class,'getHome']);
-//Route::get('/home', [HomeController::class,'getHome']);
+*/
+Route::get('/', [HomeController::class,'getHome']);
+Route::get('/home', [HomeController::class,'getHome']);
 
 
 /*

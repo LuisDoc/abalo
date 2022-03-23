@@ -18,7 +18,7 @@
     <nav class="navbar-container">
         <!--Logo -->
         <div class="navbar-item">
-            <img id="navbarLogo" src="{{ url('/images/logoInverted.jpg') }}" alt="Abalo">
+            <img id="navbarLogo" src="{{ url('/images/logo.png') }}" alt="Abalo">
         </div>
         <!-- Buttons -->
         <div class="navbar-item">
@@ -30,11 +30,11 @@
 
         @if (!Auth::guest())
             <div class="navbar-item">
-                <a class="btn btn-light" href="/logout">Log out</a>
+                <a class="btn btn-light" href="/logout">Sign Out</a>
             </div>
         @else
             <div class="navbar-item">
-                <a class="btn btn-light" href="/showLogin">login</a>
+                <a class="btn btn-light" href="/showLogin">Login</a>
             </div>
         @endif
     </nav>

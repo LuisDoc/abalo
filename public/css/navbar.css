@@ -1,6 +1,10 @@
+/*
+    Color-Codes
+    Bootstrap secondary grey: 687178
+*/
 
 .navbar-container{
-    background-color: #687178;
+    background-color: #f7f7f7;
     border-radius: 12px;
     height: 6em;
     display: grid;
@@ -8,10 +12,10 @@
     grid-template-columns: 15em repeat(6, 10em); 
     grid-column-gap: 0.5em;
     /*Margin um zum Browser Rand abstand zu generien*/
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-top: 0.5em;
+    margin-bottom: 5em;
+    margin-left: 1em;
+    margin-right: 1em;
     
 }
 .navbar-item{
@@ -20,9 +24,16 @@
     align-content:center;
 }
 .navbar-item > a{
+    border-radius: 15px;
+    background-color: #f7f7f7e3;
     margin-top: auto;
     margin-bottom: auto;
     height: 2.4em;
+}
+.navbar-item > a:hover{
+    transform: scale(1.1);
+    transition-duration: 500ms;
+    border-color: black;
 }
 
 #navbarLogo{
@@ -31,5 +42,10 @@
     margin-left: 1em;
     height:4.5em;
     width: 10em;
+}
+#navbarLogo:hover{
+    transform: scale(1.1);
+    transition-duration: 500ms;
+    border-color: black;
 }
 
