@@ -1,0 +1,14 @@
+.defaultButton{
+    margin-top: 3em;
+    margin-bottom: 3em;
+    margin-left: 45%;
+    padding:10px;
+    border-radius: 15px;
+    border-color: black;
+    background-color: #f7f7f7e3;
+}
+.defaultButton:hover{
+    transform: scale(1.1);
+    transition-duration: 500ms;
+    border-color: black;
+}
