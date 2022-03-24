@@ -41,7 +41,7 @@
                     </a>
                 @endforeach
             </div>
-            <a href="/articles" class="btn ml-64 py-4 px-8">View more articles</a>
+            <a href="/articles" class="btn ml-64 py-4 px-8">Mehr Artikel ansehen</a>
         </div>
     </div>
 @endsection
