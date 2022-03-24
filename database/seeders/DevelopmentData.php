@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\ab_user;
+use App\Models\User;
 use App\Models\ab_article;
 use App\Models\ab_articlecategory;
 
@@ -25,7 +25,7 @@ class DevelopmentData extends Seeder
 
         while(($data = fgetcsv($userCSV, 2000, ";")) !== FALSE){
             if(!$firstLine){
-                ab_user::create([
+                User::create([
                     "ab_name" => $data[1],
                     "ab_password" => Hash::make($data[2]),
                     "ab_mail" => $data[3]
