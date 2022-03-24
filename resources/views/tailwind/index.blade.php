@@ -19,7 +19,7 @@
   <!--Latest 3 articles-->
   <div class="bg-cgray">
         <div class="text-5xl headline ml-64 pt-20 mb-20 text-purple">
-            Latest Articles
+            Neuste Artikel    
         </div>
         <div class="mt-20 pb-24">
             
