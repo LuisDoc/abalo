@@ -29,13 +29,13 @@ class AuthController extends Controller
         //Suche nach einem Nutzer mit dieser Email
         $User = User::where('ab_mail','like',$email)->get()->first();
         if(!$User){
-            return view('auth.login')->withErrors(['email' => 'Es wurde kein Konto unter dieser Email gefunden']);
+            return view('tailwind.auth.login')->withErrors(['email' => 'Es wurde kein Konto unter dieser Email gefunden']);
         }
 
 
         //Passwörter identisch ? 
         if(!Hash::check($password,$User->ab_password)){
-            return view('auth.login')->withErrors(['password' => 'Passwort inkorrekt']);
+            return view('tailwind.auth.login')->withErrors(['password' => 'Passwort inkorrekt']);
         }
         
         //Nutzer anmelden

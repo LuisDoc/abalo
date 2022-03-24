@@ -29,11 +29,11 @@ Authentication routes
 //Weiterleitung zu Views
 Route::get('/showLogin', function()
 {
-    return view('auth.login');
+    return view('tailwind.auth.login');
 })->name('login');;
 Route::get('/showRegister', function()
 {
-    return view('auth.register');
+    return view('tailwind.auth.register');
 });
 //Anmeldung
 Route::POST('/login',[AuthController::class,'login']);

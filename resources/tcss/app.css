@@ -46,4 +46,12 @@
     display:none;
     animation:showBlock 0.3s;
 }
-
+.inp{
+    @apply border border-gray-300 rounded focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple;
+}
+.errorinput{
+     @apply border border-red-600 rounded focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 text-red-600;
+}
+.successinput{
+     @apply border border-green-600 rounded focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 text-green-600;
+}
