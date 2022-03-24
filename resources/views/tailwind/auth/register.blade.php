@@ -2,9 +2,10 @@
 @section('content')
     <div class="bg-cgray py-28 px-40 flex justify-center">
           <div class="p-8 px-40 bg-white">
-            <h1 class="headline text-4xl pb-4 text-purple text-center">Anmelden</h1>
+        @if(Auth::guest())
+            <h1 class="headline text-4xl pb-4 text-purple text-center">Registrieren</h1>
             <div>
-                <form action="/login" method="POST" id="loginform">
+                <form action="/register" method="POST" id="loginform">
                     @csrf
                     <div class="flex justify-center mb-2">
                          @foreach ($errors->all() as $error)
@@ -12,17 +13,26 @@
                          @endforeach
                     </div>
                     <div class="flex justify-center">
+                        <input type="text" class="mb-2 py-2 px-5 inp" placeholder="Name" id="name" name="name" required>
+                    </div>
+                    <div class="flex justify-center">
                         <input type="email" class="mb-2 py-2 px-5 inp" placeholder="E-Mail" id="email" name="email" required>
                     </div>
                     <div class="flex justify-center mb-2">
-                        <input type="password" class="mb-2 py-2 px-5 inp" placeholder="Passwort" id="password" name="passwort" required>
+                        <input type="password" class="mb-2 py-2 px-5 inp" placeholder="Passwort" id="password" name="password" required>
+                    </div>
+                    <div class="flex justify-center mb-2">
+                        <input type="password" class="mb-2 py-2 px-5 inp" placeholder="Passwort Bestätigen" id="password_confirmation" name="password_confirmation" required>
                     </div>
                     <div class="flex justify-center mb-4">
-                        <button class="btn px-4 py-2">Anmelden</button>
+                        <button class="btn px-4 py-2">Registrieren</button>
                     </div>
-                    <a href="/showRegister" class="block underline text-purple" >Noch kein Konto? Hier registrieren!</a>
+                    <a href="/showLogin" class="block underline text-purple" >Sie haben bereits ein Konto? Melden Sie sich hier an</a>
                 </form>
             </div>
+        @else
+            <h1 class="headline text-4xl pb-4 text-purple text-center">Sie sind bereits angemeldet</h1>
+        @endif
           </div>  
     </div>
 @endsection
@@ -42,6 +52,16 @@
             }
         })
 
+        form.name.addEventListener('keyup',(e)=>{
+           if(form.name.value == ""){
+                form.name.classList.add("errorinput");
+                form.name.classList.remove("successinput");
+           }else{
+                form.name.classList.remove("errorinput");
+                form.name.classList.add("successinput");
+           }
+        })
+
         form.password.addEventListener('keyup',(e)=>{
            if(form.password.value == ""){
                 form.password.classList.add("errorinput");
@@ -50,6 +70,16 @@
                 form.password.classList.remove("errorinput");
                 form.password.classList.add("successinput");
            }
+        })
+
+        form.password_confirmation.addEventListener('keyup',(e)=>{
+            if(form.password.value!=form.password_confirmation.value){
+                form.password_confirmation.classList.add("errorinput");
+                form.password_confirmation.classList.remove("successinput");
+            }else{
+                form.password_confirmation.classList.remove("errorinput");
+                form.password_confirmation.classList.add("successinput");
+            }
         })
     </script>
 @endsection
