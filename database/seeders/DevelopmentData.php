@@ -40,10 +40,14 @@ class DevelopmentData extends Seeder
         $firstLine = true;
 
         while(($data = fgetcsv($csv, 2000, ";")) !== FALSE){
+            $number = $data[2];
+            if(strpos($data[2],".")){
+                $number = intval(str_replace('.','',$data[2]));
+            }
             if(!$firstLine){
                 ab_article::create([
                     "ab_name" =>  $data[1],
-                    "ab_price" => ($data[2]*100),
+                    "ab_price" => ($number*100),
                     "ab_description" => $data[3],
                     "ab_creator_id" => $data[4],
                     "ab_createdate" => $data[5]
