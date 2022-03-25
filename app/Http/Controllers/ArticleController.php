@@ -16,7 +16,7 @@ class ArticleController extends Controller
         
         $keyword = $request->search;
         $articles = ab_article::where('ab_name','ilike','%'.$keyword.'%')
-                                ->orWhere('ab_description','ilike','%'.$keyword.'%')->get();
+                                ->get();
         return view('tailwind.article')->with('articles',$articles);
     }
 }
