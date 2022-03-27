@@ -7,7 +7,5 @@
         <!-- Tabelle für Artikel importieren -->
         @include('layout imports.articleTable')
         <a href="/articles" class="defaultButton">Show More articles</a>
-
-
     </div>
 @endsection
