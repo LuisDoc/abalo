@@ -24,6 +24,12 @@ Route::get('/articles/search',[ArticleController::class,'searchArticleLike']);
 
 
 /*
+    Services and Accessories
+*/
+Route::get('/faq', function(){return view('tailwind.services_and_accessories.faq');});
+
+
+/*
 Authentication routes
 */
 //Weiterleitung zu Views
