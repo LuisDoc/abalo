@@ -23,6 +23,13 @@
         </div>
         <!-- Anzeigen der drei zuletzt hinzugefügten Artikel -->
         @include('tailwind.layouts.viewArticles')
+        <div class="flex justify-center flex align-center">
+            <a class="mt-6 mb-6 py-4 px-8 pr-2 btn block w-36" href="/articles">
+                Alle Artikel
+            </a>
+        </div>
+
+
     </div>
 @endsection
 @section('scripts')
