@@ -19,12 +19,12 @@
         <div class="grid grid-cols-3">
             <div class="m-5"><span class=" hover:cursor-pointer" id="back">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mt-2 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    <path stroke-linecap="rmund" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
             </span>
         </div>
             <div class="m-5">
-                <form action="/articles/search" method="GET">
+                <form action="/articles" method="GET">
                     <div class="relative border-b-2 border-gray-600 hover:border-gray-800">
                         <input type="text" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple"> 
                         <span class="absolute left-0 mr-6 mt-2 mb-2">
@@ -72,7 +72,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </span>
-                <span id="login" class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">Abalo Login</span>
+                @if(Auth::guest())
+                    <span id="login" class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">Abalo Login</span>
+                @else
+                    <span id="login" class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">My Profile</span>
+                @endif
           </div>
           
       </div>

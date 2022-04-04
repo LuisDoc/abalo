@@ -20,7 +20,7 @@ Route::get('/home', [HomeController::class,'getHome']);
     Artikel-Routen
 */
 Route::get('/articles',[ArticleController::class,'showAllArticle']);
-Route::get('/articles/search',[ArticleController::class,'searchArticleLike']);
+//Route::get('/articles/search',[ArticleController::class,'searchArticleLike']);
 
 
 /*
