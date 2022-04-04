@@ -10,6 +10,6 @@ class HomeController extends Controller
     public function getHome(){
         $articlePreview = ab_article::query()->orderBy('ab_createdate','desc')->limit(3)->get();
         
-        return view('tailwind.index')->with('articles',$articlePreview);
+        return view('index')->with('articles',$articlePreview);
     }
 }

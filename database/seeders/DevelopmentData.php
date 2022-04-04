@@ -40,10 +40,12 @@ class DevelopmentData extends Seeder
         $firstLine = true;
 
         while(($data = fgetcsv($csv, 2000, ";")) !== FALSE){
+            //Konvertierung der Schreibweise 30.000 zu 30000
             $number = $data[2];
             if(strpos($data[2],".")){
                 $number = intval(str_replace('.','',$data[2]));
             }
+
             if(!$firstLine){
                 ab_article::create([
                     "ab_name" =>  $data[1],

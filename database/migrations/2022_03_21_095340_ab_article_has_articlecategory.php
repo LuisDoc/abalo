@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('ab_article_id');
             $table->foreign('ab_articlecategory_id')->references('id')->on('ab_articlecategory')->nullable(false);
             $table->foreign('ab_article_id')->references('id')->on('ab_article')->unique()->nullable(false);
-            $table->unique(['ab_articlecategory_id', 'ab_article_id']);
         });
     }
 

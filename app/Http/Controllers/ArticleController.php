@@ -8,21 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
-    //returned die Artikel View mit allen Artikeln
-    public function showAllArticle(Request $request){
-        if($request->search){
-            $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
-            return view('tailwind.article')->with('articles',$articles);
-        }
-        //Alle Artikel
+    public function showAllArticle(){
         $articles = ab_article::all();
-        return view('tailwind.article')->with('articles',$articles);
+        return view('article')->with('articles',$articles);
     }
-    
-
-    //returned die Artikel View mit Artikeln
-    public function searchArticleLike(Request $request){
-        //Alle Artikel, die das Keyword enthalten
+    public function showArticle(Request $request){
         
+        $keyword = $request->search;
+        $articles = ab_article::where('ab_name','ilike','%'.$keyword.'%')->get();
+        return view('article')->with('articles',$articles);
     }
 }
