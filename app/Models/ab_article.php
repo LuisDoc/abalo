@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ab_article extends Model
 {
@@ -17,4 +18,11 @@ class ab_article extends Model
         'ab_creator_id',
         'ab_createdate'
     ];
+
+    public function ab_price(): Attribute{
+        return Attribute::make (
+            get: fn($value) => $value/100,
+            set: fn($value) => $value*100
+        );
+    }
 }

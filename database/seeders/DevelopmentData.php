@@ -47,7 +47,7 @@ class DevelopmentData extends Seeder
             if(!$firstLine){
                 ab_article::create([
                     "ab_name" =>  $data[1],
-                    "ab_price" => ($number*100),
+                    "ab_price" => $number,
                     "ab_description" => $data[3],
                     "ab_creator_id" => $data[4],
                     "ab_createdate" => $data[5]
