@@ -137,7 +137,7 @@
                 <div class="headline text-xl mb-12">Service und Zubehör</div>
                 <div class="mb-4 headline text-xs" ><a class="hover:text-gray-400" href="">Abalo Original Zubehör</a></div>
                 <div class="mb-4 headline text-xs" ><a class="hover:text-gray-400" href="">Garantieleistungen</a></div>
-                <div class="mb-4 headline text-xs" ><a class="hover:text-gray-400" href="">Häufige Fragen (FAQ)</a></div>
+                <div class="mb-4 headline text-xs" ><a class="hover:text-gray-400" href="/faq">Häufige Fragen (FAQ)</a></div>
             </div>
             <div>
                 <div class="headline text-xl mb-12">Abalo Welt</div>
