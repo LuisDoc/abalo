@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        let x = ["erstes", "zweites", 3, 4];
+
+        
+        //Erste Schleife
+        console.warn("1. Schleife");
+        x.forEach( element => console.log(element));
+        //Zweite Schleife
+        console.warn("2. Schleife");
+        for (let einArrayElement of x) { 
+            console.log(einArrayElement); 
+        }
+        //Dritte Schleife
+        console.warn("3. Schleife");
+        for(let i = 0; i < x.length; i++){
+            console.log(x[i]);
+        }
+        //Vierte Schleife
+        console.warn("4. Schleife");
+        let i = 0;
+        while(i < x.length){
+            console.log(x[i++]);
+        }
+
+
+        //Map function
+        console.warn(".map Funktion ")
+        let newArr = x.map((e)=>{
+            if(typeof(e)!=="string"){
+                e = e.toString() + " string";
+            }else{
+                e+=" string";
+            }
+            return e;
+        })
+        console.log(newArr);
+    </script>
+</body>
+</html>
