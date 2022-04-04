@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="data.js"></script>
+    <script>
+        "use strict";
+
+        let getMaxPreis = function(data){
+            //Neues Array erstellen mit map Methode 
+            let res = data['produkte'].map(element=>{
+                return element.preis;
+            });
+            return Math.max(...res);
+        }
+
+        let getMinPreis = function(data){
+            //Initial auf das erste Objekt setzen
+            let product = data['produkte'][0];
+            //Iterieren über alle Produkte
+            data['produkte'].forEach((x)=>{
+                if(x.preis < product.preis)
+                    product = x;
+            });
+            return product;
+        }
+        
+        let getPreisSum = function(data){
+            //Verwendem der reduce Methode, Objekt destruieren auf preis
+            return data['produkte'].reduce(function(total, {preis}){
+                return total+preis;
+            },0);
+        }
+
+        let getGesamtWert = function(data){
+            let value = 0;
+            data['produkte'].forEach((x)=>{
+                value += x.anzahl * x.preis;
+            });
+            return value;
+        }
+
+        let getAnzahlProdukteOfKategorie = function(data){
+            let container = new Object();
+            
+            let id = 0;
+
+            data['kategorien'].forEach((category)=>{
+                let pcounter = 0;
+                data['produkte'].forEach((product)=>{
+                    if(product.kategorie == category.id){
+                        pcounter++;
+                    }
+                })
+            
+                container.push({id : category.id, amount: pcounter});
+            })
+            return result;               
+        }
+
+        //Ausführung der Scripts
+        console.warn("Maximaler Preis");
+        console.log(getMaxPreis(data));
+        console.warn("Minimaler Preis");
+        console.log(getMinPreis(data));
+        console.warn("Summe der Preise");
+        console.log(getPreisSum(data));
+        console.warn("Gesamtwert");
+        console.log(getGesamtWert(data));
+        console.warn("Anzahl Produkte")
+        console.log(getAnzahlProdukteOfKategorie(data));
+
+    </script>
+
+</body>
+</html>

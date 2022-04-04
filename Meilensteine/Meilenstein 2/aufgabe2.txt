@@ -1,0 +1,7 @@
+Aufgabe 2 - Features in Visual Studio Code
+1. SQLTools
+    Ermöglicht einfache und schnelle ausführung von SQL Statements
+    Ermöglicht schnelles testen und betrachten von Tabellen, in Visual Studio Code selber 
+2. Live Server
+    Einfacher Live-Server um simple HTML Dateien schnell darstellen zu können.
+3. Intellisense(Allgemein für eine Programmiersprache hilfreiche Syntaxvervollständigung/-erkennung)

@@ -1,0 +1,24 @@
+Aufgabe 3 - Browserunterstützung
+
+
+Quelle: https://de.statista.com/statistik/daten/studie/158095/umfrage/meistgenutzte-browser-im-internet-weltweit/
+Meistverwendet auf Desktops:    Chrome v99.0
+Meistverwendet auf Mobilgeräten: Chrome for Android
+
+Welcher Webbrowser unterstützt welche Version JavaScript ?
+
+Full ES7 Support:
+    None
+Partial ES7 Support:
+    None
+Full ES6 Support:
+    Edge, Firefox, Chrome, Safari, Opera, Safari on iOS, Android Browser, Opera Mobile, Chrome for Android, Firefox for Android, UC Browser, Samsung Internet, QQ Browser
+Partial ES6 Support:
+    IE, Baidu Browser, KaiOs Browser
+
+
+Top3-Browser
+1. Safari - Der meist genutzte Browser auf iOS Geräten
+2. Chrome - Der meist genutzte Browser auf Windows / Android Geräten
+3. Firefox - Am meisten genutzte Browser auf Windows und Android Geräten, der nicht auf Chrome basiert (wie z.b. Edge)
+

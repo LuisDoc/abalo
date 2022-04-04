@@ -19,7 +19,7 @@ class DevelopmentData extends Seeder
     public function run()
     {
         //User Samen streuen
-        $userCSV = fopen(public_path("seeders/user.csv"),"r");
+        $userCSV = fopen(base_path("/resources/seeders/user.csv"),"r");
 
         $firstLine = true;
 
@@ -36,7 +36,7 @@ class DevelopmentData extends Seeder
         fclose($userCSV);
 
         //Artikel Samen streuen
-        $csv = fopen(public_path("seeders/articles.csv"),"r");
+        $csv = fopen(base_path("/resources/seeders/articles.csv"),"r");
         $firstLine = true;
 
         while(($data = fgetcsv($csv, 2000, ";")) !== FALSE){
@@ -59,7 +59,7 @@ class DevelopmentData extends Seeder
 
         //Kategorie Same streuen
 
-        $categorycsv = fopen(public_path("seeders/articlecategory.csv"),"r");
+        $categorycsv = fopen(base_path("/resources/seeders/articlecategory.csv"),"r");
         $firstLine = true;
 
         while(($data = fgetcsv($categorycsv, 2000, ";")) !== FALSE){

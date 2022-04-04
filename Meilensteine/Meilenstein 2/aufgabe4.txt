@@ -1,0 +1,17 @@
+Aufgabe 4 - Vergleich Mit Programmiersprachen
+
+Unterschiede von Javascript zu C++
+- Keine klassischen Datentypen (dynamic types)
+- Keine Pointer (Keine Kontroller über Speicher)
+- Keine Mehrfachvererbung
+- Nicht kompiliert sondern interpretiert
+- Nicht so performant
+- hoisting
+
+Gemeinsamkeiten zu C++
+- enthält den Basisdatentyp "string"
+- Beide sind frei verfügbar 
+- Beide haben eine ausführliche Dokumentation
+- Beide haben eine aktive Community
+- unterstützen Objektorientierung
+- können Variablen in einem Block scopen (anders als z.B. Python)
