@@ -47,14 +47,11 @@
   <div id="nav" class="grid grid-cols-9 ">
       <div class="col-span-1">
           <div class="pt-6 flex justify-end">
-                <span class="mr-9 font-bold text-xl rounded-full px-2 bg-purple text-white"><a href="/home"> ABALO</a></span>
+             <span id=open class="mr-9 font-bold text-xl rounded-full px-2 bg-purple text-white cursor-pointer">&#9776; ABALO</span>
           </div>
       </div>
       <div class="col-span-4">
-          <div class="pt-6">
-                <span class="mr-8 text-xl text-purple hover:text-black hover:cursor-pointer transition ease-in-out"><a href="/articles">Artikel</a> </span>
-                <span class="mr-8 text-xl text-purple hover:text-black hover:cursor-pointer transition ease-in-out"><a href="">Services</a> </span>
-          </div>
+
       </div>
       <div class="col-span-3">
           <div class="flex justify-end">
@@ -80,6 +77,17 @@
           </div>
           
       </div>
+  </div>
+  <!--Javascript Navbar-->
+  <div id=menu class="fixed top-0 left-0 h-full p-10 w-1/6 bg-purple  z-50 text-white hidden">
+        <div class="relative">
+            <div class="absolute -right-5 -top-5">
+                <svg id="close"xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rounded-full hover:bg-white hover:text-purple cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+        </div> 
+        <div class="mt-2" id="mnav"></div>     
   </div>
   @yield('content')
   <!-- Login-->
@@ -189,7 +197,8 @@
   </div>
   
   @yield('scripts')
-<script>
+    <script src="{{asset('js/m2-nav.js')}}"></script>
+    <script>
     
       const search = document.querySelector("#search");
       const searchbar = document.querySelector("#searchbar");
@@ -238,6 +247,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>`
       })
+
+      
   </script>
 </body>
 </html>
