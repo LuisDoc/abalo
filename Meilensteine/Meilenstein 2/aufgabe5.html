@@ -45,22 +45,20 @@
             return value;
         }
 
-        let getAnzahlProdukteOfKategorie = function(data){
-            let container = new Object();
-            
-            let id = 0;
-
+        let getAnzahlProdukteOfKategorie = function(data, kategoriename = "Spielzeug"){
+           let amount = 0;
+            //Suche nach Kategorien mit dem Namen
             data['kategorien'].forEach((category)=>{
-                let pcounter = 0;
-                data['produkte'].forEach((product)=>{
-                    if(product.kategorie == category.id){
-                        pcounter++;
-                    }
-                })
-            
-                container.push({id : category.id, amount: pcounter});
+                if(category.name == kategoriename){
+                    //Abgleich mit Produkten und Addition wenn Kategorie übereinstimmt
+                    data['produkte'].forEach((product)=>{
+                        if(product.kategorie == category.id){
+                            amount++;
+                        }
+                    })
+                }
             })
-            return result;               
+            return amount;               
         }
 
         //Ausführung der Scripts
@@ -73,7 +71,8 @@
         console.warn("Gesamtwert");
         console.log(getGesamtWert(data));
         console.warn("Anzahl Produkte")
-        console.log(getAnzahlProdukteOfKategorie(data));
+        console.log("Spielzeug: " + getAnzahlProdukteOfKategorie(data,"Spielzeug"));
+        console.log("Garten: " + getAnzahlProdukteOfKategorie(data,"Garten"));
 
     </script>
 
