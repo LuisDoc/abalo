@@ -20,7 +20,13 @@ Route::get('/home', [HomeController::class,'getHome']);
     Artikel-Routen
 */
 Route::get('/articles',[ArticleController::class,'showAllArticle']);
-Route::get('/articles/search',[ArticleController::class,'showArticle']);
+//Route::get('/articles/search',[ArticleController::class,'searchArticleLike']);
+
+
+/*
+    Services and Accessories
+*/
+Route::get('/faq', function(){return view('tailwind.services_and_accessories.faq');});
 
 
 /*
@@ -29,11 +35,11 @@ Authentication routes
 //Weiterleitung zu Views
 Route::get('/showLogin', function()
 {
-    return view('auth.login');
+    return view('tailwind.auth.login');
 })->name('login');;
 Route::get('/showRegister', function()
 {
-    return view('auth.register');
+    return view('tailwind.auth.register');
 });
 //Anmeldung
 Route::POST('/login',[AuthController::class,'login']);

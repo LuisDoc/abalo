@@ -1,4 +1,4 @@
-<table>
+<table class="table">
     <thead>
         <td scope="col">Bild</td>
         <td scope="col">Name</td>

@@ -29,13 +29,13 @@ class AuthController extends Controller
         //Suche nach einem Nutzer mit dieser Email
         $User = User::where('ab_mail','like',$email)->get()->first();
         if(!$User){
-            return view('auth.login')->withErrors(['email' => 'Es wurde kein Konto unter dieser Email gefunden']);
+            return view('tailwind.auth.login')->withErrors(['email' => 'Es wurde kein Konto unter dieser Email gefunden']);
         }
 
 
         //Passwörter identisch ? 
         if(!Hash::check($password,$User->ab_password)){
-            return view('auth.login')->withErrors(['password' => 'Passwort inkorrekt']);
+            return view('tailwind.auth.login')->withErrors(['password' => 'Passwort inkorrekt']);
         }
         
         //Nutzer anmelden
@@ -60,11 +60,11 @@ class AuthController extends Controller
         
         //Überprüfung der E-Mail
         if($User){
-            return view('auth.register')->withErrors(['email' => 'Diese E-Mail existiert bereits']);
+            return view('tailwind.auth.register')->withErrors(['email' => 'Diese E-Mail existiert bereits']);
         }
         //Validierung ob Passwörter identisch
         if($request->password != $request->password_confirmation){
-            return view('auth.register')->withErrors(['password_confirmation' => 'Die Passwörter sind nicht identisch']);
+            return view('tailwind.auth.register')->withErrors(['password_confirmation' => 'Die Passwörter sind nicht identisch']);
         }
         //Anlegen des neuen Nutzers
         User::create([
