@@ -96,8 +96,16 @@
 
         </div>
     </div>
+    <!-- Cookie Dialog -->
+    <div id="CookieDialog" class="flex justify-center text-purple" hidden>
+        <!-- Card Box-->
+        <p class="text-align my-4 mx-5">Akzeptieren Sie cookies?</p>
+        <button class="text-white bg-purple rounded-xl m-2 p-2">Ja</button>
+        <button class="text-white bg-purple rounded-xl m-2 p-2">Nein</button>
+    </div>
     <!--Javascript Navbar-->
-    <div id=menu class="fixed top-0 left-0 h-full p-10 w-1/6 bg-purple  z-50 text-white hidden">
+    <div id=menu class="
+            fixed top-0 left-0 h-full p-10 w-1/6 bg-purple z-50 text-white hidden">
         <div class="relative">
             <div class="absolute -right-5 -top-5">
                 <svg id="close" xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +241,10 @@
     </div>
 
     @yield('scripts')
+    <!-- Meilenstein 2 Aufgabe 7 -->
     <script src="{{ asset('js/m2-nav.js') }}"></script>
+    <!-- Meilenstein 2 Aufgabe 8 -->
+    <script src="{{ asset('js/coockiecheck.js') }}"></script>
     <script>
         const search = document.querySelector("#search");
         const searchbar = document.querySelector("#searchbar");

@@ -22,6 +22,10 @@
     from { display: block; opacity: 0; }
     to { opacity: 1; }
 }
+@keyframes showCookieDialog {
+    from { display: block; opacity: 0; }
+    to { opacity: 1; }
+}
 .btn{
     @apply bg-purple text-white hover:bg-white hover:text-purple transition ease-in-out;
 }
@@ -59,6 +63,9 @@
 
 .nav-element{
     @apply mr-8 text-xl text-purple hover:text-black hover:cursor-pointer transition ease-in-out;
+}
+#CookieDialog{
+    animation:showBlock 0.2s;
 }
 #menu{
     animation:showBlock 0.2s;
