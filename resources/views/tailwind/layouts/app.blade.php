@@ -100,8 +100,8 @@
     <div id="CookieDialog" class="flex justify-center text-purple" hidden>
         <!-- Card Box-->
         <p class="text-align my-4 mx-5">Akzeptieren Sie cookies?</p>
-        <button class="text-white bg-purple rounded-xl m-2 p-2">Ja</button>
-        <button class="text-white bg-purple rounded-xl m-2 p-2">Nein</button>
+        <button id="CookieDialogYes" class="text-white bg-purple rounded-xl m-2 p-2">Ja</button>
+        <button id="CookieDialogNo" class="text-white bg-purple rounded-xl m-2 p-2">Nein</button>
     </div>
     <!--Javascript Navbar-->
     <div id=menu class="
