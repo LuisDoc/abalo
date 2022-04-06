@@ -8,39 +8,27 @@ use App\Http\Controllers\AuthController;
 /*
     Home-Routen
 */
-/*
-Route::redirect('/','/articles')->middleware('auth');
-Route::redirect('/home','/articles')->middleware('auth');
-*/
 Route::get('/', [HomeController::class,'getHome']);
-Route::get('/home', [HomeController::class,'getHome']);
-
-
+Route::redirect('/home','/');
 /*
     Artikel-Routen
 */
 Route::get('/articles',[ArticleController::class,'showAllArticle']);
-//Route::get('/articles/search',[ArticleController::class,'searchArticleLike']);
-
-
 /*
     Services and Accessories
 */
 Route::get('/faq', function(){return view('tailwind.services_and_accessories.faq');});
-
-
 /*
-Authentication routes
+    Cookies
+*/
+Route::get('/CookieGuidelines', function(){ return view ('tailwind.Cookie.CookieGuidelines');});
+Route::get('/CookieSettings', function(){return view('tailwind.Cookie.CookieSettings');});
+/*
+Auth
 */
 //Weiterleitung zu Views
-Route::get('/showLogin', function()
-{
-    return view('tailwind.auth.login');
-})->name('login');;
-Route::get('/showRegister', function()
-{
-    return view('tailwind.auth.register');
-});
+Route::get('/showLogin', function(){ return view('tailwind.auth.login'); })->name('login');
+Route::get('/showRegister', function(){ return view('tailwind.auth.register');});
 //Anmeldung
 Route::POST('/login',[AuthController::class,'login']);
 Route::POST('/register',[AuthController::class,'register']);

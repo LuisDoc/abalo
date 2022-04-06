@@ -26,8 +26,31 @@
     from { display: block; opacity: 0; }
     to { opacity: 1; }
 }
+
+.firstHeadline{
+    @apply text-purple text-5xl my-10;
+}
+.secondHeadline{
+    @apply text-purple text-xl underline my-5;
+}
+.freitext{
+    @apply text-black mt-2 mb-5 text-justify;
+}
+
 .btn{
     @apply bg-purple text-white hover:bg-white hover:text-purple transition ease-in-out;
+}
+.CookieButton{
+    @apply rounded-full px-10 my-2 mx-5 bg-white text-purple hover:bg-purple hover:text-white hover:outline hover:outline-white transition ease-in-out;
+}
+.CookieSettingsButtonChecked{
+    @apply bg-purple text-white rounded-full m-20 p-5 ;
+}
+.CookieSettingsButtonUnChecked{
+    @apply bg-white text-purple rounded-full m-20 p-5 outline outline-purple;
+}
+.CookieSettingsButtonInformation{
+    
 }
 
 #searchbar{

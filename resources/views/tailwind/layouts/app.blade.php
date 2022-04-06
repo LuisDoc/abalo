@@ -96,13 +96,7 @@
 
         </div>
     </div>
-    <!-- Cookie Dialog -->
-    <div id="CookieDialog" class="flex justify-center text-purple" hidden>
-        <!-- Card Box-->
-        <p class="text-align my-4 mx-5">Akzeptieren Sie cookies?</p>
-        <button id="CookieDialogYes" class="text-white bg-purple rounded-xl m-2 p-2">Ja</button>
-        <button id="CookieDialogNo" class="text-white bg-purple rounded-xl m-2 p-2">Nein</button>
-    </div>
+    
     <!--Javascript Navbar-->
     <div id=menu class="
             fixed top-0 left-0 h-full p-10 w-1/6 bg-purple z-50 text-white hidden">
@@ -230,21 +224,35 @@
                 <a class="text-xs mr-4" href="">Impressum</a>
                 <a class="text-xs mr-4" href="">Rechtliches</a>
                 <a class="text-xs mr-4" href="">Datenschutz</a>
-                <a class="text-xs mr-4" href="">Cookie Einstellungen</a>
-                <a class="text-xs mr-4" href="">Cookie Richtlinie</a>
+                <a id ="refCookieSettings" class="text-xs mr-4" href="/CookieSettings">Cookie Einstellungen</a>
+                <a class="text-xs mr-4" href="/CookieGuidelines">Cookie Richtlinie</a>
                 <a class="text-xs mr-4" href="">Presse</a>
                 <a class="text-xs mr-4" href="">Karriere</a>
             </div>
-
-
         </div>
+    </div>
+    <!-- Cookie Dialog -->
+    <div id="CookieDialog" class="flex fixed bottom-0 w-screen bg-purple text-white z-50 h-32" hidden>
+        <div class ="w-2/3 mt-4 mb-4 mx-10" >
+            <h1 class="text-align-left text-4xl">Cookie-Einstellungen</h1>
+            <p class ="text-base">
+                Mit einem Klick auf "Zustimmen" akzeptieren Sie die Nutzung von Cookies,
+                um Ihnen moderne Funktionalitäten und Services bieten zu können.
+                <a class ="text-lg italic underline"href="/CookieGuidelines">Mehr Informationen</a>
+            </p>
+        </div>
+        <div class ="w-1/3 mt-4 mb-4 mx-10 flex justify-center">
+            <button id="CookieDialogYes" class="CookieButton">Akzeptieren</button>
+            <button id="CookieDialogNo" class="CookieButton">Ablehnen</button>
+        </div>
+        
     </div>
 
     @yield('scripts')
-    <!-- Meilenstein 2 Aufgabe 7 -->
-    <script src="{{ asset('js/m2-nav.js') }}"></script>
     <!-- Meilenstein 2 Aufgabe 8 -->
     <script src="{{ asset('js/coockiecheck.js') }}"></script>
+    <!-- Meilenstein 2 Aufgabe 7 -->
+    <script src="{{ asset('js/m2-nav.js') }}"></script>
     <script>
         const search = document.querySelector("#search");
         const searchbar = document.querySelector("#searchbar");
