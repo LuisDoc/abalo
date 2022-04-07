@@ -7,6 +7,7 @@ use App\Models\ab_articlecategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use File;
 class ArticleController extends Controller
 {
     //returned die Artikel View mit allen Artikeln
@@ -64,6 +65,13 @@ class ArticleController extends Controller
         if($article->ab_creator_id == Auth()->User()->id){
             ab_article::destroy($request->id);
         }
+        if(File::exists(public_path('images/articlepictures/'.$request->id . '.png'))){
+            File::delete(public_path('images/articlepictures/'.$request->id . '.png'));
+        }
+        if(File::exists(public_path('images/articlepictures/'.$request->id . '.jpg'))){
+            File::delete(public_path('images/articlepictures/'.$request->id . '.jpg'));
+        }
+
         return redirect()->back();
     }
     
