@@ -6,25 +6,22 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 
 /*
-    Home-Routen
+    Main-Routes
 */
+//Home-Routen
 Route::get('/', [HomeController::class,'getHome']);
 Route::redirect('/home','/');
-/*
-    Artikel-Routen
-*/
+//Artikel-Routen
 Route::get('/articles',[ArticleController::class,'showAllArticle']);
-/*
-    Services and Accessories
-*/
+Route::get('/myarticle',[ArticleController::class,'showMyArticle'])->middleware('auth');
+Route::get('/newarticle',[ArticleController::class,'showNewArticleForm'])->middleware('auth');
+//Services and Accessories
 Route::get('/faq', function(){return view('tailwind.services_and_accessories.faq');});
-/*
-    Cookies
-*/
+//Cokies
 Route::get('/CookieGuidelines', function(){ return view ('tailwind.Cookie.CookieGuidelines');});
 Route::get('/CookieSettings', function(){return view('tailwind.Cookie.CookieSettings');});
 /*
-Auth
+    Auth
 */
 //Weiterleitung zu Views
 Route::get('/showLogin', function(){ return view('tailwind.auth.login'); })->name('login');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ab_article;
+use App\Models\ab_articlecategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,17 +13,21 @@ class ArticleController extends Controller
     public function showAllArticle(Request $request){
         if($request->search){
             $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
-            return view('tailwind.article')->with('articles',$articles);
+            return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
         }
         //Alle Artikel
         $articles = ab_article::all();
-        return view('tailwind.article')->with('articles',$articles);
+        return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
     }
-    
-
-    //returned die Artikel View mit Artikeln
-    public function searchArticleLike(Request $request){
-        //Alle Artikel, die das Keyword enthalten
-        
+    public function showMyArticle(Request $request){
+        $id = Auth()->User()->id;
+        $articles = ab_article::where('ab_creator_id','like',$id)
+        ->orderBy('ab_createdate','desc')
+        ->get();
+        return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Meine Artikel im Überblick");
+    }
+    public function showNewArticleForm(Request $request){
+        $categories = ab_articlecategory::all();
+        return view('tailwind.Article.CreateArticle')->with('categories',$categories);
     }
 }

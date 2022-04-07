@@ -33,6 +33,9 @@
 .secondHeadline{
     @apply text-purple text-xl underline my-5;
 }
+.thirdHeadline{
+    @apply text-black text-lg my-5;
+}
 .freitext{
     @apply text-black mt-2 mb-5 text-justify;
 }

@@ -137,6 +137,8 @@
                 @else
                     <div>
                         <div class="mt-5 text-md text-gray-600">Wilkommen zurück</div>
+                        <a href="/myarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border">Meine Artikel</a>
+                        <a href="/newarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border">Artikel hinzufügen</a>
                         <a href="/logout" class="block py-4 px-10 text-md headline btn border-purple border">
                             Abmelden
                         </a>
