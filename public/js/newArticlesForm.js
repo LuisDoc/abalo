@@ -12,6 +12,7 @@ const form = document.createElement('form');
 form.setAttribute("class", "flex flex-col justify-center mx-20");
 form.setAttribute("action","/articles");
 form.setAttribute("method","POST");
+form.setAttribute("enctype", "multipart/form-data")
 
 //Label anlegen: Artikel Informationen
 const label1 = document.createElement('label');
@@ -112,20 +113,26 @@ const submit = document.createElement('input');
 submit.setAttribute("class","btn p-2 mx-5 rounded-xl border border-purple")
 submit.setAttribute("type","submit");
 submit.setAttribute("value","Hinzufügen");
+
 //Div4 Zusammensetzen
 div4.appendChild(submit);
 
-const csrf_token_input = document.createElement('input');
-csrf_token_input.setAttribute("name","_token");
-csrf_token_input.setAttribute("value","{{ csrf_token() }}");
-csrf_token_input.setAttribute("type","hidden");
 //Form zusammensetzen
 
-form.appendChild(csrf_token_input);
+const filediv = document.createElement('div');
+const inputFile = document.createElement('input');
+inputFile.setAttribute('type', "file");
+inputFile.setAttribute('class', 'mx-5 mb-2')
+inputFile.setAttribute('name', 'file');
+
+filediv.appendChild(inputFile);
+
+
 form.appendChild(label1);
 form.appendChild(div1);
 form.appendChild(div2);
 form.appendChild(div3);
+form.appendChild(filediv)
 form.appendChild(div4);
 base.appendChild(form);
 
@@ -137,7 +144,7 @@ let priceStatus = false;
 let nameStatus = false;
 
 function validateInputPrice(){
-    if(!inputPrice.value.match(/^\d*\.?\d{2}$/) ||  parseFloat(inputPrice.value)<= 0 ){
+    if(!inputPrice.value.match(/^\d*\.?\d{1,2}$/) ||  parseFloat(inputPrice.value)<= 0 ){
         inputPrice.classList.remove("successinput");
         inputPrice.classList.add("errorinput");
         priceStatus = false;

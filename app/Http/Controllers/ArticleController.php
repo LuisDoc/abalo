@@ -6,7 +6,7 @@ use App\Models\ab_article;
 use App\Models\ab_articlecategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 class ArticleController extends Controller
 {
     //returned die Artikel View mit allen Artikeln
@@ -19,9 +19,11 @@ class ArticleController extends Controller
         else if($request->name){
             $request->validate([
                 'name'=>'required|unique:ab_article,ab_name',
-                'price'=>'numeric|gt:0'
+                'price'=>'numeric|gt:0',
+                'file.*' => 'mimes:png,jpg'
             ]);
 
+            
             //Neuen Artikel anlegen
             $article = new ab_article();
             $article->ab_name = $request->name;
@@ -37,7 +39,11 @@ class ArticleController extends Controller
             $article->ab_creator_id = auth()->user()->id;
 
             $article->save();
-
+            
+            if($request->hasFile('file')){
+                $fileName= $article->id .'.'. $request->file('file')->getClientOriginalExtension();
+                $request->file('file')->move('images/articlepictures', $fileName);
+            }
             return redirect("/myarticle");
         }
         //Alle Artikel
