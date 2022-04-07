@@ -23,7 +23,7 @@
                     </div>
                     <div class ="p-4 flex justify-end">
                         @if (Auth()->User()->id == $article->ab_creator_id)
-                        <a class ="w-14 h-15 rounded-full p-2 bg-white hover:bg-purple transition duration-300 ease-out" href="/removeArticle/{{$article->id}}">
+                        <a class ="w-14 h-15 rounded-full p-2 bg-white border-red-400 hover:bg-red-400 border-2 hover:border-red-400 transition duration-300 ease-out" href="/removeArticle/{{$article->id}}">
                             <img src="{{ url('/images/TrashCan.png') }}" alt="">
                         </a>
                         @else
