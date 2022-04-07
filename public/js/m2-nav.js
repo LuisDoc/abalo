@@ -19,7 +19,7 @@ let navs = [
     { name: 'Home', href: "/home" },
     { name: 'Artikel', href: "/articles" },
     { name: 'Kategorien', href: "/categories" },
-    { name: 'Verkaufen', href: "" },
+    { name: 'Verkaufen', href: "/newarticle" },
     { name: 'Unternehmen', sub: [{ name: 'Philosophie', href: "" }, { name: 'Karriere', href: "" }] }
 ]
 

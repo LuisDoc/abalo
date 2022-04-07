@@ -15,6 +15,30 @@ class ArticleController extends Controller
             $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
             return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
         }
+        //Neuer Artikel wird angelegt
+        else if($request->name){
+            $request->validate([
+                'name'=>'required|unique:ab_article,ab_name',
+                'price'=>'numeric|gt:0'
+            ]);
+
+            //Neuen Artikel anlegen
+            $article = new ab_article();
+            $article->ab_name = $request->name;
+            $article->ab_price = $request->price;
+            
+            if($request->description == null){
+                $article->ab_description = "";
+            }
+            else{
+                $article->ab_description = $request->description;
+            }
+            
+            $article->ab_creator_id = auth()->user()->id;
+            $article->save();
+
+            return redirect("/myarticle");
+        }
         //Alle Artikel
         $articles = ab_article::all();
         return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
@@ -27,4 +51,5 @@ class ArticleController extends Controller
         $categories = ab_articlecategory::all();
         return view('tailwind.Article.CreateArticle')->with('categories',$categories);
     }
+    
 }

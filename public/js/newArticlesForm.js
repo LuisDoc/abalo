@@ -2,10 +2,15 @@
 
 const base = document.querySelector("#addArticleForm");
 
+/*
+    HTML in Javascript
+    Wieso auch immer
+*/
+
 //Form anlegen
 const form = document.createElement('form');
 form.setAttribute("class", "flex flex-col justify-center mx-20");
-form.setAttribute("action","");
+form.setAttribute("action","/articles");
 form.setAttribute("method","GET");
 
 //Label anlegen: Artikel Informationen
@@ -18,16 +23,20 @@ const div1 = document.createElement('div');
 div1.setAttribute("class","my-2");
 //Inhalt von Div1 anlegen
 const inputName =document.createElement('input');
-inputName.setAttribute("class","outline outline-gray-300 inp p-6 mx-5");
+inputName.setAttribute("class","inp outline outline-gray-300 p-6 mx-5");
 inputName.setAttribute("type","text");
 inputName.setAttribute("placeholder","Artikel Name*")
-inputName.setAttribute("required","");
+//Required zusätzlich zu Java-Script-Validierung
+//inputName.setAttribute("required","");
 inputName.setAttribute("name","name");
 const inputPrice = document.createElement('input');
 inputPrice.setAttribute("class","outline outline-gray-300 inp p-6 mx-5");
-inputPrice.setAttribute("type","text");
+inputPrice.setAttribute("type","number");
+inputPrice.setAttribute("min","0.01");
+inputPrice.setAttribute("step","0.01");
 inputPrice.setAttribute("placeholder","Artikel Preis*")
-inputPrice.setAttribute("required","");
+//Required zusätzlich zu Java-Script-Validierung
+//inputPrice.setAttribute("required","");
 inputPrice.setAttribute("name","price");
 //Div 1 zusammensetzen
 div1.appendChild(inputName);
@@ -57,7 +66,9 @@ chooseCategoryLabel.innerHTML = "Kategorie auswählen";
 //Kategorie Select
 const chooseCategory = document.createElement('select');
 chooseCategory.setAttribute("class","outline outline-gray-300 focus:outline-purple rounded-xl p-4");
+/*
 chooseCategory.setAttribute("name","category");
+*/
 console.log(categories);
 
 for (var object in categories) {
@@ -76,9 +87,10 @@ for (var object in categories) {
             //Suche nach Kindknoten
             for(var object2 in categories){
                 if(categories.hasOwnProperty(object2)){
+                    //Unterkategorie gefunden - Parent ID identisch
                     let subcategory = categories[object2];
                     if(id == subcategory['ab_parent']){
-                        console.log(subcategory['id'] + "ist ein Kind von Root: " + id);
+                        //Option Tag wird angelegt und angehangen
                         const opt = document.createElement('option');
                         opt.setAttribute("value",subcategory['id']);
                         opt.innerHTML = subcategory['ab_name'];
@@ -97,16 +109,69 @@ const div4 = document.createElement('div');
 div3.setAttribute("class","my-2");
 //Div 4 - Inhalt
 const submit = document.createElement('input');
-submit.setAttribute("class","outline outline-gray-300 hover:outline-purple rounded-xl p-6 mx-5")
+submit.setAttribute("class","btn p-2 mx-5 rounded-xl border border-purple")
 submit.setAttribute("type","submit");
 submit.setAttribute("value","Hinzufügen");
 //Div4 Zusammensetzen
 div4.appendChild(submit);
 
+const csrf_token_input = document.createElement('input');
+csrf_token_input.setAttribute("name","_token");
+csrf_token_input.setAttribute("value","{{ csrf_token() }}");
+csrf_token_input.setAttribute("type","hidden");
 //Form zusammensetzen
+
+form.appendChild(csrf_token_input);
 form.appendChild(label1);
 form.appendChild(div1);
 form.appendChild(div2);
 form.appendChild(div3);
 form.appendChild(div4);
 base.appendChild(form);
+
+/*
+    Event Listener
+*/
+
+let priceStatus = false;
+let nameStatus = false;
+
+function validateInputPrice(){
+    if(!inputPrice.value.match(/^\d*\.?\d{2}$/) ||  parseFloat(inputPrice.value)<= 0 ){
+        inputPrice.classList.remove("successinput");
+        inputPrice.classList.add("errorinput");
+        priceStatus = false;
+    }
+    else{
+        inputPrice.classList.remove("errorinput");
+        inputPrice.classList.add("successinput");
+        priceStatus = true;
+    }
+}
+
+function validateInputname(){
+    if(inputName.value ==""){
+        inputName.classList.remove("successinput");
+        inputName.classList.add("errorinput");
+        nameStatus = false;
+    }else{
+        inputName.classList.remove("errorinput");
+        inputName.classList.add("successinput");
+        nameStatus = true;
+    }
+}
+['focus', 'keyup'].forEach((event)=>{
+    inputName.addEventListener(event, validateInputname);
+    inputPrice.addEventListener(event, validateInputPrice);
+})
+
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    if (priceStatus && nameStatus){
+        form.submit();
+    }else{
+        console.log("Form not complete");
+    }
+})
+
+
