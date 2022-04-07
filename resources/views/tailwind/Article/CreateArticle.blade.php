@@ -21,5 +21,4 @@
     var categories = <?php echo json_encode($categories); ?>;
 </script>
 <script src="{{ asset('js/newArticlesForm.js') }}"></script>
-
 @endsection

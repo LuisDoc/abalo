@@ -11,7 +11,7 @@ const base = document.querySelector("#addArticleForm");
 const form = document.createElement('form');
 form.setAttribute("class", "flex flex-col justify-center mx-20");
 form.setAttribute("action","/articles");
-form.setAttribute("method","GET");
+form.setAttribute("method","POST");
 
 //Label anlegen: Artikel Informationen
 const label1 = document.createElement('label');

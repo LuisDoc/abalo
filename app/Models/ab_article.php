@@ -20,10 +20,11 @@ class ab_article extends Model
         'ab_createdate'
     ];
 
-    public function ab_price(): Attribute{
-        return Attribute::make (
-            get: fn($value) => $value/100,
-            set: fn($value) => $value*100
+    protected function abprice(): Attribute
+    {
+        return new Attribute(
+            set: fn ($value) => intval($value * 100),
+            get: fn($value) => doubleval($value/100),
         );
     }
 

@@ -35,6 +35,7 @@ class ArticleController extends Controller
             }
             
             $article->ab_creator_id = auth()->user()->id;
+
             $article->save();
 
             return redirect("/myarticle");
@@ -50,6 +51,14 @@ class ArticleController extends Controller
     public function showNewArticleForm(Request $request){
         $categories = ab_articlecategory::all();
         return view('tailwind.Article.CreateArticle')->with('categories',$categories);
+    }
+
+    public function deleteArticle(Request $request){
+        $article = ab_article::where('id','like',$request->id)->first();
+        if($article->ab_creator_id == Auth()->User()->id){
+            ab_article::destroy($request->id);
+        }
+        return redirect()->back();
     }
     
 }

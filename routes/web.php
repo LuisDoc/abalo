@@ -13,7 +13,8 @@ Route::get('/', [HomeController::class,'getHome']);
 Route::redirect('/home','/');
 //Artikel-Routen
 Route::get('/articles',[ArticleController::class,'showAllArticle']);
-Route::post('/articles',[ArticleController::class,'createArticle']);
+Route::post('/articles',[ArticleController::class,'showAllArticle']);
+Route::get('/removeArticle/{id}',[ArticleController::class,'deleteArticle'])->middleware('auth');
 Route::get('/myarticle',[ArticleController::class,'showMyArticle'])->middleware('auth');
 Route::get('/newarticle',[ArticleController::class,'showNewArticleForm'])->middleware('auth');
 //Services and Accessories
