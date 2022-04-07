@@ -58,6 +58,6 @@ class User extends Authenticatable
 
 
     public function myarticles(){
-        return $this->hasMany(ab_article::class, 'ab_creator_id');
+        return $this->hasMany(ab_article::class, 'ab_creator_id')->orderBy('ab_createdate', 'desc');
     }
 }

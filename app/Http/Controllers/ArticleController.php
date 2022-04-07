@@ -20,10 +20,7 @@ class ArticleController extends Controller
         return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
     }
     public function showMyArticle(Request $request){
-        $id = Auth()->User()->id;
-        $articles = ab_article::where('ab_creator_id','like',$id)
-        ->orderBy('ab_createdate','desc')
-        ->get();
+        $articles = auth()->user()->myarticles;
         return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Meine Artikel im Überblick");
     }
     public function showNewArticleForm(Request $request){

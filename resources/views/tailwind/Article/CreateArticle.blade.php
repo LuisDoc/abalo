@@ -12,10 +12,10 @@
             <textarea class="outline outline-gray-300 inp mx-5 p-6" type="text" rows="10" cols="100" placeholder ="Artikel Beschreibung" maxlength="6000"></textarea>
         </div>
         <div class ="my-2">
-            <Label class="thirdheadline text-purple mr-10"> Kategorie auswählen -</Label>
-            <select name="" id="">
+            <Label class="thirdheadline text-black mx-5"> Kategorie auswählen: </Label>
+            <select class ="outline outline-gray-300 focus:outline-purple rounded-xl p-4" name="" id="">
                 @foreach($categories as $category)
-                    <option value="">{{$category->name}}</option>
+                    <option class="" value="">{{$category->ab_name}}</option>
                 @endforeach
             </select>
         </div>
