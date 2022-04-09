@@ -52,7 +52,7 @@
         </div>
     </div>
     <!-- Navbar-->
-    <div id="nav" class="grid grid-cols-9 ">
+    <div id="nav" class="grid grid-cols-9">
         <div class="col-span-1">
             <div class="pt-6 flex justify-end">
                 <span id=open
@@ -60,10 +60,8 @@
                     ABALO</span>
             </div>
         </div>
-        <div class="col-span-4">
-
-        </div>
-        <div class="col-span-3">
+        
+        <div class="col-start-3 col-span-4">
             <div class="flex justify-end">
                 <span id="search" class="m-6 hover:cursor-pointer grayscale hover:grayscale-0 transition ease-in-out">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none" viewBox="0 0 24 24"
@@ -74,7 +72,14 @@
                 </span>
             </div>
         </div>
-        <div class="col-span-1">
+        <!-- Warenkorb Button -->
+        <div class="col-span-1 mx-auto">
+            <a href="/ShoppingCart" class="flex mx-4 my-3 px-1 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
+                <img class ="w-9 h-9 my-1" src="{{asset('images/warenkorb.png')}}" alt="">
+                <span id="shoppingcartbell" class ="text-black h-7 ml-2 relative top-0 right-2"></span>
+            </a>
+        </div>
+        <div class="col-span-2">
             <div class="flex justify-end">
                 <span id="profileicon" class="mt-6 mr-1 mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none" viewBox="0 0 24 24"
@@ -93,7 +98,6 @@
                         Profile</span>
                 @endif
             </div>
-
         </div>
     </div>
     
@@ -251,6 +255,17 @@
     </div>
 
     @yield('scripts')
+    <script>
+        "use strict";
+        //Umwandeln von PHP Variablen nach JavaScript
+        var articles = <?php echo json_encode($articles); ?>;
+        //Definition of global variables
+        let shoppingcartkey ="ShoppingCart";
+        let cookiekey ="acceptCookies";
+    </script>
+    <!-- Meilenstein 2 Aufgabe 10 -->
+    <script src="{{ asset('js/ShoppingCart/ShoppingCartCounter.js') }}"></script>
+    <script src="{{ asset('js/ShoppingCart/addToShoppingCart.js') }}"></script>
     <!-- Meilenstein 2 Aufgabe 8 -->
     <script src="{{ asset('js/coockiecheck.js') }}"></script>
     <!-- Meilenstein 2 Aufgabe 7 -->

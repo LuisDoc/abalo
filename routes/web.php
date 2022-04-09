@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 
@@ -16,6 +17,8 @@ Route::match(['get', 'post'], '/articles',[ArticleController::class,'showAllArti
 Route::get('/removeArticle/{id}',[ArticleController::class,'deleteArticle'])->middleware('auth');
 Route::get('/myarticle',[ArticleController::class,'showMyArticle'])->middleware('auth');
 Route::get('/newarticle',[ArticleController::class,'showNewArticleForm'])->middleware('auth');
+//Einkaufswagen
+Route::get('/ShoppingCart',[ShoppingCartController::class,'getShoppingCart']);
 //Services and Accessories
 Route::get('/faq', function(){return view('tailwind.services_and_accessories.faq');});
 //Cokies

@@ -4,8 +4,6 @@
 /*
     Zeige Dialog für Cookie-Optionen
 */
-
-let key = "acceptCookies";
 const dialog = document.querySelector("#CookieDialog");
 const yesButton = document.querySelector("#CookieDialogYes");
 const noButton = document.querySelector("#CookieDialogNo");
@@ -17,14 +15,14 @@ const refCookieSettings = document.querySelector("#refCookieSettings");
 */
 yesButton.addEventListener('click', () => {
     dialog.classList.add("hidden");
-    window.sessionStorage.setItem(key, true);
+    window.sessionStorage.setItem(cookiekey, true);
     refCookieSettings.classList.remove("hidden");
     console.log("Cooke-Acceptance Status updated to: " + true);
     location.reload();
 });
 noButton.addEventListener('click', () => {
     dialog.classList.add("hidden");
-    window.sessionStorage.setItem(key, false);
+    window.sessionStorage.setItem(cookiekey, false);
     refCookieSettings.classList.remove("hidden");
     console.log("Cooke-Acceptance Status updated to: " + false);
     location.reload();
@@ -33,14 +31,14 @@ noButton.addEventListener('click', () => {
 
 
 //Disable Dialog if property already set
-    if (window.sessionStorage.getItem(key) != null) {
+    if (window.sessionStorage.getItem(cookiekey) != null) {
         /*
             User has already accepted or declined cookies
         */
         dialog.classList.add("hidden");
         //Aktivieren des A-Tags um auf Seite für Cookie-Settings zu kommen
         refCookieSettings.classList.remove("hidden");
-        console.log("Cookie-Acceptance Status: " + window.sessionStorage.getItem(key));
+        console.log("Cookie-Acceptance Status: " + window.sessionStorage.getItem(cookiekey));
 
     
     }
