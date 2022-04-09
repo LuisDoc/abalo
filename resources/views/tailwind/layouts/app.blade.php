@@ -255,10 +255,15 @@
     </div>
 
     @yield('scripts')
+    @if(isset($articles))
+        <script>var articles = <?php echo json_encode($articles); ?>;</script>
+    @else
+        <script>var articles = null;</script>
+    @endif
     <script>
         "use strict";
         //Umwandeln von PHP Variablen nach JavaScript
-        var articles = <?php echo json_encode($articles); ?>;
+        
         //Definition of global variables
         let shoppingcartkey ="ShoppingCart";
         let cookiekey ="acceptCookies";
