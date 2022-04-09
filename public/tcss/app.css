@@ -689,6 +689,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-ml-1 {
   margin-left: -0.25rem;
 }
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+.mb-32 {
+  margin-bottom: 8rem;
+}
+.mb-64 {
+  margin-bottom: 16rem;
+}
+.mt-32 {
+  margin-top: 8rem;
+}
 .block {
   display: block;
 }
@@ -919,6 +931,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .p-0 {
   padding: 0px;
+}
+.p-5 {
+  padding: 1.25rem;
 }
 .py-4 {
   padding-top: 1rem;
