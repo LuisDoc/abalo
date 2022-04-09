@@ -227,7 +227,7 @@
             </div>
             <div class="flex mt-5">
                 <div class="text-xs mr-24">&#64;2022 LUIS&ampNILUSCHE AG GmbH Inc. Co. KG</div>
-                <a class="text-xs mr-4" href="">Impressum</a>
+                <a class="text-xs mr-4" href="/impressum">Impressum</a>
                 <a class="text-xs mr-4" href="">Rechtliches</a>
                 <a class="text-xs mr-4" href="">Datenschutz</a>
                 <a id ="refCookieSettings" class="text-xs mr-4" href="/CookieSettings">Cookie Einstellungen</a>
@@ -254,7 +254,7 @@
         
     </div>
 
-    @yield('scripts')
+    <!-- Scripts -->
     @if(isset($articles))
         <script>var articles = <?php echo json_encode($articles); ?>;</script>
     @else
@@ -268,6 +268,7 @@
         let shoppingcartkey ="ShoppingCart";
         let cookiekey ="acceptCookies";
     </script>
+    @yield('scripts')
     <!-- Meilenstein 2 Aufgabe 10 -->
     <script src="{{ asset('js/ShoppingCart/ShoppingCartCounter.js') }}"></script>
     <script src="{{ asset('js/ShoppingCart/addToShoppingCart.js') }}"></script>

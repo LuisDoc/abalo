@@ -21,6 +21,7 @@ Route::get('/newarticle',[ArticleController::class,'showNewArticleForm'])->middl
 Route::get('/ShoppingCart',[ShoppingCartController::class,'getShoppingCart']);
 //Services and Accessories
 Route::get('/faq', function(){return view('tailwind.services_and_accessories.faq');});
+Route::get('/impressum', function(){return view('tailwind.services_and_accessories.impressum');});
 //Cokies
 Route::get('/CookieGuidelines', function(){ return view ('tailwind.Cookie.CookieGuidelines');});
 Route::get('/CookieSettings', function(){return view('tailwind.Cookie.CookieSettings');});
