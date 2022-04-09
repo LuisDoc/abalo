@@ -21,5 +21,6 @@
 @endsection
 @section('scripts')
 <!-- Meilenstein 2 Aufgabe 8 -->
+<script>var categories = <?php echo json_encode($categories); ?>;</script>
 <script src="{{ asset('js/newArticlesForm.js') }}"></script>
 @endsection
