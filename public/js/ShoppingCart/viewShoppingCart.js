@@ -1,17 +1,78 @@
 "use strict";
 
 //Search HTML Elements
-const anker = document.querySelector("#anker");
+const anker = document.querySelector("#carttable");
 
-let sessionData = sessionStorage.getItem(shoppingcartkey);
+let sessionData = JSON.parse(sessionStorage.getItem(shoppingcartkey));
 
-articles.forEach((e)=>{
-    let articleID = e['id'];
+
+articles.forEach((article)=>{
+    let articleID = article['id'];
     //Iterieren durch Warenkorb
-    sessionData.forEach((e) =>{
-        
-    })
-    if(sessionData.includes(articleID)){
-        console.log(articleID + "liegt im Warenkorb");
-    }
+    sessionData.forEach((shoppingcartid)=>{
+       if(articleID == shoppingcartid){
+            //Funktionsaufruf zum Printen
+            print(article);
+       }
+    });
 });
+
+function print(article){
+    const row = document.createElement('tr');
+    const picturecolumn = document.createElement('td');
+    const namecolumn = document.createElement('td');
+    const pricecolumn = document.createElement('td');
+    const removecolumn = document.createElement('td');
+    //Tailwind CSS
+    row.setAttribute("class","TableRow");
+    picturecolumn.setAttribute("class","TableColumn");
+    namecolumn.setAttribute("class","TableColumn");
+    pricecolumn.setAttribute("class","TableColumn");
+    removecolumn.setAttribute("class","TableColumn flex justify-center");
+    
+    //Bilder
+    const imgPic = document.createElement('img');
+    //Bilder Tailwind CSS
+    //imgPic.setAttribute("class","img");
+    //Pfade setzen
+    imgPic.setAttribute("src","/");
+    imgPic.setAttribute("alt","Bild einfügen");
+    //Bilder anhängen
+    picturecolumn.appendChild(imgPic);
+
+    //Name und Preis
+    pricecolumn.innerHTML = article['ab_price'] / 100;
+    namecolumn.innerHTML = article['ab_name'];
+
+    //Entfernen Button
+    const button = document.createElement('button');
+    button.setAttribute("class","text-base btn p-2 border border-purple");
+    button.innerHTML = "Entfernen";
+    //Eventhandler bauen
+    button.addEventListener('click',(button) =>{
+        removeShoppingCart(article);
+    });
+    //Button zusammensetzen
+    removecolumn.appendChild(button);
+    //Zeile zusammensetzen
+    row.appendChild(picturecolumn);
+    row.appendChild(namecolumn);
+    row.appendChild(pricecolumn);
+    row.appendChild(removecolumn);
+    anker.appendChild(row);
+}
+
+function removeShoppingCart(article){
+    let cart = JSON.parse(sessionStorage.getItem(shoppingcartkey));
+    let id = article['id'];
+    //Anlegen eines neuen Warenkorbs
+    let newCart = [];
+    //Iteration in O(n) - entfernen der ID aus der Session
+    cart.forEach((number)=>{
+        if(number != id){
+            newCart.push(number);
+        }
+    });
+    sessionStorage.setItem(shoppingcartkey,JSON.stringify(newCart)); 
+    location.reload();
+}

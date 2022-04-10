@@ -40,6 +40,13 @@
     @apply text-black mt-2 mb-5 text-justify;
 }
 
+.TableRow{
+    @apply p-5 hover:bg-gray-300 transition ease-in-out duration-300;
+}
+.TableColumn{
+    @apply p-5 text-2xl;
+}
+
 .btn{
     @apply bg-purple text-white hover:bg-white hover:text-purple transition ease-in-out;
 }
