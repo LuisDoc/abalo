@@ -10,6 +10,7 @@ articles.forEach((article)=>{
     let articleID = article['id'];
     //Iterieren durch Warenkorb
     sessionData.forEach((shoppingcartid)=>{
+        
        if(articleID == shoppingcartid){
             //Funktionsaufruf zum Printen
             print(article);
@@ -81,6 +82,7 @@ function removeShoppingCart(article){
             newCart.push(number);
         }
     });
+    console.log(newCart)
     sessionStorage.setItem(shoppingcartkey,JSON.stringify(newCart)); 
     var articleToDelete = document.getElementById(article.id);
     articleToDelete.parentNode.removeChild(articleToDelete)
