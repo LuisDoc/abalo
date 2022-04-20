@@ -20,6 +20,7 @@ articles.forEach((article)=>{
 
 function print(article){
     const row = document.createElement('tr');
+    row.setAttribute('id', article.id)
     const picturecolumn = document.createElement('td');
     const namecolumn = document.createElement('td');
     const pricecolumn = document.createElement('td');
@@ -56,6 +57,7 @@ function print(article){
     button.innerHTML = "Entfernen";
     //Eventhandler bauen
     button.addEventListener('click',(button) =>{
+        button.preventDefault();
         removeShoppingCart(article);
     });
     //Button zusammensetzen
@@ -80,5 +82,14 @@ function removeShoppingCart(article){
         }
     });
     sessionStorage.setItem(shoppingcartkey,JSON.stringify(newCart)); 
-    location.reload();
+    var articleToDelete = document.getElementById(article.id);
+    articleToDelete.parentNode.removeChild(articleToDelete)
+    let amount = JSON.parse(sessionStorage.getItem(shoppingcartkey)).length;
+    if(amount > 0 && amount != undefined && amount != null){
+        bell.innerHTML = amount;
+        bell.classList.remove("hidden");
+    }
+    else{
+        bell.classList.add("hidden");
+    }
 }
