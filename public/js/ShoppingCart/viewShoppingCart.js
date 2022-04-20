@@ -13,6 +13,7 @@ articles.forEach((article)=>{
        if(articleID == shoppingcartid){
             //Funktionsaufruf zum Printen
             print(article);
+
        }
     });
 });
@@ -35,8 +36,13 @@ function print(article){
     //Bilder Tailwind CSS
     //imgPic.setAttribute("class","img");
     //Pfade setzen
-    imgPic.setAttribute("src","/");
+    
+    imgPic.setAttribute("src","/images/articlepictures/"+article.id + ".jpg");
+    imgPic.setAttribute("onerror", `this.onerror = null; this.src="/images/articlepictures/${article.id}.png"`)
     imgPic.setAttribute("alt","Bild einfügen");
+    imgPic.setAttribute("class", "w-60 h-60 object-cover mt-5");
+    
+
     //Bilder anhängen
     picturecolumn.appendChild(imgPic);
 
