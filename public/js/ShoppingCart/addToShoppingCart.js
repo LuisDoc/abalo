@@ -13,7 +13,8 @@ if(articles){
         const btn = document.querySelector("#addShoppingCart"+id);
         
         if(btn){
-            btn.addEventListener('click',() =>{
+            btn.addEventListener('click',(e) =>{
+                e.preventDefault();
                 handle(element, id);
             });
         }
@@ -37,8 +38,16 @@ function handle(e,id){
     else{
         console.log("Already in Shopping Cart");
     }
-    
+    /*Realtime Counter update*/
+    let amount = JSON.parse(sessionStorage.getItem(shoppingcartkey)).length;
 
+    if(amount > 0 && amount != undefined && amount != null){
+        bell.innerHTML = amount;
+        bell.classList.remove("hidden");
+    }
+    else{
+        bell.classList.add("hidden");
+    }
 
     
 }
