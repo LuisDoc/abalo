@@ -6,35 +6,34 @@ use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 
-/*
-    Main-Routes
-*/
 //Home-Routen
 Route::get('/', [HomeController::class,'getHome']);
 Route::redirect('/home','/');
 //Artikel-Routen
-Route::match(['get', 'post'], '/articles',[ArticleController::class,'showAllArticle']);
-Route::get('/removeArticle/{id}',[ArticleController::class,'deleteArticle'])->middleware('auth');
-Route::get('/myarticle',[ArticleController::class,'showMyArticle'])->middleware('auth');
-Route::get('/newarticle',[ArticleController::class,'showNewArticleForm'])->middleware('auth');
+Route::controller(ArticleController::class)->group(function(){
+    Route::match(['get', 'post'], '/articles','showAllArticle');
+    Route::get('/removeArticle/{id}','deleteArticle')->middleware('auth');
+    Route::get('/myarticle','showMyArticle')->middleware('auth');
+    Route::get('/newarticle','showNewArticleForm')->middleware('auth');
+});
+//Services and Accessories
+Route::view('/faq', 'tailwind.services_and_accessories.faq');
+Route::view('/impressum', 'tailwind.services_and_accessories.impressum');
+//Cookies
+Route::view('/CookieGuidelines', 'tailwind.Cookie.CookieGuidelines');
+Route::view('/CookieSettings', 'tailwind.Cookie.CookieSettings');
+//Weiterleitung zu Views
+Route::view('/showLogin', 'tailwind.auth.login')->name('login');
+Route::view('/showRegister', 'tailwind.auth.register');
 //Einkaufswagen
 Route::get('/ShoppingCart',[ShoppingCartController::class,'getShoppingCart']);
-//Services and Accessories
-Route::get('/faq', function(){return view('tailwind.services_and_accessories.faq');});
-Route::get('/impressum', function(){return view('tailwind.services_and_accessories.impressum');});
-//Cokies
-Route::get('/CookieGuidelines', function(){ return view ('tailwind.Cookie.CookieGuidelines');});
-Route::get('/CookieSettings', function(){return view('tailwind.Cookie.CookieSettings');});
-/*
-    Auth
-*/
-//Weiterleitung zu Views
-Route::get('/showLogin', function(){ return view('tailwind.auth.login'); })->name('login');
-Route::get('/showRegister', function(){ return view('tailwind.auth.register');});
 //Anmeldung
-Route::POST('/login',[AuthController::class,'login']);
-Route::POST('/register',[AuthController::class,'register']);
-Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/login','login');
+    Route::post('/register','register');
+    Route::get('/logout', 'logout')->middleware('auth');
+});
+
 
 
 
