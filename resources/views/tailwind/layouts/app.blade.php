@@ -74,8 +74,8 @@
         </div>
         <!-- Warenkorb Button -->
         <div class="col-span-1 mx-auto">
-            <a href="/ShoppingCart" class="flex my-3 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
-                <img class ="w-9 h-9 my-1" src="{{asset('images/warenkorb.png')}}" alt="">
+            <a href="/ShoppingCart" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
+                <img class ="w-9 h-9" src="{{asset('images/warenkorb.png')}}" alt="">
                 <span id="shoppingcartbell" class ="text-black h-7 ml-2 relative top-0 right-2"></span>
             </a>
         </div>
