@@ -16,7 +16,7 @@
     <!-- Tailwind Klassen Rendern -->
     <div class="flex flex-col justify-center mx-20" hidden></div>
     <div class="inp outline outline-gray-300 p-6 mx-5" hidden></div>
-    <div class="outline outline-gray-300 inp p-6 mx-5" hidden></div>
+    <div class="outline text-green-600 my-5 outline-gray-300 inp p-6 mx-5" hidden></div>
     <div class="btn p-2 mx-5 rounded-xl border border-purple mb-2" hidden></div>
 @endsection
 @section('scripts')

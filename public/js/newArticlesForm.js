@@ -6,6 +6,11 @@ const base = document.querySelector("#addArticleForm");
     HTML in Javascript
     Wieso auch immer
 */
+//Paragraph Fehlermeldung
+const warning = document.createElement('p');
+warning.setAttribute("class", "text-red-600 mx-20 my-10");
+warning.classList.add("hidden");
+warning.innerHTML = "";
 
 //Form anlegen
 const form = document.createElement('form');
@@ -110,7 +115,7 @@ const div4 = document.createElement('div');
 div3.setAttribute("class","my-2");
 //Div 4 - Inhalt
 const submit = document.createElement('input');
-submit.setAttribute("class","btn p-2 mx-5 rounded-xl border border-purple")
+submit.setAttribute("class","btn p-2 mx-5 rounded-xl border border-purple");
 submit.setAttribute("type","submit");
 submit.setAttribute("value","Hinzufügen");
 
@@ -124,7 +129,7 @@ const inputFile = document.createElement('input');
 inputFile.setAttribute('type', "file");
 inputFile.setAttribute('class', 'mx-5 mb-2')
 inputFile.setAttribute('name', 'file');
-
+inputFile.setAttribute('id', 'pic');
 filediv.appendChild(inputFile);
 
 
@@ -135,6 +140,7 @@ form.appendChild(div3);
 form.appendChild(filediv)
 form.appendChild(div4);
 base.appendChild(form);
+base.appendChild(warning);
 
 /*
     Event Listener
@@ -174,9 +180,35 @@ function validateInputname(){
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
-    if (priceStatus && nameStatus){
-        form.submit();
-    }else{
-        console.log("Form not complete");
+    
+    if(nameStatus && priceStatus){
+        $.ajax({
+            url:"/api/createArticle",
+            type:"POST",
+            data:{
+                name: inputName.value,
+                price:inputPrice.value,
+                description : inputTextArea.value,
+                userID : auth_user_id,
+                //file :$('#pic').serialize(),
+            },
+            success:function(response){
+                    console.log(response);
+                    warning.setAttribute("class", "text-green-600 mx-20 my-5");
+                    warning.classList.remove("hidden");
+                    warning.innerHTML ="Artikel wurde erfolgreich hinzugefügt";
+            },
+            error:function(response){
+                console.log(response);
+                warning.setAttribute("class", "text-red-600 mx-20 my-5");
+                warning.classList.remove("hidden");
+                warning.innerHTML =JSON.stringify(response.responseJSON.message).slice(1,-1);
+            }
+        })
+    }
+    else{
+        warning.setAttribute("class", "text-red-600 mx-20 my-5");
+        warning.classList.remove("hidden");
+        warning.innerHTML ="Bitte füllen sie alle verpflichtenden Felder aus";
     }
 })

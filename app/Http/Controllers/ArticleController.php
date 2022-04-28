@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use File;
+use Response;
 class ArticleController extends Controller
 {
     //returned die Artikel View mit allen Artikeln
@@ -16,7 +17,8 @@ class ArticleController extends Controller
             $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
             return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
         }
-        //Neuer Artikel wird angelegt
+        /*
+        //Artikel wird serverseitig angelegt
         else if($request->name){
             $request->validate([
                 'name'=>'required|unique:ab_article,ab_name',
@@ -46,7 +48,8 @@ class ArticleController extends Controller
                 $request->file('file')->move('images/articlepictures', $fileName);
             }
             return redirect("/myarticle");
-        }
+            }
+            */
         //Alle Artikel
         $articles = ab_article::all();
         return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
@@ -73,6 +76,36 @@ class ArticleController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /*
+        API ROUTEN
+    */
+
+    public function addArticle(Request $request){
+        //1. Serverseitige-Validierung
+        //-> Ab_Article hat keine Attribute, die unique sind
+
+        $validator = $request->validate([
+            'name'=>'required|unique:ab_article,ab_name',
+            'price'=>'numeric|gt:0',
+            'file.*' => 'mimes:png,jpg'
+        ]);
+        
+        $article = new ab_article();
+        $article->ab_name = $request->name;
+        $article->ab_price = $request->price;
+        if($request->description == null){
+            $article->ab_description = "";
+        }
+        else{
+            $article->ab_description = $request->description;
+        }
+        $article->ab_creator_id = $request->userID;
+        $article->save();
+
+        //3. Success oder Fehler zurückgeben
+        return response()->json(['message' => 'success']);
     }
     
 }

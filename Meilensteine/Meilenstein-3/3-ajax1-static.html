@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=p, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <p id="zeile"></p>
+        <script>
+            "use strict";
+            const p = document.querySelector("#zeile");
+            
+            let xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.open("GET", "/public/static/message.json");
+            xmlhttp.onload = function(){
+                console.log("success");
+                //Darstellung von Message im HTML Element
+                p.innerHTML = JSON.parse(xmlhttp.responseText)['message'];
+                console.log(xmlhttp.responseText);
+            }
+            xmlhttp.onerror = function(){
+                console.log("error");
+                p.innerHTML = "Fehler";
+            }
+            xmlhttp.send()
+        </script>
+    </body>
+</html>

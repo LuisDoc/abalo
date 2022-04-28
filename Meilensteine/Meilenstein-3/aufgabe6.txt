@@ -1,0 +1,28 @@
+Spotify APi
+Was ist Zweck der API ?
+Die Api ermöglicht Zugang zu Nutzer- und Trackdaten.
+Damit ist es möglich Playlisten zu editieren, Trackinformationen zu laden u.v.m.
+
+Welche REST Prinzipien sind umgesetzt?
+- Einheitliche Schnittstelle
+- Zustandslosigkeit
+
+Auf welchem Level befindet sich die API?
+Level 3
+
+Wie ist eine Versionierung implementiert ?
+Über den Link besteht eine Versionsauswahl.
+"/v1/playlists/{playlist_id}/tracks"
+
+
+Twitter API
+Was ist Zweck der API ?
+
+
+Welche REST Prinzipien sind umgesetzt?
+Ja Twitter ist RESTful
+
+Auf welchem Level befindet sich die API?
+Level 3
+
+Wie ist eine Versionierung implementiert ?

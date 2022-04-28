@@ -2,7 +2,7 @@
 "use strict";
 
 /*
-    Zeige Dialog für Cookie-Optionen
+    html elemente
 */
 const dialog = document.querySelector("#CookieDialog");
 const yesButton = document.querySelector("#CookieDialogYes");

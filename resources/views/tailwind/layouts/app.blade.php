@@ -255,8 +255,15 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script>
+        var auth_user_id = <?php echo Auth()->User()->id; ?>;
+        console.log("Current User's ID: " + auth_user_id);
+    </script>
     @if(isset($articles))
-        <script>var articles = <?php echo json_encode($articles); ?>;</script>
+        <script>
+            var articles = <?php echo json_encode($articles); ?>;
+        </script>
     @else
         <script>var articles = null;</script>
     @endif

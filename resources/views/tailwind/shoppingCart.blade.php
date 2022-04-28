@@ -22,7 +22,7 @@
         <div class ="flex justify-end my-20 mr-10">
             <!-- First Row -->
             <div>
-                <button class ="btn p-2 text-2xl hover:border hover:border-purple">Bestellen</button>
+                <button class ="btn p-2 text-2xl ho ver:border hover:border-purple">Bestellen</button>
             </div>
         </div>
         

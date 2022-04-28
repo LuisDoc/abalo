@@ -1,0 +1,20 @@
+
+Array.prototype.flat(depth)
+JavaScriptCore (u.a. Safari): Ja
+V8 (u.a. chrome): Ja
+SpiderMonkey (u.a. Firefox): Ja
+
+! let a= () => { …}; a.toString();
+JavaScriptCore: Ja
+V8: Ja
+SpiderMonkey: Ja
+
+! Object.fromEntries()
+JavaScriptCore: Ja
+V8: Ja
+SpiderMonkey: Ja
+
+! Null-Coalescing Operator:
+JavaScriptCore: Ja
+V8: Ja
+SpiderMonkey: Ja
