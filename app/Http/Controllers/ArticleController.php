@@ -17,39 +17,6 @@ class ArticleController extends Controller
             $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
             return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
         }
-        /*
-        //Artikel wird serverseitig angelegt
-        else if($request->name){
-            $request->validate([
-                'name'=>'required|unique:ab_article,ab_name',
-                'price'=>'numeric|gt:0',
-                'file.*' => 'mimes:png,jpg'
-            ]);
-
-            
-            //Neuen Artikel anlegen
-            $article = new ab_article();
-            $article->ab_name = $request->name;
-            $article->ab_price = $request->price;
-            
-            if($request->description == null){
-                $article->ab_description = "";
-            }
-            else{
-                $article->ab_description = $request->description;
-            }
-            
-            $article->ab_creator_id = auth()->user()->id;
-
-            $article->save();
-            
-            if($request->hasFile('file')){
-                $fileName= $article->id .'.'. $request->file('file')->getClientOriginalExtension();
-                $request->file('file')->move('images/articlepictures', $fileName);
-            }
-            return redirect("/myarticle");
-            }
-            */
         //Alle Artikel
         $articles = ab_article::all();
         return view('tailwind.Article.article')->with('articles',$articles)->with('headline',"Alle Artikel im Überblick");
@@ -81,6 +48,41 @@ class ArticleController extends Controller
     /*
         API ROUTEN
     */
+
+    public function articles(Request $request){
+        //Es wurde ein Suchbegriff angegeben
+        if($request->search){
+            //Suche in Datenbank nach Suchbegriff
+            $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
+            return json_encode($articles);
+        }
+        //Anfrage zur Erstellung eines Artikels wurde hochgeladen
+        else if($request->input('name') != null && $request->input('price') != null && $request->input('creator_id') != null){
+            //Validation
+            if($request->input('price') <= 0 ){
+                //Validierung fehlgeschlagen
+                return json_encode(["Error" => "Preis ist <= 0"]);
+            }
+
+            if( ab_article::where('ab_name','like',$request->input('name'))->get()->count() > 0){
+                //Validierung fehlgeschlagen
+                return json_encode(["Error" => "Es existiert bereits ein Artikel unter diesem Namen"]);
+            }
+
+            //Artikel anlegen
+            $article = new ab_article();
+            $article->ab_name = $request->input('name');
+            $article->ab_price = doubleval($request->input('price'));
+            $article->ab_description = $request->input('description') != null ? $request->input('description'): "";
+            $article->ab_creator_id = $request->input('creator_id');
+            $article->save();
+            return json_encode(["ID" => $article->id]);
+        }
+        else{
+            return json_encode(["Error" => "Kein Suchbegriff angegeben"]);
+        }
+        
+    }
 
     public function addArticle(Request $request){
         //1. Serverseitige-Validierung
