@@ -54,19 +54,19 @@ class ArticleController extends Controller
         if($request->search){
             //Suche in Datenbank nach Suchbegriff
             $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
-            return json_encode($articles);
+            return response()->json(['articles'=>$articles], 200);
         }
         //Anfrage zur Erstellung eines Artikels wurde hochgeladen
         else if($request->input('name') != null && $request->input('price') != null && $request->input('creator_id') != null){
             //Validation
             if($request->input('price') <= 0 ){
                 //Validierung fehlgeschlagen
-                return json_encode(["Error" => "Preis ist <= 0"]);
+                return response()->json(["Error" => "Preis ist <= 0"], 400);
             }
 
             if( ab_article::where('ab_name','like',$request->input('name'))->get()->count() > 0){
                 //Validierung fehlgeschlagen
-                return json_encode(["Error" => "Es existiert bereits ein Artikel unter diesem Namen"]);
+                return response()->json(["Error" => "Es existiert bereits ein Artikel unter diesem Namen"],403);
             }
 
             //Artikel anlegen
@@ -76,10 +76,13 @@ class ArticleController extends Controller
             $article->ab_description = $request->input('description') != null ? $request->input('description'): "";
             $article->ab_creator_id = $request->input('creator_id');
             $article->save();
-            return json_encode(["ID" => $article->id]);
+            return response()->json([
+                "ID" => $article->id, 
+                "artikel"=>$article
+            ]);
         }
         else{
-            return json_encode(["Error" => "Kein Suchbegriff angegeben"]);
+            return response()->json(["Error" => "Kein Suchbegriff angegeben"],403);
         }
         
     }
@@ -107,7 +110,23 @@ class ArticleController extends Controller
         $article->save();
 
         //3. Success oder Fehler zurückgeben
-        return response()->json(['message' => 'success']);
+        return response()->json(['message' => 'success'],200);
+    }
+
+    public function apidelete($id){
+        $article = ab_article::find($id);
+        
+        if(!$article){
+            return response([
+                'message'=>'Artikel nicht gefunden'
+            ],403);
+        }
+        $article->delete();
+
+        return response([
+            'message' => 'Artikel gelöscht'
+        ],200);
+        
     }
     
 }

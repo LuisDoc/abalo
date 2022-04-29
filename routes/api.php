@@ -25,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Artikel
 Route::post('/createArticle', [ArticleController::class, "addArticle"]);
 Route::match(['get', 'post'], '/articles', [ArticleController::class, "articles"]);
+Route::delete("/articles/{id}", [ArticleController::class, "apidelete"]);
