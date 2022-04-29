@@ -44,17 +44,15 @@ let nav = {
         } else {
             list.innerHTML += '<ul>';
             for (i of e.sub) {
-                let sublist = document.createElement('li');
-                let link = document.createElement('a');
-                link.href = i.href;
-                link.innerText = i.name;
+                let sublist = this.create_list();
+                let link = this.create_link(i.href, i.name);
 
                 //<li><a></a></li>
                 sublist.appendChild(link);
                 sublist.classList.add("sub-nav");
 
                 //temporary div to insert html
-                temp = document.createElement("div");
+                temp = this.create_div()
                 temp.appendChild(sublist);
 
                 //add to main list
@@ -62,7 +60,19 @@ let nav = {
             }
         }
 
-    })
+        })
+    },
+    create_list:function(){
+        return document.createElement('li');
+    },
+    create_link:function(href, name){
+        let link = document.createElement('a');
+        link.href = href;
+        link.innerText = name;
+        return link;
+    },
+    create_div:function(){
+        return document.createElement('div');
     }
     
 }
