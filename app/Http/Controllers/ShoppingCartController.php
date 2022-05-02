@@ -56,7 +56,7 @@ class ShoppingCartController extends Controller
     }
     
     //Aktualisieren des Warenkorb Inhaltes
-    public function putShoppingCart_api($creator_id, Request $request){
+    public function postShoppingCart_api($creator_id, Request $request){
         /*
             Validierung
         */
@@ -108,6 +108,39 @@ class ShoppingCartController extends Controller
         }        
     }
 
+    public function deleteArticleFromShoppingCart($creator_id, $article_id, Request $request){
+        /*
+            Validierung
+        */
+        $user = User::find($creator_id);
+        if(!$user){
+            return response()->json(["error" => "user not found"]);
+        }
+        $articleID = intval($article_id);
+        if(ab_article::find($articleID) == null){
+            return response()->json(["error" => "article not found"]);
+        }
+        $cart = $user->myShoppingCart;
+        //Noch kein Shopping Cart initialisiert
+        if($cart == null){
+            return response()->json(["error" => "cart not yet initialized - nothing to delete"]);
+        }
+        $cartID = $cart->id;
+        
+        //Aus Shopping Cart entfernen
+        $articles = ab_shoppingcart_item::where('ab_shoppingcart_id','=',$cartID)
+            ->where('ab_article_id','=',$articleID)->get();
+        if($articles->count() == 0){
+            return response()->json(["error" => "article not found in shopping cart"]);
+        }
+        else{
+            foreach($articles as $article){
+                $article->delete();
+                return response()->json(["success" => "Article was removed"]);
+            }   
+        } 
+    }
+
     //Wird nur aufgerufen, wenn der Warenkorb entfernt werden soll, weil z.B. keine Items mehr im Shop liegen
     public function deleteShoppingCart_api($creator_id){
         $user = User::find($creator_id);
@@ -121,6 +154,7 @@ class ShoppingCartController extends Controller
         else{
             ab_shoppingcart::destroy($cart->id);
         }
+    
     }
     
 }

@@ -103,18 +103,17 @@ function removeShoppingCart(article){
 
     //Request zum entfernen
     let xhr = new XMLHttpRequest();
-    let url = "/api/shoppingcart/" + auth_user_id;
-    let params = "articleID="+id;
-    xhr.open("put",url);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    let url = "/api/shoppingcart/" + auth_user_id + "/articles/" + id;
+
+    xhr.open("delete",url);
 
     xhr.onload = function(){
        console.log(xhr.responseText);
     }
     xhr.onerror = function(){
-        console.warn("Fehler beim laden des Artikelcounters");
+        console.warn("Fehler beim Artikel löschen");
     }
-    xhr.send(params);
+    xhr.send();
 
 
     var articleToDelete = document.getElementById(id);

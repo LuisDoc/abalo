@@ -27,7 +27,7 @@ function handle(e,id){
     let xhr = new XMLHttpRequest();
     let url = "/api/shoppingcart/" + auth_user_id;
     let params = "articleID="+id;
-    xhr.open("put",url);
+    xhr.open("post",url);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.onload = function(){

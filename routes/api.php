@@ -28,10 +28,8 @@ Route::delete("/articles/{id}", [ArticleController::class, "delete_api"]);
 //Shopping Cart
 Route::get('/shoppingcart/{creator_id}/size',[ShoppingCartController::class,"getShoppingCartSize_api"]);
 Route::get('/shoppingcart/{creator_id}',[ShoppingCartController::class,"getShoppingCart_api"]);
-//Initialisieren des Warenkorbs
-Route::post('/shoppingcart/{creator_id}',[ShoppingCartController::class,"postShoppingCart_api"]);
 //Aktualisieren des Warenkorbs
-Route::put('/shoppingcart/{creator_id}',[ShoppingCartController::class,"putShoppingCart_api"]);
+Route::post('/shoppingcart/{creator_id}',[ShoppingCartController::class,"postShoppingCart_api"]);
 //Löschen des Warenkorbs
 Route::delete('/shoppingcart/{creator_id}',[ShoppingCartController::class,"deleteShoppingCart_api"]);
 //Löschen aus dem Warenkorb
