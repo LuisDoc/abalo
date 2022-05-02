@@ -15,6 +15,7 @@ Route::controller(ArticleController::class)->group(function(){
     Route::get('/removeArticle/{id}','deleteArticle')->middleware('auth');
     Route::get('/myarticle','showMyArticle')->middleware('auth');
     Route::get('/newarticle','showNewArticleForm')->middleware('auth');
+    Route::post('/createArticle', [ArticleController::class, "addArticle"]);
 });
 //Services and Accessories
 Route::view('/faq', 'tailwind.services_and_accessories.faq');

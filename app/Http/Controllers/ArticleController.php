@@ -30,63 +30,6 @@ class ArticleController extends Controller
         return view('tailwind.Article.CreateArticle')->with('categories',$categories);
     }
 
-    public function deleteArticle(Request $request){
-        $article = ab_article::where('id','like',$request->id)->first();
-        if($article->ab_creator_id == Auth()->User()->id){
-            ab_article::destroy($request->id);
-        }
-        if(File::exists(public_path('images/articlepictures/'.$request->id . '.png'))){
-            File::delete(public_path('images/articlepictures/'.$request->id . '.png'));
-        }
-        if(File::exists(public_path('images/articlepictures/'.$request->id . '.jpg'))){
-            File::delete(public_path('images/articlepictures/'.$request->id . '.jpg'));
-        }
-
-        return redirect()->back();
-    }
-
-    /*
-        API ROUTEN
-    */
-
-    public function articles(Request $request){
-        //Es wurde ein Suchbegriff angegeben
-        if($request->search){
-            //Suche in Datenbank nach Suchbegriff
-            $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
-            return response()->json(['articles'=>$articles], 200);
-        }
-        //Anfrage zur Erstellung eines Artikels wurde hochgeladen
-        else if($request->input('name') != null && $request->input('price') != null && $request->input('creator_id') != null){
-            //Validation
-            if($request->input('price') <= 0 ){
-                //Validierung fehlgeschlagen
-                return response()->json(["Error" => "Preis ist <= 0"], 400);
-            }
-
-            if( ab_article::where('ab_name','like',$request->input('name'))->get()->count() > 0){
-                //Validierung fehlgeschlagen
-                return response()->json(["Error" => "Es existiert bereits ein Artikel unter diesem Namen"],403);
-            }
-
-            //Artikel anlegen
-            $article = new ab_article();
-            $article->ab_name = $request->input('name');
-            $article->ab_price = doubleval($request->input('price'));
-            $article->ab_description = $request->input('description') != null ? $request->input('description'): "";
-            $article->ab_creator_id = $request->input('creator_id');
-            $article->save();
-            return response()->json([
-                "ID" => $article->id, 
-                "artikel"=>$article
-            ]);
-        }
-        else{
-            return response()->json(["Error" => "Kein Suchbegriff angegeben"],403);
-        }
-        
-    }
-
     public function addArticle(Request $request){
         //1. Serverseitige-Validierung
         //-> Ab_Article hat keine Attribute, die unique sind
@@ -113,7 +56,63 @@ class ArticleController extends Controller
         return response()->json(['message' => 'success'],200);
     }
 
-    public function apidelete($id){
+    public function deleteArticle(Request $request){
+        $article = ab_article::where('id','like',$request->id)->first();
+        if($article->ab_creator_id == Auth()->User()->id){
+            ab_article::destroy($request->id);
+        }
+        if(File::exists(public_path('images/articlepictures/'.$request->id . '.png'))){
+            File::delete(public_path('images/articlepictures/'.$request->id . '.png'));
+        }
+        if(File::exists(public_path('images/articlepictures/'.$request->id . '.jpg'))){
+            File::delete(public_path('images/articlepictures/'.$request->id . '.jpg'));
+        }
+
+        return redirect()->back();
+    }
+
+    /*
+        API ROUTEN
+    */
+
+    public function articles_api(Request $request){
+        //Es wurde ein Suchbegriff angegeben
+        if($request->search){
+            //Suche in Datenbank nach Suchbegriff
+            $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
+            return response()->json(['articles'=>$articles], 200);
+        }
+        //Anfrage zur Erstellung eines Artikels wurde hochgeladen
+        else if($request->input('name') != null && $request->input('price') != null && $request->input('creator_id') != null){
+            //Validation
+            if($request->input('price') <= 0 ){
+                //Validierung fehlgeschlagen
+                return response()->json(["Error" => "Preis ist <= 0"], 400);
+            }
+            if( ab_article::where('ab_name','like',$request->input('name'))->get()->count() > 0){
+                //Validierung fehlgeschlagen
+                return response()->json(["Error" => "Es existiert bereits ein Artikel unter diesem Namen"],403);
+            }
+
+            //Artikel anlegen
+            $article = new ab_article();
+            $article->ab_name = $request->input('name');
+            $article->ab_price = doubleval($request->input('price'));
+            $article->ab_description = $request->input('description') != null ? $request->input('description'): "";
+            $article->ab_creator_id = $request->input('creator_id');
+            $article->save();
+            return response()->json([
+                "ID" => $article->id, 
+                "artikel"=>$article
+            ]);
+        }
+        else{
+            return response()->json(["Error" => "Kein Suchbegriff angegeben"],403);
+        }
+        
+    }
+
+    public function delete_api($id){
         $article = ab_article::find($id);
         
         if(!$article){
@@ -128,5 +127,6 @@ class ArticleController extends Controller
         ],200);
         
     }
+
     
 }
