@@ -50,20 +50,7 @@ class ShoppingCartController extends Controller
         }
         
     }
-    //Wird nur aufgerufen, wenn getShoppingCartSize bisher leer war, also ein neuer Korb
-    //initialisiert werden muss
-    public function putShoppingCart_api($creator_id){
-        //Hat der Nutzer bereits einen Warenkorb angelegt?
-        $found = ab_shoppingcart::where('ab_creator_id','=',$creator_id)->get();
-        if($found->count()){
-            return response()->json(["error: " => "user has already initialized his shopping cart"]);
-        }
-        //Warenkorb anlegen
-        $cart = new ab_shoppingcart();
-        $cart->ab_creator_id = $creator_id;
-        $cart->save();
-        return response()->json(["sucess: " => "shopping cart was initialized", "ID" => $cart->id]);
-    }
+    
     //Aktualisieren des Warenkorb Inhaltes
     public function postShoppingCart_api($creator_id, Request $request){
         /*
@@ -79,7 +66,7 @@ class ShoppingCartController extends Controller
         }
         $cart = $user->myShoppingCart;
         if($cart == null){
-            return response()->json(["error: " => "shopping cart not initialized"]);
+            return response()->json(["error: " => "shopping cart not found"]);
         }
         $cartID = $cart->id;
         /*
@@ -104,11 +91,34 @@ class ShoppingCartController extends Controller
             $entry->save();
             return response()->json(["success: " => "article was added to shopping cart"]);
         }        
-        
-        
-        
-
-        
     }
-
+    //Wird nur aufgerufen, wenn getShoppingCartSize bisher leer war, also ein neuer Korb
+    //initialisiert werden muss
+    public function putShoppingCart_api($creator_id){
+        //Hat der Nutzer bereits einen Warenkorb angelegt?
+        $found = ab_shoppingcart::where('ab_creator_id','=',$creator_id)->get();
+        if($found->count()){
+            return response()->json(["error: " => "user has already initialized his shopping cart"]);
+        }
+        //Warenkorb anlegen
+        $cart = new ab_shoppingcart();
+        $cart->ab_creator_id = $creator_id;
+        $cart->save();
+        return response()->json(["sucess: " => "shopping cart was initialized", "ID" => $cart->id]);
+    }
+    //Wird nur aufgerufen, wenn der Warenkorb entfernt werden soll, weil z.B. keine Items mehr im Shop liegen
+    public function deleteShoppingCart_api($creator_id){
+        $user = User::find($creator_id);
+        if(!$user){
+            return response()->json(["error: " => "user not found"]);
+        }
+        $cart = $user->myShoppingCart;
+        if($cart == null){
+            return response()->json(["error: " => "shopping cart not found"]);
+        }
+        else{
+            ab_shoppingcart::destroy($cart->id);
+        }
+    }
+    
 }

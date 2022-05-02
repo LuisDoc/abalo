@@ -32,3 +32,5 @@ Route::get('/shoppingcart/{creator_id}',[ShoppingCartController::class,"getShopp
 Route::post('/shoppingcart/{creator_id}',[ShoppingCartController::class,"postShoppingCart_api"]);
 //Aktualisieren des Warenkorbs
 Route::put('/shoppingcart/{creator_id}',[ShoppingCartController::class,"putShoppingCart_api"]);
+//Löschen des Warenkorbs
+Route::delete('/shoppingcart/{creator_id}',[ShoppingCartController::class,"deleteShoppingCart_api"]);
