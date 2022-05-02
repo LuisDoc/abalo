@@ -22,32 +22,22 @@ if(articles){
 }
 
 function handle(e,id){
-    let articles = [];
-    articles = JSON.parse(sessionStorage.getItem(shoppingcartkey));
-    console.warn("Aktueller Warenkorb");
-    console.log(articles);
+    e.preventDefault;
+    //Ist Warenkorb bereits initialisiert?
+    let xhr = new XMLHttpRequest();
+    let url = "/api/shoppingcart/" + auth_user_id;
+    let params = "articleID="+id;
+    xhr.open("put",url);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-    if(articles == null){
-        articles = [id];
-        sessionStorage.setItem(shoppingcartkey,JSON.stringify(articles));
+    xhr.onload = function(){
+       console.log(xhr.responseText);
     }
-    else if(!articles.includes(id)){
-        articles.push(id);
-        sessionStorage.setItem(shoppingcartkey,JSON.stringify(articles));
+    xhr.onerror = function(){
+        console.warn("Fehler beim laden des Artikelcounters");
     }
-    else{
-        console.log("Already in Shopping Cart");
-    }
-    /*Realtime Counter update*/
-    let amount = JSON.parse(sessionStorage.getItem(shoppingcartkey)).length;
-
-    if(amount > 0 && amount != undefined && amount != null){
-        bell.innerHTML = amount;
-        bell.classList.remove("hidden");
-    }
-    else{
-        bell.classList.add("hidden");
-    }
-
+    xhr.send(params);
     
+    /*Realtime Counter update*/
+    bellUpdate();
 }

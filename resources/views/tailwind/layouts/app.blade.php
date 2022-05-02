@@ -282,7 +282,7 @@
         let shoppingcartkey ="ShoppingCart";
         let cookiekey ="acceptCookies";
     </script>
-    @yield('scripts')
+    
     <!-- Meilenstein 2 Aufgabe 10 -->
     <script src="{{ asset('js/ShoppingCart/ShoppingCartCounter.js') }}"></script>
     <script src="{{ asset('js/ShoppingCart/addToShoppingCart.js') }}"></script>
@@ -290,6 +290,7 @@
     <script src="{{ asset('js/coockiecheck.js') }}"></script>
     <!-- Meilenstein 2 Aufgabe 7 -->
     <script src="{{ asset('js/m2-nav.js') }}"></script>
+    @yield('scripts')
     <script>
         const search = document.querySelector("#search");
         const searchbar = document.querySelector("#searchbar");
