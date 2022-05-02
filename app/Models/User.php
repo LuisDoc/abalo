@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\ab_article;
+use App\Models\ab_shoppingcart;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -60,5 +61,8 @@ class User extends Authenticatable
 
     public function myarticles(){
         return $this->hasMany(ab_article::class, 'ab_creator_id')->orderBy('ab_createdate', 'desc');
+    }
+    public function myShoppingCart(){
+        return $this->hasOne(ab_shoppingcart::class, 'ab_creator_id');
     }
 }

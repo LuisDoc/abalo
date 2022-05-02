@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\ab_shoppingcart_item;
 use App\Models\ab_articlecategory;
 use App\Models\User;
 class ab_article extends Model
@@ -35,4 +36,5 @@ class ab_article extends Model
     public function owner(){
         return $this->belongsTo(User::class, 'ab_creator_id');
     }
+
 }
