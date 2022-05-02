@@ -340,6 +340,11 @@
                             </svg>`
         })
     </script>
+
+    <!-- Rendern von Typescript klassen -->
+    <div class ="hidden">
+        <div class ="w-14 h-15 rounded-full p-2 border-2 border-red-400 hover:bg-red-400 transition duration-300 ease-out"></div>
+    </div>
 </body>
 
 </html>
