@@ -22,7 +22,7 @@ Route::view('/impressum', 'tailwind.services_and_accessories.impressum');
 //Cookies
 Route::view('/CookieGuidelines', 'tailwind.Cookie.CookieGuidelines');
 Route::view('/CookieSettings', 'tailwind.Cookie.CookieSettings');
-//Weiterleitung zu Views
+//View Routing
 Route::view('/showLogin', 'tailwind.auth.login')->name('login');
 Route::view('/showRegister', 'tailwind.auth.register');
 //Einkaufswagen

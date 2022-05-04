@@ -23,15 +23,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Artikel
-Route::match(['get', 'post'], '/articles', [ArticleController::class, "articles_api"]);
-Route::delete("/articles/{id}", [ArticleController::class, "delete_api"]);
-Route::post('/createArticle', [ArticleController::class, "addArticle"]);
+Route::controller(ArticleController::class)->group(function(){
+    Route::match(['get', 'post'], '/articles', 'articles_api');
+    Route::delete("/articles/{id}", 'delete_api');
+    Route::post('/createArticle', "addArticle");
+});
+
+
 //Shopping Cart
-Route::get('/shoppingcart/{creator_id}/size',[ShoppingCartController::class,"getShoppingCartSize_api"]);
-Route::get('/shoppingcart/{creator_id}',[ShoppingCartController::class,"getShoppingCart_api"]);
-//Aktualisieren des Warenkorbs
-Route::post('/shoppingcart/{creator_id}',[ShoppingCartController::class,"postShoppingCart_api"]);
-//Löschen des Warenkorbs
-Route::delete('/shoppingcart/{creator_id}',[ShoppingCartController::class,"deleteShoppingCart_api"]);
-//Löschen aus dem Warenkorb
-Route::delete('/shoppingcart/{creator_id}/articles/{article_id}',[ShoppingCartController::class,"deleteArticleFromShoppingCart"]);
+Route::controller(ShoppingCartController::class)->group(function(){
+    //Shopping Cart Size
+    Route::get('/shoppingcart/{creator_id}/size',"getShoppingCartSize_api");
+    //Shopping Cart Elements in JSON
+    Route::get('/shoppingcart/{creator_id}',"getShoppingCart_api");
+    //Shopping Cart Update
+    Route::post('/shoppingcart/{creator_id}',[ShoppingCartController::class,"postShoppingCart_api"]);
+    //Delete whole Shopping Cart
+    Route::delete('/shoppingcart/{creator_id}',[ShoppingCartController::class,"deleteShoppingCart_api"]);
+    //Delete article from Shopping Cart
+    Route::delete('/shoppingcart/{creator_id}/articles/{article_id}',[ShoppingCartController::class,"deleteArticleFromShoppingCart"]);
+});
+

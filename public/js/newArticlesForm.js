@@ -193,12 +193,14 @@ form.addEventListener('submit', (e)=>{
                 userID : auth_user_id,
                 //file :$('#pic').serialize(),
             },
+            //Sucess handler will show User that his Article was uploaded correctly
             success:function(response){
                     console.log(response);
                     warning.setAttribute("class", "text-green-600 mx-20 my-5");
                     warning.classList.remove("hidden");
                     warning.innerHTML ="Artikel wurde erfolgreich hinzugefügt";
             },
+            //Error handler will tell User why his Article was not uploaded correctly
             error:function(response){
                 console.log(response);
                 warning.setAttribute("class", "text-red-600 mx-20 my-5");
@@ -208,6 +210,7 @@ form.addEventListener('submit', (e)=>{
         })
     }
     else{
+        //Not all needed input fields have been filled
         warning.setAttribute("class", "text-red-600 mx-20 my-5");
         warning.classList.remove("hidden");
         warning.innerHTML ="Bitte füllen sie alle verpflichtenden Felder aus";
