@@ -239,7 +239,7 @@
         </div>
     </div>
     <!-- Cookie Dialog -->
-    <div id="CookieDialog" class="flex fixed bottom-0 w-screen bg-purple text-white z-50 h-32" hidden>
+    <div id="CookieDialog" class="flex fixed bottom-0 w-screen bg-purple text-white z-50 h-32 hidden">
         <div class ="w-2/3 mt-4 mb-4 mx-10" >
             <h1 class="text-align-left text-4xl">Cookie-Einstellungen</h1>
             <p class ="text-base">
