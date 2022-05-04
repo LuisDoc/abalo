@@ -73,12 +73,14 @@
             </div>
         </div>
         <!-- Warenkorb Button -->
-        <div class="col-span-1 mx-auto">
-            <a href="/ShoppingCart" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
-                <img class ="w-9 h-9" src="{{asset('images/warenkorb.png')}}" alt="">
-                <span id="shoppingcartbell" class ="text-black h-7 ml-2 relative top-0 right-2"></span>
-            </a>
-        </div>
+        @if(!Auth::guest())
+            <div class="col-span-1 mx-auto">
+                <a href="/ShoppingCart" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
+                    <img class ="w-9 h-9" src="{{asset('images/warenkorb.png')}}" alt="">
+                    <span id="shoppingcartbell" class ="text-black h-7 ml-2 relative top-0 right-2"></span>
+                </a>
+            </div>
+        @endif
         <div class="col-span-2">
             <div class="flex justify-end">
                 <span id="profileicon" class="mt-6 mr-1 mb-4">
@@ -100,7 +102,6 @@
             </div>
         </div>
     </div>
-    
     <!--Javascript Navbar-->
     <div id=menu class="
             fixed top-0 left-0 h-full p-10 w-1/6 bg-purple z-50 text-white hidden">

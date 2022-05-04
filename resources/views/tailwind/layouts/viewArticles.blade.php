@@ -21,17 +21,19 @@
                                 class="w-full h-60 object-cover mt-5">
                         @endif
                     </div>
-                    <div class ="p-4 flex justify-end">
-                        @if(!Auth::guest() && Auth()->User()->id == $article->ab_creator_id)
-                                <a class ="w-14 h-15 rounded-full p-2 bg-white border-red-400 hover:bg-red-400 border-2 hover:border-red-400 transition duration-300 ease-out" href="/removeArticle/{{$article->id}}">
-                                    <img src="{{ url('/images/TrashCan.png') }}" alt="">
-                                </a>
-                        @else
-                            <button id="addShoppingCart{{$article->id}}" class ="w-14 h-15 rounded-full p-2 border-2 border-green-400 hover:bg-green-400 transition duration-300 ease-out">
-                                <img src="{{ url('/images/warenkorb.png') }}" alt="">
-                            </button> 
-                        @endif
-                    </div>
+                    @if(!Auth::guest())
+                        <div class ="p-4 flex justify-end">
+                            @if(Auth()->User()->id == $article->ab_creator_id)
+                                    <a class ="w-14 h-15 rounded-full p-2 bg-white border-red-400 hover:bg-red-400 border-2 hover:border-red-400 transition duration-300 ease-out" href="/removeArticle/{{$article->id}}">
+                                        <img src="{{ url('/images/TrashCan.png') }}" alt="">
+                                    </a>
+                            @else
+                                <button id="addShoppingCart{{$article->id}}" class ="w-14 h-15 rounded-full p-2 border-2 border-green-400 hover:bg-green-400 transition duration-300 ease-out">
+                                    <img src="{{ url('/images/warenkorb.png') }}" alt="">
+                                </button> 
+                            @endif
+                        </div>
+                    @endif
                 </a>
             </div>
         @endforeach
