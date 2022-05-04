@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Artikel
 Route::match(['get', 'post'], '/articles', [ArticleController::class, "articles_api"]);
 Route::delete("/articles/{id}", [ArticleController::class, "delete_api"]);
+Route::post('/createArticle', [ArticleController::class, "addArticle"]);
 //Shopping Cart
 Route::get('/shoppingcart/{creator_id}/size',[ShoppingCartController::class,"getShoppingCartSize_api"]);
 Route::get('/shoppingcart/{creator_id}',[ShoppingCartController::class,"getShoppingCart_api"]);

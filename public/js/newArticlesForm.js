@@ -75,7 +75,8 @@ chooseCategory.setAttribute("class","outline outline-gray-300 focus:outline-purp
 /*
 chooseCategory.setAttribute("name","category");
 */
-console.log(categories);
+
+
 
 for (var object in categories) {
     if (categories.hasOwnProperty(object)) {
