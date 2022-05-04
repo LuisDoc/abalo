@@ -1,3 +1,6 @@
+@section('scripts')
+<script src="{{ asset('js/ShoppingCart/displayAddRemoveShoppingCart.js') }}"></script>
+@endsection
 <div class="mt-20">
     <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 p-32 px-64 pt-1 gap-4">
         @foreach ($articles as $article)
