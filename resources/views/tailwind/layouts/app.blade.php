@@ -265,7 +265,7 @@
     @else
         <script>
             var auth_user_id = 0;
-            console.log("User ist not logged in yet"");
+            console.log("User ist not logged in yet");
         </script>
     @endif
     @if(isset($articles))
@@ -284,12 +284,14 @@
         let cookiekey ="acceptCookies";
     </script>
     
-    <!-- Meilenstein 2 Aufgabe 10 -->
-    <script src="{{ asset('js/ShoppingCart/ShoppingCartCounter.js') }}"></script>
-    <script src="{{ asset('js/ShoppingCart/addToShoppingCart.js') }}"></script>
-    <!-- Meilenstein 2 Aufgabe 8 -->
+    <!-- Shopping Cart Scripts -->
+    @if(!Auth::guest())
+            <script src="{{ asset('js/ShoppingCart/ShoppingCartCounter.js') }}"></script>
+            <script src="{{ asset('js/ShoppingCart/addToShoppingCart.js') }}"></script>
+    @endif
+    <!-- Cookie Scripts -->
     <script src="{{ asset('js/coockiecheck.js') }}"></script>
-    <!-- Meilenstein 2 Aufgabe 7 -->
+    <!-- Navigation Scripts -->
     <script src="{{ asset('js/m2-nav.js') }}"></script>
     @yield('scripts')
     <script>
