@@ -13,14 +13,16 @@ const refCookieSettings = document.querySelector("#refCookieSettings");
     Event Handler:
     Yes and No Button
 */
-yesButton.addEventListener('click', () => {
+yesButton.addEventListener('click', (e) => {
+    e.preventDefault();
     dialog.classList.add("hidden");
     window.sessionStorage.setItem(cookiekey, true);
     refCookieSettings.classList.remove("hidden");
     console.log("Cooke-Acceptance Status updated to: " + true);
     location.reload();
 });
-noButton.addEventListener('click', () => {
+noButton.addEventListener('click', (e) => {
+    e.preventDefault();
     dialog.classList.add("hidden");
     window.sessionStorage.setItem(cookiekey, false);
     refCookieSettings.classList.remove("hidden");
@@ -44,8 +46,6 @@ setTimeout(function() {
     //Aktivieren des A-Tags um auf Seite für Cookie-Settings zu kommen
     refCookieSettings.classList.remove("hidden");
     console.log("Cookie-Acceptance Status: " + window.sessionStorage.getItem(cookiekey));
-
-
 }
 //Enable Dialog if property is not set
 else {

@@ -154,6 +154,7 @@ class ShoppingCartController extends Controller
         else{
             ab_shoppingcart::destroy($cart->id);
         }
+        return response()->json(["success" => "Shopping cart was removed"]);
     
     }
     
