@@ -107,7 +107,7 @@ class ArticleController extends Controller
             ]);
         }
         else{
-            return response()->json(["Error" => "Kein Suchbegriff angegeben"],403);
+            return ab_article::all();
         }
         
     }

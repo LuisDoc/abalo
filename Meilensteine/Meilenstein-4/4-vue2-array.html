@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id=app>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Preis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="inserat in inserate" v-bind:key="inserate.Name">
+                    <th>{{inserat.Name}}</th>
+                <th>{{inserat.Price}}€</th>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <button @click="Hinzufügen">Hinzufügen</button>
+    </div>
+    
+    <script>
+        "use strict";
+        let appdata = [
+            {"Name":"Reifen", "Price":"8290"},
+            {"Name":"Antenne drehbar. Leicht geknickt", "Price":"1400"},
+            {"Name":"Opel Kadett C 1992", "Price":"150000"}
+        ];
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    inserate: appdata,
+                }
+            },
+            methods:{
+                Hinzufügen(){
+                    this.inserate.push({"Name":"UKW Radio", "Price":"49"});
+                }
+            }
+        }).mount('#app')
+
+
+
+
+
+    </script>
+</body>
+</html>

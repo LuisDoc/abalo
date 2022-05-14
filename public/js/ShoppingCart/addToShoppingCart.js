@@ -1,10 +1,5 @@
 "use strict";
 
-
-console.warn("Aktueller Warenkorb");
-console.log(sessionStorage.getItem(shoppingcartkey));
-
-
 if(articles){
     for(let objNumber in articles){
         let element = articles[objNumber];
@@ -40,7 +35,7 @@ function handle(e,id, btn){
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.onload = function(){
-       console.log(xhr.responseText);
+       
     }
     xhr.onerror = function(){
         console.warn("Fehler beim laden des Artikelcounters");

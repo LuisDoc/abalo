@@ -1,0 +1,31 @@
+Motivation:
+Existierende Frameworks wie Backbone und Angular haben nicht die notwendigen Interaktiven Funktionen um
+Vanilla Javascript zu ersetzen, 
+die Evan brauchte um bei Google an UI-Prototypen zu arbeiten, welche besondere
+Konzepte der Interaktionen, Videos umsetzten.
+
+Backbone:
+Backbone ist eher eine Applikationsstruktur und hat die Interaktivität z.B mit Databinding wie Vue nicht.
+
+Laravel und Vue:
+Taylor fand, dass andere Frameworks wie React viel schwieriger war als Vue. 
+Vue konnte über cdn schnell deployed werden ohne vorher mehrere Installationen durchzuführen.
+Vue war für Ihn als Anfänger in Javascript leicht zu lernen.
+
+
+Warum plötzlich besser als Angular:
+Vue kam zur richtigen Zeit, als Angular in Version 1 rauskam.
+Als Angular zu Version 2 wurde, welche sehr anders war und React gerade auch rauskam wechselten viele
+zu React, weil es das "Neue" war. 
+Viele Entwickler vermissten allerdings die leichten Dinge die Angular Version 1 hatte und Vue konnte da
+die Lücke von Leuten füllen, welche eine lower barrier of entry zusammen mit der flexibilität von React
+erhielten.
+
+
+
+Gründe für Erfolg:
+- Vue ist nicht durch eine große Firma entwickelt worden, sondern durch eine Person und später ein kleines
+  Team
+- Laravel hat Vue aufmerksam gemacht
+- Vue hat eine einfache Lernkurve
+- Sehr gutes Eco-System wie Vue Cli

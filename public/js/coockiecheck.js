@@ -45,7 +45,6 @@ setTimeout(function() {
     dialog.classList.add("hidden");
     //Aktivieren des A-Tags um auf Seite für Cookie-Settings zu kommen
     refCookieSettings.classList.remove("hidden");
-    console.log("Cookie-Acceptance Status: " + window.sessionStorage.getItem(cookiekey));
 }
 //Enable Dialog if property is not set
 else {
@@ -55,7 +54,6 @@ else {
         dialog.classList.remove("hidden");
         //Deaktivieren des A-Tags um auf Seite für Cookie-Settings zu kommen
         refCookieSettings.classList.add("hidden");
-        console.log("Cookie-Acceptance Status: " + "null/undefined");
         
 }
 }, delayInMilliseconds);

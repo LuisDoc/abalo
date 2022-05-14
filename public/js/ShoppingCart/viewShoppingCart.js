@@ -108,10 +108,10 @@ function removeShoppingCart(article){
     xhr.open("delete",url);
 
     xhr.onload = function(){
-       console.log(xhr.responseText);
+      
     }
     xhr.onerror = function(){
-        console.warn("Fehler beim Artikel löschen");
+        
     }
     xhr.send();
 

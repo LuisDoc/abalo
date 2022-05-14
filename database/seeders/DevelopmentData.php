@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\ab_article;
 use App\Models\ab_articlecategory;
-
+use DB;
 class DevelopmentData extends Seeder
 {
     /**
@@ -80,5 +80,26 @@ class DevelopmentData extends Seeder
             $firstLine = false;
         }
         fclose($categorycsv);
+        /*
+        Meilenstein 4
+        */
+
+        $article_has_category_csv = fopen(base_path("/resources/Seeders/article_has_articlecategory.csv"), "r");
+        $firstLine = true;
+
+        //Traversierung
+        while(($data = fgetcsv($article_has_category_csv, 2000, ";")) !== FALSE){
+            if(!$firstLine){    
+                DB::table('ab_article_has_articlecategory')->insertGetId([
+                    'ab_articlecategory_id' => $data[0],
+                    'ab_article_id' => $data[1],
+                ]);
+            }
+            $firstLine = false;
+        }
+
+        fclose($article_has_category_csv);
     }
+    
+
 }

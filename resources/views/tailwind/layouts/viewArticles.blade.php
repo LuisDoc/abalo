@@ -3,12 +3,13 @@
         <script src="{{ asset('js/ShoppingCart/displayAddRemoveShoppingCart.js') }}"></script>
     @endif
 @endsection
+
 <div class="mt-20">
     <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 p-32 px-64 pt-1 gap-4">
         @foreach ($articles as $article)
             <!-- Artikel Anzeige-->
-            <div class="class= bg-white hover:shadow-lg hover:outline hover:outline-purple transition ease-in-out">
-                <a  href="">
+            <div class="class= bg-white hover:shadow-lg hover:outline hover:outline-purple transition ease-in-out" id="{{$article->id}}">
+                <a   href="">
                     <div class="p-4">
                         <h1 class="headline font-bold mb-2 truncate text-purple">{{ $article->ab_name }}</h1>
                         <p class="text-sm mt-4 text-gray-600 font-semibold mb-1"><b class="text-purple">Preis:</b> {{ $article->ab_price }}</p>
@@ -21,8 +22,11 @@
                         @if (file_exists(public_path() . '/images/articlepictures/' . $article->id . '.jpg'))
                             <img src="{{ url('/images/articlepictures/' . $article->id . '.jpg') }}" alt=""
                                 class="w-full h-60 object-cover mt-5">
-                        @else
+                        @elseif (file_exists(public_path() . '/images/articlepictures/' . $article->id . '.png'))
                             <img src="{{ url('/images/articlepictures/' . $article->id . '.png') }}" alt=""
+                                class="w-full h-60 object-cover mt-5">
+                        @else
+                            <img src="{{ url('/images/notfound.jpg') }}" alt=""
                                 class="w-full h-60 object-cover mt-5">
                         @endif
                     </div>
