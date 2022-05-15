@@ -1,0 +1,143 @@
+<template>
+<div>
+    <Searchbar :search="search"/>
+  <div id="nav" class="grid grid-cols-9">
+        <div class="col-span-1">
+            <div class="pt-6 flex justify-end">
+                <span id=open @click="navbar=true"
+                    class="mr-9 font-bold text-xl rounded-full px-2 bg-purple text-white cursor-pointer">&#9776;
+                    ABALO</span>
+            </div>
+        </div>
+        
+        <div class="col-start-3 col-span-4">
+            <div class="flex justify-end">
+                <span id="search" class="m-6 hover:cursor-pointer grayscale hover:grayscale-0 transition ease-in-out" @click="search=!search">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <!-- Warenkorb Button -->
+            <div class="col-span-1 mx-auto">
+                <a href="/ShoppingCart" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
+                    <img class ="w-9 h-9" src="../../public/images/warenkorb.png" alt="">
+                    <span id="shoppingcartbell" class ="text-black h-7 ml-2 relative top-0 right-2"></span>
+                </a>
+            </div>
+        <div class="col-span-2">
+            <div class="flex justify-end">
+                <span id="profileicon" class="mt-6 mr-1 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </span>
+                    <span @click="showlogin=!showlogin" v-if="user.token==null" id="login" class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">Abalo Login</span>
+                    <span v-else id="login"
+                        class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">My
+                        Profile</span>
+            </div>
+        </div>
+    </div>
+    <div id=menu class="fixed top-0 left-0 h-full p-10 w-1/6 bg-purple z-50 text-white" :class="{hidden: !navbar}">
+        <div class="relative">
+            <div class="absolute -right-5 -top-5">
+                <svg id="close" xmlns="http://www.w3.org/2000/svg" @click="navbar=false"
+                    class="h-6 w-6 rounded-full hover:bg-white hover:text-purple cursor-pointer" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+        </div>
+        <div class="mt-2" id="mnav">
+            <ul >
+                <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Home</router-link></li>
+                <li @click="navbar=!navbar"><router-link :to="{name:'Articles'}">Artikel</router-link></li>
+                <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Kategorien</router-link></li>
+                <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Verkaufen</router-link></li>
+                <li @click="navbar=!navbar">Unternehmen</li>
+                <li @click="navbar=!navbar" class="sub-nav"><router-link :to="{name:'Home'}">Philosophie</router-link></li>
+                <li @click="navbar=!navbar" class="sub-nav"><router-link :to="{name:'Home'}">Karriere</router-link></li>
+            </ul>
+        </div>
+    </div>
+    <div :class="{hidden:!showlogin}" class= "">
+        <div class="relative right-0 ml-4 bg-white -mt-1" >
+            <div class="p-12">
+                    <div v-if="user.token==null">
+                        <div class="headline text-5xl">Willkommen bei Abalo</div>
+                        <div class="mt-5 text-md text-gray-600">Der individuelle Zugang zur digitalen Welt von Abalo:</div>
+                        <div class="mt-5 text-md text-gray-600">Schnelle Kontaktaufnahme mit persönlichem Abalo Partner
+                        </div>
+                        <div class="mt-5 text-gray-400 text-xs"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Possimus tenetur id deleniti architecto</div>
+                        <div class="text-gray-400 text-xs">Lorem ipsum dolor sit amet.</div>
+
+                        <div class="mt-12">
+                            <router-link :to="{name:'Login'}" @click="showlogin=!showlogin">
+                            <a class="py-4 px-10 text-md headline btn border-purple border">
+                                Anmelden
+                            </a>
+                            </router-link>
+                            <a class="ml-1 py-4 px-6 text-md bg-white headline hover:bg-gray-200 transition ease-in-out border border-black"
+                                href="">
+                                Mehr erfahren
+                            </a>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="mt-5 text-xl font-bold text-gray-600 text-center">Wilkommen zurück</div>
+                        <a href="/myarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Meine Artikel</a>
+                        <a href="/newarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Artikel hinzufügen</a>
+                        <a href="/logout" class="block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">
+                            Abmelden
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</template>
+
+<script>
+import {mapState} from 'vuex'
+import Searchbar from "../components/Searchbar.vue"
+export default {
+    components:{ Searchbar},
+    name:"Navbar",
+    computed: {
+        ...mapState(['user'])
+    },
+    data(){
+        return{
+            showlogin: false,
+            navbar: false,
+            search: false,
+        }
+    }
+}
+</script>
+
+<style>
+@keyframes showBlock {
+    from { display: block; opacity: 0; }
+    to { opacity: 1; }
+}
+.login{
+    background: rgba(0,0,0,0.5);
+    position:fixed;
+    top:4.9rem;
+    left:0;
+    width:100%;
+    height:100%;
+    animation:showBlock 0.3s;
+}
+
+</style>
