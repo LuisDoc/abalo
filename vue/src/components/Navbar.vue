@@ -57,7 +57,7 @@
         <div class="mt-2" id="mnav">
             <ul >
                 <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Home</router-link></li>
-                <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Artikel</router-link></li>
+                <li @click="navbar=!navbar"><router-link :to="{name:'Articles'}">Artikel</router-link></li>
                 <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Kategorien</router-link></li>
                 <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Verkaufen</router-link></li>
                 <li @click="navbar=!navbar">Unternehmen</li>
