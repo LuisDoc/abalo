@@ -35,7 +35,7 @@
         <div class="grid-cols-2  ml-64 mr-64 mt-12 mb-12 gap-4" v-if="showResults">
             <template v-if="size > 0">
                 <div  v-for="article in articlesearch" :key="article.id" class=" bg-purple rounded-lg mt-4">
-                    <router-link  :to="'/articles#'+article.id+ article.id" @click="showResults=false">
+                    <a  :href="`#S${article.id}`" @click="handleReroute">
                         <div class="p-4">
                             <h1 class="headline font-bold mb-2 truncate text-white">{{ article.ab_name }}</h1>
                             <p class="text-sm mt-4 text-gray-200 font-semibold mb-1"><b class="text-white">Preis:</b> {{ article.ab_price }}</p>
@@ -46,7 +46,7 @@
                             <p class="text-sm text-gray-200 mb-1"><b class="text-white">Created at:</b>
                                 {{ article.ab_createdate }}</p>
                         </div>
-                    </router-link>
+                    </a>
                 </div>
             </template>
             <template v-else class="col-span-2">
@@ -102,6 +102,12 @@ export default {
             }
             console.log(this.size);
             
+        },
+        handleReroute(){
+            this.showResults=false;
+            if(this.$route.name != "/articles"){
+                this.$router.push('/articles');
+            }
         }
     }
 }
