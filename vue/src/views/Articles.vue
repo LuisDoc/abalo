@@ -62,7 +62,7 @@ export default {
             json = res.json();
             console.log(json);
             return json;
-        });
+        }).then(data=>this.articles =data);
     }
 }
 </script>
