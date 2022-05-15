@@ -9,9 +9,9 @@
                 </span>
             </div>
             <div class="m-5">
-                <form action="/articles" method="GET">
+                <form action="" method="" @submit.prevent="handleSearch">
                     <div class="relative border-b-2 border-gray-600 hover:border-gray-800">
-                        <input type="text" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple">
+                        <input type="text" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple" v-model="searchvalue" @keyup="handleSearch" @keydown="handleSearch">
                         <span class="absolute left-0 mr-6 mt-2 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -29,15 +29,81 @@
                     </div>
                 </form>
             </div>
-            <div class="m-5"></div>
+            <div class="m-5">
+            </div>
+        </div>
+        <div class="grid-cols-2  ml-64 mr-64 mt-12 mb-12 gap-4" v-if="showResults">
+            <template v-if="size > 0">
+                <div  v-for="article in articlesearch" :key="article.id" class=" bg-purple rounded-lg mt-4">
+                    <router-link  :to="'/articles#'+article.id+ article.id" @click="showResults=false">
+                        <div class="p-4">
+                            <h1 class="headline font-bold mb-2 truncate text-white">{{ article.ab_name }}</h1>
+                            <p class="text-sm mt-4 text-gray-200 font-semibold mb-1"><b class="text-white">Preis:</b> {{ article.ab_price }}</p>
+                            <p class="text-sm text-gray-200 mb-1 truncate"><b class="text-white">About:</b>
+                                {{ article.ab_description }}</p>
+                            <p class="text-sm text-gray-200 mb-1"><b class="text-white">Creator:</b>
+                                {{ article.ab_creator_id }}</p>
+                            <p class="text-sm text-gray-200 mb-1"><b class="text-white">Created at:</b>
+                                {{ article.ab_createdate }}</p>
+                        </div>
+                    </router-link>
+                </div>
+            </template>
+            <template v-else class="col-span-2">
+                <content-loader 
+                    viewBox="0 0 476 124"
+                    primaryColor="#977DE2"
+                    secondaryColor="#cccccc"
+                    class=""
+                    >
+                    <rect x="0" y="24" rx="3" ry="3" width="150" height="6" />
+                    <rect x="0" y="40" rx="3" ry="3" width="52" height="6" />
+                    <rect x="0" y="56" rx="3" ry="3" width="320" height="6" />
+                    <rect x="0" y="72" rx="3" ry="3" width="350" height="6" />
+                    <rect x="0" y="88" rx="3" ry="3" width="178" height="6" />
+                </content-loader>
+            </template>
+            
         </div>
     </div>
 </template>
 
 <script>
+import { ContentLoader } from 'vue-content-loader'
 export default {
     name: "Searchbar",
-    props:["search"]
+    props:["search"],
+    components:{
+        ContentLoader
+    },
+    data(){
+        return{
+            searchvalue:"",
+            articlesearch: [],
+            size:0,
+            showResults: false
+        }
+    },
+    methods:{
+        async handleSearch(){
+            if(this.searchvalue.length >2){
+                await fetch(`http://localhost:8000/api/articles?search=${this.searchvalue}`)
+                .then((res)=>res.json())
+                .then(data=>{
+                    this.articlesearch = data.articles;
+                    this.size = data.articles.length;
+                })
+                .catch((err)=>console.log(err))
+
+                this.showResults = true;
+            }else{
+                this.articlesearch= []
+                this.size = 0;
+            }
+            console.log(this.size);
+            
+        }
+    }
 }
 </script>
 
