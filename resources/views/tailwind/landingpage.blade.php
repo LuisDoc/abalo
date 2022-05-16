@@ -62,7 +62,7 @@
                     <form class="" @submit.prevent="">
                         <div class="relative border-b-2 border-gray-600 hover:border-gray-800">
                             <!-- Daten an Vue übermitteln -->
-                            <input type="text" @keyup="handleSearch" @keydown="handleSearch" v-model="key" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple">
+                            <input type="text" @keyup="paginationSearch" @keydown="paginationSearch" v-model="key" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple">
                             <span class="absolute left-0 mr-6 mt-2 mb-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -81,17 +81,8 @@
                     </form>
                     <!-- Suchergebnisse -->
                     <div class="">
-                        <div class="grid-cols-2  ml-64 mr-64 mt-12 mb-12 gap-4" v-if="showResults">
-                            <template v-if="size > 0">
-                                <div  v-for="article in articlesearch" :key="article.id" class=" bg-purple rounded-lg mt-4">
-                                    <a  :href="`#S${article.id}`" @click="handleReroute">
-                                        
-                                    </a>
-                                </div>
-                            </template>
-                        </div>
                         <template v-if="articles.length!=0">
-                            <div v-for="article in articles" :key="article.id" class="mt-2">
+                            <div v-for="article in articles" :key="article.id" class="mt-2 mb-5">
                                 <a :href="'/articles#' + article.id">
                                     <div class="p-3 bg-purple rounded-lg hover:outline-double hover:outline-purple">
                                         <h1 class="headline font-bold mb-1 truncate text-sm text-white">@{{ article.ab_name }}</h1>
@@ -100,14 +91,17 @@
                                             @{{ article.ab_description }}</p>
                                     </div>
                                 </a>
-    
                             </div>
+                            <span v-for="(link,index) in links.slice(0,-1)" :key="link.label" class="mt-10">
+                                <span v-if="index>0 && link.url!=null && link.label!='Next &raquo;'" @click="nextPage(link.label)" :id="link.label" class="bg-purple p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer" v-text="index"></span>
+                            </span>
                         </template>
                         <template v-if="articles.length==0 && key.length >= 3" class ="text-red-600 text-semibold text-4xl">
                             Keine Artikel gefunden
                         </template>
                 </div>
             </div>
+</div>
         </div>
     </script>
     <!-- Template für Footer -->

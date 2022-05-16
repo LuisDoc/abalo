@@ -79,7 +79,7 @@ class ArticleController extends Controller
         //Es wurde ein Suchbegriff angegeben
         if($request->search){
             //Suche in Datenbank nach Suchbegriff
-            $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->get();
+            $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->paginate(5);
             return response()->json(['articles'=>$articles], 200);
         }
         //Anfrage zur Erstellung eines Artikels wurde hochgeladen

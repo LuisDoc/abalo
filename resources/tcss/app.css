@@ -17,6 +17,9 @@
     top: 0;
     left: 0;
 }
+.activeClass{
+    @apply bg-red-500
+}
 
 @keyframes showBlock {
     from { display: block; opacity: 0; }

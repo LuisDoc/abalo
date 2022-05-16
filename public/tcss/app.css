@@ -497,6 +497,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 5rem;
   margin-right: 5rem;
 }
+.my-20 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -504,10 +508,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mx-12 {
   margin-left: 3rem;
   margin-right: 3rem;
-}
-.my-20 {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
 }
 .mx-5 {
   margin-left: 1.25rem;
@@ -570,8 +570,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-1 {
   margin-top: 0.25rem;
 }
-.mt-8 {
-  margin-top: 2rem;
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-0\.5 {
+  margin-bottom: 0.125rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
+.mr-1 {
+  margin-right: 0.25rem;
 }
 .mb-16 {
   margin-bottom: 4rem;
@@ -612,9 +624,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .ml-2 {
   margin-left: 0.5rem;
 }
-.mr-1 {
-  margin-right: 0.25rem;
-}
 .-mt-1 {
   margin-top: -0.25rem;
 }
@@ -623,18 +632,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .ml-1 {
   margin-left: 0.25rem;
-}
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-.mr-64 {
-  margin-right: 16rem;
-}
-.mb-0\.5 {
-  margin-bottom: 0.125rem;
-}
-.mb-0 {
-  margin-bottom: 0px;
 }
 .block {
   display: block;
@@ -761,6 +758,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-lg {
   border-radius: 0.5rem;
 }
+.rounded-md {
+  border-radius: 0.375rem;
+}
 .border {
   border-width: 1px;
 }
@@ -826,6 +826,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-1 {
   padding: 0.25rem;
 }
+.p-3 {
+  padding: 0.75rem;
+}
 .p-32 {
   padding: 8rem;
 }
@@ -844,9 +847,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-64 {
   padding: 16rem;
 }
-.p-3 {
-  padding: 0.75rem;
-}
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -859,6 +859,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
+.px-64 {
+  padding-left: 16rem;
+  padding-right: 16rem;
+}
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -866,10 +870,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-.px-64 {
-  padding-left: 16rem;
-  padding-right: 16rem;
 }
 .py-28 {
   padding-top: 7rem;
@@ -949,17 +949,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 .text-lg {
   font-size: 1.125rem;
@@ -969,9 +969,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 3.75rem;
   line-height: 1;
 }
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .font-bold {
   font-weight: 700;
@@ -989,6 +989,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 .text-red-600 {
   --tw-text-opacity: 1;
@@ -1009,10 +1013,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-.text-gray-200 {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -1060,6 +1060,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 	-moz-box-shadow: 5px 34px 97px rgba(0, 0, 0, 0.5) inset;  
     top: 0;
     left: 0;
+}
+.activeClass {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 @-webkit-keyframes showBlock {
@@ -1387,20 +1391,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:outline:hover {
   outline-style: solid;
 }
-.hover\:outline-dotted:hover {
-  outline-style: dotted;
-}
 .hover\:outline-double:hover {
   outline-style: double;
 }
 .hover\:outline-purple:hover {
   outline-color: #977DE2;
-}
-.hover\:outline-white:hover {
-  outline-color: #FFFFFF;
-}
-.hover\:outline-red-600:hover {
-  outline-color: #dc2626;
 }
 .hover\:grayscale-0:hover {
   --tw-grayscale: grayscale(0);

@@ -8,10 +8,13 @@ export default{
             key :"",
             all_articles:[],
             articles:[],
+            links: []
+            
         }
     },
     //Methoden
     methods:{
+        //Alter Search unpaginated
         handleSearch(){
             if(this.key.length >= 1){
                 this.articles = this.all_articles;
@@ -27,6 +30,30 @@ export default{
                 this.articles = [];
             }
             console.log(this.articles);
+        },
+        //Neue Search paginated
+        paginationSearch(){
+            fetch(`http://localhost:8000/api/articles?search=${this.key}&page=0`)
+            .then(res=>{
+                let json = res.json();
+                return json;
+            }).then(data =>{
+                this.links = data.articles.links;
+                this.articles = data.articles.data;
+            })
+            .catch(err=>console.log(err))
+        },
+        nextPage(page){
+             fetch(`http://localhost:8000/api/articles?search=${this.key}&page=${page}`)
+            .then(res=>{
+                let json = res.json();
+                return json;
+            }).then(data =>{
+                this.articles = data.articles.data;
+                console.log(this.links)
+            })
+            .catch(err=>console.log(err))
+
         }
     },
     //Abfrage aller Artikel für Suchfunktion
