@@ -6,8 +6,11 @@ use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 
+//Einstiegsseite
+Route::view('/newsite',"tailwind.landingpage");
+Route::redirect('/','/newsite');
 //Home-Routen
-Route::get('/', [HomeController::class,'getHome']);
+//Route::get('/', [HomeController::class,'getHome']);
 Route::redirect('/home','/');
 //Artikel-Routen
 Route::controller(ArticleController::class)->group(function(){

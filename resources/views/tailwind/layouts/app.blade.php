@@ -30,9 +30,9 @@
                     ABALO</span>
             </div>
         </div>
-    <div class="col-start-3 col-span-4">
-        @yield("searchicon")
-    </div>
+        <div class="col-start-3 col-span-4">
+            @yield("searchicon")
+        </div>
         
         <!-- Warenkorb Button -->
         @if(!Auth::guest())

@@ -29,6 +29,7 @@
             </div>
             <div class="col-start-3 col-span-4">
                 <!-- Suchleiste implementieren -->
+
             </div>
         </div>
         <!-- Menu-->
@@ -47,7 +48,7 @@
                 </div>
             </div>
             <div class="mt-2" id="mnav">
-                <ul>
+                <ul id= "menu_item_list" ref="menu_item_list">
                     <li><a href="/home">Home</a></li>   
                     <li><a href="/articles">Artikel</a></li>
                     <li><a href="/categories">Kategorien</a></li>
