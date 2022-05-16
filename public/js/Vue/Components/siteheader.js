@@ -17,6 +17,7 @@ export default{
         initNavbarItems(){
             //Wenn die Elemente noch nicht angehangen wurden
             if(!this.initItems){
+                this.initItems=true;
                 //Ankerpunkt abfragen
                 const anker = this.$refs.menu_item_list;
                 this.initNavbarItemsRecursive(anker, this.menu_items);
