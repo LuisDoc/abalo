@@ -10,8 +10,8 @@ use App\Http\Controllers\AuthController;
 Route::view('/newsite',"tailwind.landingpage");
 Route::redirect('/','/newsite');
 //Home-Routen
-//Route::get('/', [HomeController::class,'getHome']);
-Route::redirect('/home','/');
+Route::get('/index', [HomeController::class,'getHome']);
+Route::redirect('/home','/index');
 //Artikel-Routen
 Route::controller(ArticleController::class)->group(function(){
     Route::match(['get', 'post'], '/articles','showAllArticle');

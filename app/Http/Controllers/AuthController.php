@@ -48,7 +48,7 @@ class AuthController extends Controller
             return redirect('/showRegister')->withErrors(['error' => 'Anmeldung fehlgeschlagen']);;
         }
 
-        return redirect('home');
+        return redirect('/home');
     }
 
     public function register(Request $request){
@@ -81,7 +81,7 @@ class AuthController extends Controller
         session()->flush();
         Auth::logout();
         
-        return redirect('home');
+        return redirect('/home');
     }
 
 

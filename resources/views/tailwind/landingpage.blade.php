@@ -53,14 +53,27 @@
     </script>
     <!-- Template für Body -->
     <script type="text/x-template" id="body">
-        <div class ="bg-cgray mt-20">
-            Body
+        <div class ="bg-cgray mt-10">
+            <div class ="grid grid-cols-2 gap-4 mx-32">
+                <div class ="flex justify-center align-center ">
+                    <div class ="p-5"> 
+                        <a href="/index">
+                            <img class =" w-9/12 h-9/12 rounded-xl hover:border-4 hover:border-purple transition ease-in-out" 
+                            src="{{asset('images/landingPage.jpg')}}" alt="Kein Bild vorhanden">
+                        </a>
+                    </div>
+                    
+                </div>
+                <div class ="flex justify-center align-center">
+                    <img src="" alt="Kein Bild vorhanden">
+                </div>
+            </div>
         </div>
     </script>
     <!-- Template für Footer -->
     <script type="text/x-template" id="footer">
         <div class ="mt-20">
-            Footer
+            
         </div>
     </script>
 -->
