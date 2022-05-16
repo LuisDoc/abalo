@@ -60,16 +60,16 @@
             </div>
             <div class="flex text-white justify-end mt-6">
                 <a href="" class="mr-2">
-                    <img src="../../public/images/facebook.png" class="w-6 h-6" alt="">
+                    <img src="/images/facebook.png" class="w-6 h-6" alt="">
                 </a>
                 <a href="" class="mr-2">
-                    <img src="../../public/images/twitter.png" class="w-6 h-6" alt="">
+                    <img src="/images/twitter.png" class="w-6 h-6" alt="">
                 </a>
                 <a href="" class="mr-2">
-                    <img src="../../public/images/instagram.png" class="w-6 h-6" alt="">
+                    <img src="/images/instagram.png" class="w-6 h-6" alt="">
                 </a>
                 <a href="" class="mr-2">
-                    <img src="../../public/images/yt.png" class="w-6 h-6" alt="">
+                    <img src="/images/yt.png" class="w-6 h-6" alt="">
                 </a>
             </div>
             <div class="flex mt-5">
@@ -77,7 +77,7 @@
                 <a class="text-xs mr-4" href="/impressum">Impressum</a>
                 <a class="text-xs mr-4" href="">Rechtliches</a>
                 <a class="text-xs mr-4" href="">Datenschutz</a>
-                <a id ="refCookieSettings" class="text-xs mr-4" href="/CookieSettings">Cookie Einstellungen</a>
+                <a ref ="refCookieSettings" class="text-xs mr-4" href="/CookieSettings">Cookie Einstellungen</a>
                 <a class="text-xs mr-4" href="/CookieGuidelines">Cookie Richtlinie</a>
                 <a class="text-xs mr-4" href="">Presse</a>
                 <a class="text-xs mr-4" href="">Karriere</a>
