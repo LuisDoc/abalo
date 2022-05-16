@@ -27,10 +27,6 @@
                     </span>
                 </div>
             </div>
-            <div class="col-start-3 col-span-4">
-                <!-- Suchleiste implementieren -->
-
-            </div>
         </div>
         <!-- Menu-->
         <!--Javascript Navbar-->
@@ -55,14 +51,61 @@
     <script type="text/x-template" id="body">
         <div class ="h-screen bg-cgray mt-10">
             <div class ="align-middle grid grid-cols-2 gap-4 mx-32">
-                <div class ="flex justify-center p-5"> 
-                    <a class ="w-9/12 h-9/12 " href="/index">
+                <div class ="w-9/12 h-9/12 flex justify-center p-5"> 
+                    <a class =" " href="/index">
                         <img class =" rounded-xl hover:border-4 hover:border-purple transition ease-in-out" 
                         src="{{asset('images/landingPage.jpg')}}" alt="{{asset('images/notfound.jpg')}}">
                     </a>
                 </div>
-                <div class ="p-5">
-                    <p class ="w-9/12 h-9/12 flex justify-center">Hier suche implementieren</p>
+                <div class ="mx-20 p-5">
+                    <!-- Suchformular -->
+                    <form class="" @submit.prevent="">
+                        <div class="relative border-b-2 border-gray-600 hover:border-gray-800">
+                            <!-- Daten an Vue übermitteln -->
+                            <input type="text" @keyup="handleSearch" @keydown="handleSearch" v-model="key" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple">
+                            <span class="absolute left-0 mr-6 mt-2 mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </span>
+                            <button class="absolute right-0 mr-6 mb-2  p-1  mt-1 hover:bg-gray-100 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Suchergebnisse -->
+                    <div class="">
+                        <div class="grid-cols-2  ml-64 mr-64 mt-12 mb-12 gap-4" v-if="showResults">
+                            <template v-if="size > 0">
+                                <div  v-for="article in articlesearch" :key="article.id" class=" bg-purple rounded-lg mt-4">
+                                    <a  :href="`#S${article.id}`" @click="handleReroute">
+                                        
+                                    </a>
+                                </div>
+                            </template>
+                        </div>
+                        <template v-if="articles.length!=0">
+                            <div v-for="article in articles" :key="article.id" class="mt-2">
+                                <a :href="'/articles#' + article.id">
+                                    <div class="p-3 bg-purple rounded-lg hover:outline-double hover:outline-purple">
+                                        <h1 class="headline font-bold mb-1 truncate text-sm text-white">@{{ article.ab_name }}</h1>
+                                        <p class="text-xs mt-4 text-gray-200 font-semibold mb-0.5"><b class="text-white">Preis:</b> @{{ article.ab_price }}€</p>
+                                        <p class="text-xs text-gray-200 mb-0.5 truncate"><b class="text-white">About:</b>
+                                            @{{ article.ab_description }}</p>
+                                    </div>
+                                </a>
+    
+                            </div>
+                        </template>
+                        <template v-if="articles.length==0 && key.length >= 3" class ="text-red-600 text-semibold text-4xl">
+                            Keine Artikel gefunden
+                        </template>
                 </div>
             </div>
         </div>

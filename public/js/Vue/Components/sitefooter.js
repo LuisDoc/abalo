@@ -2,5 +2,6 @@
     Footer Komponente
 */
 export default{
-    template: "#footer"
+    template: "#footer",
+   
 }

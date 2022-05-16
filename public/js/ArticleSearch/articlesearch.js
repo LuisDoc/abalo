@@ -12,7 +12,7 @@ const app = Vue.createApp({
     methods:{
         handleChange(){
             
-            if(this.key.length >= 1){
+            if(this.key.length >= 3){
                 this.showHeadline = true;
                 this.articles = this.all_articles;
                 let searchvalue = this.key.toLowerCase();
