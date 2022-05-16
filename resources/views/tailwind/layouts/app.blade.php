@@ -257,21 +257,15 @@
         @endif
     <!-- Navbar -->
     <script>
-        const search = document.querySelector("#search");
-        const searchbar = document.querySelector("#searchbar");
-        const back = document.querySelector("#back")
+        
+        
 
         const login = document.querySelector('.login');
         const loginbutton = document.querySelector('#login');
-        search.addEventListener('click', function() {
-            searchbar.classList.add('block');
-            searchbar.classList.remove('hidden');
-        })
-        back.addEventListener('click', (e) => {
-
-            searchbar.classList.remove('block');
-            searchbar.classList.add('hidden');
-        })
+        
+        
+        
+        
 
         loginbutton.addEventListener('click', (e) => {
             const body = document.body;

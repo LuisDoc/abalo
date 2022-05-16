@@ -1,6 +1,20 @@
 @extends('tailwind.layouts.app')
 
-
+@section('scripts')
+<script>
+    const search = document.querySelector("#search");
+    const searchbar = document.querySelector("#searchbar");
+    const back = document.querySelector("#back")
+    search.addEventListener('click', function() {
+        searchbar.classList.add('block');
+        searchbar.classList.remove('hidden');
+    })
+    back.addEventListener('click', (e) => {
+        searchbar.classList.remove('block');
+        searchbar.classList.add('hidden');
+    })
+</script>
+@endsection
 <!-- Div vue-nav -->
 @section("searchicon")
 <div class="flex justify-end">
