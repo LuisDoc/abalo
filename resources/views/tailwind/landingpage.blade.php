@@ -47,17 +47,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="mt-2" id="mnav">
-                <ul id= "menu_item_list" ref="menu_item_list">
-                    <li><a href="/home">Home</a></li>   
-                    <li><a href="/articles">Artikel</a></li>
-                    <li><a href="/categories">Kategorien</a></li>
-                    <li><a href="/newarticle">Verkaufen</a></li>
-                    <ul>
-                    </ul>
-                    <li class="sub-nav"><a href="">Philosophie</a></li>
-                    <li class="sub-nav"><a href="">Karriere</a></li>    
-                </ul>
+            <div class="mt-2" ref="menu_item_list" id="mnav">
             </div>
         </div>
     </script>
