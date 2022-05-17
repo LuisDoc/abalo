@@ -9,9 +9,9 @@
                 </span>
             </div>
             <div class="m-5">
-                <form action="" method="" @submit.prevent="handleSearch">
+                <form action="" method="" @submit.prevent="paginationSearch">
                     <div class="relative border-b-2 border-gray-600 hover:border-gray-800">
-                        <input type="text" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple" v-model="searchvalue" @keyup="handleSearch" @keydown="handleSearch">
+                        <input type="text" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple" v-model="searchvalue" @keyup="paginationSearch" @keydown="paginationSearch">
                         <span class="absolute left-0 mr-6 mt-2 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -34,6 +34,10 @@
         </div>
         <div class="grid-cols-2  ml-64 mr-64 mt-12 mb-12 gap-4" v-if="showResults">
             <template v-if="size > 0">
+                <span v-for="(link,index) in links.slice(0,-1)" :key="link.label" class="mt-10">
+                    <span v-if="index>0 && link.url!=null && link.label!='Next &raquo;'" @click="nextPage(link.label)" :id="link.label" 
+                    :class="[link.active==true? 'bg-red-600 p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer':'bg-purple p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer' ]" class="bg-purple p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer" v-text="index"></span>
+                </span>
                 <div  v-for="article in articlesearch" :key="article.id" class=" bg-purple rounded-lg mt-4">
                     <a  :href="`#S${article.id}`" @click="handleReroute">
                         <div class="p-4">
@@ -81,10 +85,12 @@ export default {
             searchvalue:"",
             articlesearch: [],
             size:0,
-            showResults: false
+            showResults: false,
+            links:[]
         }
     },
     methods:{
+        //Old Search
         async handleSearch(){
             if(this.searchvalue.length >2){
                 await fetch(`http://localhost:8000/api/articles?search=${this.searchvalue}`)
@@ -100,9 +106,48 @@ export default {
                 this.articlesearch= []
                 this.size = 0;
             }
-            console.log(this.size);
             
         },
+        //Paginated Search
+        async paginationSearch(){
+            if(this.searchvalue.length >=1){
+                await fetch(`http://localhost:8000/api/articles?search=${this.searchvalue}&page=0`)
+                .then(res=>{
+                    let json = res.json();
+                    return json;
+                }).then(data =>{
+                    this.links = data.articles.links;
+                    this.articlesearch = data.articles.data;
+                    this.size = data.articles.data.length;
+                })
+                .catch(err=>console.log(err))
+                this.showResults = true;
+            }else{
+                this.articlesearch= []
+                this.size = 0;
+            }
+        },
+        nextPage(page){
+             fetch(`http://localhost:8000/api/articles?search=${this.searchvalue}&page=${page}`)
+            .then(res=>{
+                let json = res.json();
+                return json;
+            }).then(data =>{
+                this.articlesearch = data.articles.data;
+                this.size = data.articles.data.length;
+            })
+            .catch(err=>console.log(err))
+
+            this.links.forEach((e)=>{
+                if(e.label != page){
+                    e.active= false;
+                }
+                else{
+                    e.active = true;
+                }
+            })
+        },
+
         handleReroute(){
             this.showResults=false;
             if(this.$route.name != "/articles"){

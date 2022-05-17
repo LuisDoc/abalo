@@ -1,9 +1,9 @@
 <template>
 <div>
   <Navbar/>
-  <router-view/>
+  <router-view :cookie="cookie"/>
   <Footer/>
-  <CookieCheck @AcceptCookie="setRefs"/>
+  <CookieCheck @cookieevent="cookieSettings"/>
 </div>
 </template>
 
@@ -14,9 +14,15 @@ import Footer from "./components/Footer.vue"
 import CookieCheck from "./components/CookieCheck.vue"
   export default{
     components:{ Navbar, Footer ,CookieCheck},
+    data(){
+      return{
+        cookie :true
+      }
+    },  
     methods:{
-      setRefs(settings){
-        console.log(settings);
+      cookieSettings(settings){
+        console.log(settings)
+        this.cookie = settings;
       }
     }
   }

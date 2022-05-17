@@ -77,8 +77,8 @@
                 <a class="text-xs mr-4" href="/impressum">Impressum</a>
                 <a class="text-xs mr-4" href="">Rechtliches</a>
                 <a class="text-xs mr-4" href="">Datenschutz</a>
-                <a ref ="refCookieSettings" class="text-xs mr-4" href="/CookieSettings">Cookie Einstellungen</a>
-                <a class="text-xs mr-4" href="/CookieGuidelines">Cookie Richtlinie</a>
+                <router-link class="text-xs mr-4" to="/cookiesettings">Cookie Einstellungen</router-link>
+                <router-link class="text-xs mr-4" to="/cookieguidelines">Cookie Richtlinie</router-link>
                 <a class="text-xs mr-4" href="">Presse</a>
                 <a class="text-xs mr-4" href="">Karriere</a>
             </div>

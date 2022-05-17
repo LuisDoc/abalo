@@ -1,29 +1,41 @@
 import {createRouter, createWebHistory} from "vue-router";
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import Articles from '../views/Articles.vue'
+import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/Auth/LoginView.vue'
+import RegisterView from '../views/Auth/RegisterView.vue'
+import ArticlesView from '../views/ArticlesView.vue'
+import SettingsView from '../views/Cookies/SettingsView.vue'
+import GuidelinesView from  '../views/Cookies/GuidelinesView.vue'
 
 const routes =[
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: LoginView
     },
     {
         path: '/register',
         name: 'Register',
-        component: Register
+        component: RegisterView
     },
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: HomeView
     },
     {
         path: '/articles',
         name: 'Articles',
-        component: Articles
+        component: ArticlesView
+    },
+    {
+        path: '/cookieguidelines',
+        name: 'Cookies',
+        component: GuidelinesView
+    },
+    {
+        path: '/cookiesettings',
+        name: 'Settings',
+        component: SettingsView
     }
 ];
 

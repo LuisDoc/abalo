@@ -59,7 +59,7 @@
                 </div>
                 <div class ="mx-20 p-5">
                     <!-- Suchformular -->
-                    <form class="" @submit.prevent="">
+                    <form class="" @submit.prevent="paginationSearch">
                         <div class="relative border-b-2 border-gray-600 hover:border-gray-800">
                             <!-- Daten an Vue übermitteln -->
                             <input type="text" @keyup="paginationSearch" @keydown="paginationSearch" v-model="key" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple">
