@@ -190,7 +190,6 @@
             </div>
             <div class="flex mt-5">
                 <div class="text-xs mr-24">&#64;2022 LUIS&ampNILUSCHE AG GmbH Inc. Co. KG</div>
-                <a class="text-xs mr-4" href="/impressum">Impressum</a>
                 <a class="text-xs mr-4" href="">Rechtliches</a>
                 <a class="text-xs mr-4" href="">Datenschutz</a>
                 <a id ="refCookieSettings" class="text-xs mr-4" href="/CookieSettings">Cookie Einstellungen</a>

@@ -48,7 +48,7 @@
         </div>
     </script>
     <!-- Template für Body -->
-    <script type="text/x-template" id="body">
+    <script v-if="currentContent === landingPage" type="text/x-template" id="body">
         <div class ="h-screen bg-cgray mt-10">
             <div class ="align-middle grid grid-cols-2 gap-4 mx-32">
                 <div class ="w-9/12 h-9/12 flex justify-center p-5"> 
@@ -99,10 +99,14 @@
                         <template v-if="articles.length==0 && key.length >= 3" class ="text-red-600 text-semibold text-4xl">
                             Keine Artikel gefunden
                         </template>
+                    </div>
                 </div>
             </div>
-</div>
         </div>
+        </script>
+    <!-- Alternativer Body: Impressum -->
+    <script v-if="currentContent === impressum" type="text/x-template" id="body">
+        <p> Hello World </p>
     </script>
     <!-- Template für Footer -->
     <script type="text/x-template" id="footer">
@@ -182,7 +186,7 @@
                 </div>
                 <div class="flex mt-5">
                     <div class="text-xs mr-24">&#64;2022 LUIS&ampNILUSCHE AG GmbH Inc. Co. KG</div>
-                    <a class="text-xs mr-4" href="/impressum">Impressum</a>
+                    <a class="text-xs mr-4" @click ="handleContentSwitch" href=""></a>
                     <a class="text-xs mr-4" href="">Rechtliches</a>
                     <a class="text-xs mr-4" href="">Datenschutz</a>
                     <a id ="refCookieSettings" class="text-xs mr-4" href="/CookieSettings">Cookie Einstellungen</a>
