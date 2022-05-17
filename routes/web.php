@@ -21,7 +21,7 @@ Route::controller(ArticleController::class)->group(function(){
 });
 //Services and Accessories
 Route::view('/faq', 'tailwind.services_and_accessories.faq');
-Route::view('/impressum', 'tailwind.services_and_accessories.impressum');
+//Route::view('/impressum', 'tailwind.services_and_accessories.impressum');
 //Cookies
 Route::view('/CookieGuidelines', 'tailwind.Cookie.CookieGuidelines');
 Route::view('/CookieSettings', 'tailwind.Cookie.CookieSettings');
