@@ -18,9 +18,14 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+        
+    });
+    Route::post('/logout', [AuthController::class, "api_logout"]);
 });
+    
 
 //Artikel
 Route::controller(ArticleController::class)->group(function(){
@@ -47,4 +52,5 @@ Route::controller(ShoppingCartController::class)->group(function(){
 Route::controller(AuthController::class)->group(function(){
     Route::post('/register', 'api_register');
     Route::post('/login', 'api_login');
+    
 });

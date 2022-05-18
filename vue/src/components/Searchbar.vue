@@ -110,7 +110,7 @@ export default {
         },
         //Paginated Search
         async paginationSearch(){
-            if(this.searchvalue.length >=1){
+            if(this.searchvalue.length >=3){
                 await fetch(`http://localhost:8000/api/articles?search=${this.searchvalue}&page=0`)
                 .then(res=>{
                     let json = res.json();

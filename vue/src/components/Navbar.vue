@@ -125,7 +125,7 @@ export default {
     },
     methods:{
         handleLogout(){
-            store.commit('logout')
+            store.dispatch('logout');
         }
     }
 }
