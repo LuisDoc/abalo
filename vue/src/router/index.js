@@ -6,6 +6,7 @@ import ArticlesView from '../views/ArticlesView.vue'
 import SettingsView from '../views/Cookies/SettingsView.vue'
 import GuidelinesView from  '../views/Cookies/GuidelinesView.vue'
 import AuthLayout from  '../components/AuthLayout.vue'
+import ImpressumView from "../views/ImpressumView.vue"
 import store from "../store";
 
 const routes =[
@@ -48,6 +49,11 @@ const routes =[
         path: '/cookiesettings',
         name: 'Settings',
         component: SettingsView
+    },
+    {
+        path: '/impressum',
+        name: 'Impressum',
+        component:ImpressumView 
     }
 ];
 
