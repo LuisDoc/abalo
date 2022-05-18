@@ -77,11 +77,74 @@ class AuthController extends Controller
         return redirect('/showLogin');
     }
 
+    public function api_register(Request $request){
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|string|unique:pgsql.ab_user,ab_mail',
+            'password'=>[
+                'required',
+                'confirmed'
+            ]
+        ]);
+        //Anlegen des neuen Nutzers
+        $user = User::create([
+            'ab_mail' => $request->email,
+            'ab_name'=>$request->name,
+            'ab_password'=>Hash::make($request->password)
+            
+        ]);
+        $token = $user->createToken('main')->plainTextToken;
+
+        return response([
+            'user'=>$user,
+            'token'=>$token
+        ]);
+
+    }
+
+    public function api_login(Request $request){
+        
+        $request->validate([
+            'email'=> 'required|email|string|exists:pgsql.ab_user,ab_mail',
+            'password'=>[
+                'required'
+            ],
+        ]);
+        //Nutzer anmelden
+        $userdata = array(
+            'ab_mail'=>$request->email,
+            'password'=>$request->password
+        );
+        
+        if(!Auth::attempt($userdata)){
+            return response([
+                'error'=>'The Provided credentials are not correct'
+            ], 422);
+            
+        };
+        $user = Auth::user();
+        $token = $user->createToken('main')->plainTextToken;
+        return response([
+            'user'=>$user,
+            'token' => $token
+        ]);
+    }
+
     public function signOut(){
         session()->flush();
         Auth::logout();
         
         return redirect('/home');
+    }
+
+
+    public function api_logout(){
+        $user = Auth::user();
+
+        $user->currentAccessToken()->delete();
+        return response([
+            'success'=>true
+        ]);
     }
 
 

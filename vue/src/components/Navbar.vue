@@ -10,9 +10,9 @@
             </div>
         </div>
         
-        <div class="col-start-3 col-span-4">
-            <div class="flex justify-end">
-                <span id="search" class="m-6 hover:cursor-pointer grayscale hover:grayscale-0 transition ease-in-out" @click="search=!search">
+        <div class="col-start-3 col-span-4" >
+            <div class="flex justify-end"  @click="search=!search">
+                <span id="search" class="m-6 hover:cursor-pointer grayscale hover:grayscale-0 transition ease-in-out">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -22,11 +22,11 @@
             </div>
         </div>
         <!-- Warenkorb Button -->
-            <div class="col-span-1 mx-auto">
-                <a href="/ShoppingCart" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
+            <div v-if="user.token!=null" class="col-span-1 mx-auto">
+                <router-link :to="{name:'Cart'}" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
                     <img class ="w-9 h-9" src="../../public/images/warenkorb.png" alt="">
                     <span id="shoppingcartbell" class ="text-black h-7 ml-2 relative top-0 right-2"></span>
-                </a>
+                </router-link>
             </div>
         <div class="col-span-2">
             <div class="flex justify-end">
@@ -38,7 +38,7 @@
                     </svg>
                 </span>
                     <span @click="showlogin=!showlogin" v-if="user.token==null" id="login" class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">Abalo Login</span>
-                    <span v-else id="login"
+                    <span @click="showlogin=!showlogin" v-else id="login"
                         class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">My
                         Profile</span>
             </div>
@@ -94,9 +94,9 @@
                         <div class="mt-5 text-xl font-bold text-gray-600 text-center">Wilkommen zurück</div>
                         <a href="/myarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Meine Artikel</a>
                         <a href="/newarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Artikel hinzufügen</a>
-                        <a href="/logout" class="block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">
+                        <span  @click="handleLogout" class="block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">
                             Abmelden
-                        </a>
+                        </span>
                     </div>
             </div>
         </div>
@@ -109,6 +109,7 @@
 <script>
 import {mapState} from 'vuex'
 import Searchbar from "../components/Searchbar.vue"
+import store from "../store";
 export default {
     components:{ Searchbar},
     name:"Navbar",
@@ -120,6 +121,11 @@ export default {
             showlogin: false,
             navbar: false,
             search: false,
+        }
+    },
+    methods:{
+        handleLogout(){
+            store.dispatch('logout');
         }
     }
 }
