@@ -5,7 +5,8 @@
         <form @submit.prevent="handleLogin" id="loginform">
             <div class="flex justify-center mb-2 text-red-600">
                 <!--Errors-->
-                {{errorMessage}}
+                {{errorMessage.email[0]}}
+                {{errorMessage.password[0]}}
             </div>
             <div class="flex justify-center">
                 <input type="email" class="mb-2 py-2 px-5 inp" v-model="user.email" placeholder="E-Mail" id="email" name="email" required>
@@ -37,7 +38,7 @@ function handleLogin(){
     .then(()=>router.push({name:"Home"}))
     .catch((err)=>{
         console.log(err)
-        errorMessage.value = err.response.data.error;
+        errorMessage.value = err.response.data.errors;
     })
 
 }
