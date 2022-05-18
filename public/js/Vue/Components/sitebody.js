@@ -2,6 +2,9 @@
     Body Komponente
 */
 export default{
+    props: ['contentSwitch'],
+    emits: ['contentSwitch'],
+
     //Variablen und Daten
     data(){
         return{
@@ -14,6 +17,11 @@ export default{
     },
     //Methoden
     methods:{
+        //
+        handleSwitchToLandingPage(){
+            console.log("Handler called in Body - Switch to LandingPage");
+            this.$emit('contentSwitch','landingPage');
+        },
         //Alter Search unpaginated
         handleSearch(){
             if(this.key.length >= 1){
