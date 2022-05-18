@@ -10,9 +10,9 @@
             </div>
         </div>
         
-        <div class="col-start-3 col-span-4">
-            <div class="flex justify-end">
-                <span id="search" class="m-6 hover:cursor-pointer grayscale hover:grayscale-0 transition ease-in-out" @click="search=!search">
+        <div class="col-start-3 col-span-4" >
+            <div class="flex justify-end"  @click="search=!search">
+                <span id="search" class="m-6 hover:cursor-pointer grayscale hover:grayscale-0 transition ease-in-out">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
