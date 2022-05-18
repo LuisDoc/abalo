@@ -8,6 +8,7 @@ import GuidelinesView from  '../views/Cookies/GuidelinesView.vue'
 import AuthLayout from  '../components/AuthLayout.vue'
 import ImpressumView from "../views/ImpressumView.vue"
 import store from "../store";
+import ShoppingcartView from "../views/ShoppingcartView.vue"
 
 const routes =[
     
@@ -54,6 +55,12 @@ const routes =[
         path: '/impressum',
         name: 'Impressum',
         component:ImpressumView 
+    },
+    {
+        path:"/shoppingcart",
+        name:"Cart",
+        component: ShoppingcartView,
+        meta:{requiresAuth:true}
     }
 ];
 

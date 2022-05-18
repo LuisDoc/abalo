@@ -22,11 +22,11 @@
             </div>
         </div>
         <!-- Warenkorb Button -->
-            <div class="col-span-1 mx-auto">
-                <a href="/ShoppingCart" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
+            <div v-if="user.token!=null" class="col-span-1 mx-auto">
+                <router-link :to="{name:'Cart'}" class="flex my-4 pl-6 pr-4 transition ease-in-out duration-300 rounded-full border-purple hover:border-2">
                     <img class ="w-9 h-9" src="../../public/images/warenkorb.png" alt="">
                     <span id="shoppingcartbell" class ="text-black h-7 ml-2 relative top-0 right-2"></span>
-                </a>
+                </router-link>
             </div>
         <div class="col-span-2">
             <div class="flex justify-end">

@@ -43,12 +43,12 @@
                          <template  v-if="user.token!=null">
                             <div class ="p-4 flex justify-end">
                                 <template v-if="user.data.id==article.ab_creator_id">
-                                        <a class ="w-14 h-15 rounded-full p-2 bg-white border-red-400 hover:bg-red-400 border-2 hover:border-red-400 transition duration-300 ease-out" href="/removeArticle/{{$article->id}}">
+                                        <a  :id="'buy'+ article.id" class ="w-14 h-15 rounded-full p-2 bg-white border-red-400 hover:bg-red-400 border-2 hover:border-red-400 transition duration-300 ease-out" href="/removeArticle/{{$article->id}}">
                                             <img src="/images/TrashCan.png" alt="">
                                         </a>
                                 </template>
                                 <template v-else>
-                                    <button id="addShoppingCart{{$article->id}}" class ="w-14 h-15 rounded-full p-2 border-2 border-green-400 hover:bg-green-400 transition duration-300 ease-out">
+                                    <button :id="'buy'+ article.id" @click.prevent="addToShoppingCart(article.id)" :class="[shoppingcartItems && shoppingcartItems.includes(article.id)?'w-14 h-15 rounded-full p-2 border-2 border-red-400 hover:bg-red-400 transition duration-300 ease-out':'w-14 h-15 rounded-full p-2 border-2 border-green-400 hover:bg-green-400 transition duration-300 ease-out']">
                                         <img src="/images/warenkorb.png" alt="">
                                     </button> 
                                 </template>
@@ -67,6 +67,7 @@
 import { ContentLoader } from 'vue-content-loader'
 import Navbar from "../components/Navbar.vue"
 import {mapState} from 'vuex'
+
 export default {
     components:{
         ContentLoader, Navbar
@@ -74,6 +75,7 @@ export default {
     data(){
         return{
             articles: [],
+            shoppingcartItems: []
         }
         
     },
@@ -90,6 +92,28 @@ export default {
                 document.getElementById(id).src ="/images/placeholder.jpg";
             }
             test.src ="/images/articlepictures/" +id+ ".png";
+        },
+        addToShoppingCart(id){
+            let red = "w-14 h-15 rounded-full p-2 border-2 border-red-400 hover:bg-red-400 transition duration-300 ease-out";
+            let green = "w-14 h-15 rounded-full p-2 border-2 border-green-400 hover:bg-green-400 transition duration-300 ease-out"
+
+            const btn = document.querySelector(`#buy${id}`);
+            let decision = btn.classList == green ? red : green;
+            btn.setAttribute("class",decision);
+
+            let xhr = new XMLHttpRequest();
+            let url = "http://localhost:8000/api/shoppingcart/" + this.user.data.id
+            let params = "articleID="+id;
+            xhr.open("post",url);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function(){
+            
+            }
+            xhr.onerror = function(){
+                console.warn("Fehler beim laden des Artikelcounters");
+            }
+            xhr.send(params);
         }
     },
     async mounted(){
@@ -104,6 +128,20 @@ export default {
         let loader =document.getElementById("loader");
         loader.classList.add("hidden");
 
+
+        await fetch("http://localhost:8000/api/shoppingcart/"+ this.user.data.id)
+        .then(res=>{
+            let json = res.json();
+            return json;
+        }).then(data=>{
+            this.shoppingcartItems = data;
+        })
+        let items = this.shoppingcartItems;
+        let cart = [];
+        items.forEach(function(e){
+            cart.push(e.ab_article_id);
+        })
+        this.shoppingcartItems = cart;
     }
 }
 </script>
