@@ -21,8 +21,8 @@ import CookieCheck from "./components/CookieCheck.vue"
     },  
     methods:{
       cookieSettings(settings){
-        console.log(settings)
         this.cookie = settings;
+        window.sessionStorage.setItem("acceptCookies", this.cookie);
       }
     }
   }

@@ -38,7 +38,7 @@
                     </svg>
                 </span>
                     <span @click="showlogin=!showlogin" v-if="user.token==null" id="login" class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">Abalo Login</span>
-                    <span v-else id="login"
+                    <span @click="showlogin=!showlogin" v-else id="login"
                         class="mt-6 mb-6 mr-10 text-purple hover:text-black hover:cursor-pointer text-xl">My
                         Profile</span>
             </div>
@@ -94,9 +94,9 @@
                         <div class="mt-5 text-xl font-bold text-gray-600 text-center">Wilkommen zurück</div>
                         <a href="/myarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Meine Artikel</a>
                         <a href="/newarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Artikel hinzufügen</a>
-                        <a href="/logout" class="block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">
+                        <span  @click="handleLogout" class="block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">
                             Abmelden
-                        </a>
+                        </span>
                     </div>
             </div>
         </div>
@@ -109,6 +109,7 @@
 <script>
 import {mapState} from 'vuex'
 import Searchbar from "../components/Searchbar.vue"
+import store from "../store";
 export default {
     components:{ Searchbar},
     name:"Navbar",
@@ -120,6 +121,11 @@ export default {
             showlogin: false,
             navbar: false,
             search: false,
+        }
+    },
+    methods:{
+        handleLogout(){
+            store.commit('logout')
         }
     }
 }

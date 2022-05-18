@@ -44,3 +44,7 @@ Route::controller(ShoppingCartController::class)->group(function(){
     Route::delete('/shoppingcart/{creator_id}/articles/{article_id}',[ShoppingCartController::class,"deleteArticleFromShoppingCart"]);
 });
 
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/register', 'api_register');
+    Route::post('/login', 'api_login');
+});
