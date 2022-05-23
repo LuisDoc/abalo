@@ -3,7 +3,7 @@
     <h1 class="headline text-4xl pb-4 text-purple text-center">Anmelden</h1>
     <div>
         <form @submit.prevent="handleLogin" id="loginform">
-            <div class="flex justify-center mb-2 text-red-600">
+            <div v-if="errorMessage" class="flex justify-center mb-2 text-red-600">
                 <!--Errors-->
                 {{errorMessage.email[0]}}
                 {{errorMessage.password[0]}}

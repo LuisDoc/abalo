@@ -79,11 +79,11 @@
                         <div class="text-gray-400 text-xs">Lorem ipsum dolor sit amet.</div>
 
                         <div class="mt-12">
-                            <router-link :to="{name:'Login'}" @click="showlogin=!showlogin">
-                            <a class="py-4 px-10 text-md headline btn border-purple border">
-                                Anmelden
-                            </a>
-                            </router-link>
+                            <span  @click="showlogin=!showlogin">
+                                <router-link  :to="{name:'Login'}" class="py-4 px-10 text-md headline btn border-purple border">
+                                    Anmelden
+                                </router-link>
+                            </span>
                             <a class="ml-1 py-4 px-6 text-md bg-white headline hover:bg-gray-200 transition ease-in-out border border-black"
                                 href="">
                                 Mehr erfahren
