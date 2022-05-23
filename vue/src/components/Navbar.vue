@@ -92,7 +92,7 @@
                     </div>
                     <div v-else>
                         <div class="mt-5 text-xl font-bold text-gray-600 text-center">Wilkommen zurück</div>
-                        <a href="/myarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Meine Artikel</a>
+                        <router-link :to="{name:'MyArticles'}" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">Meine Artikel</router-link>
                         <a href="/newarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Artikel hinzufügen</a>
                         <span  @click="handleLogout" class="block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">
                             Abmelden

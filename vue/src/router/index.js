@@ -9,6 +9,8 @@ import AuthLayout from  '../components/AuthLayout.vue'
 import ImpressumView from "../views/ImpressumView.vue"
 import store from "../store";
 import ShoppingcartView from "../views/ShoppingcartView.vue"
+import MyArticlesView from "../views/MyArticlesView.vue"
+import AddNewArticlesView from "../views/AddNewArticlesView.vue"
 
 const routes =[
     
@@ -60,6 +62,18 @@ const routes =[
         path:"/shoppingcart",
         name:"Cart",
         component: ShoppingcartView,
+        meta:{requiresAuth:true}
+    },
+    {
+        path:"/myArticles",
+        name:"MyArticles",
+        component: MyArticlesView,
+        meta:{requiresAuth:true}
+    },
+    {
+        path:"/newarticle",
+        name:"NewArticle",
+        component:AddNewArticlesView,
         meta:{requiresAuth:true}
     }
 ];
