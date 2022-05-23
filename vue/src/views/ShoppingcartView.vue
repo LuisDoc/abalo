@@ -14,8 +14,8 @@
                     <td class="TableColumn">
                         <img :id="article.id" :src="'/images/articlepictures/' + article.id + '.jpg'" alt="" class="w-60 h-60 object-cover mt-5" @error="replaceImage(article.id)">
                     </td>
-                    <td class="TableColumn">{{article.article.ab_name}}</td>
-                    <td class="TableColumn">{{article.article.ab_price}}</td>
+                    <td class="TableColumn">{{article.article[0].ab_name}}</td>
+                    <td class="TableColumn">{{article.article[0].ab_name}}</td>
                     <td class="TableColumn flex justify-center pt-20">
                     <button :id="'buy'+ article.id" class="text-base btn p-2 border border-purple" @click.prevent="addToShoppingCart(article.ab_article_id)">Entfernen</button></td>
                 </tr>
@@ -69,7 +69,6 @@ export default {
             let json = res.json();
             return json;
         }).then(data=>{
-            
             this.shoppingcartItems = data;
         }).catch((err)=>{
             console.log(err);
