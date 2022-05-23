@@ -136,12 +136,6 @@ export default {
         }).then(data=>{
             this.shoppingcartItems = data;
         })
-        let items = this.shoppingcartItems;
-        let cart = [];
-        items.forEach(function(e){
-            cart.push(e.ab_article_id);
-        })
-        this.shoppingcartItems = cart;
     }
 }
 </script>

@@ -142,7 +142,7 @@ class ShoppingCartController extends Controller
     }
 
     //Wird nur aufgerufen, wenn der Warenkorb entfernt werden soll, weil z.B. keine Items mehr im Shop liegen
-    public function deleteShoppingCart_api($creator_id){
+    public function buyShoppingCart_api($creator_id){
         $user = User::find($creator_id);
         if(!$user){
             return response()->json(["error" => "user not found"]);
@@ -152,9 +152,14 @@ class ShoppingCartController extends Controller
             return response()->json(["error" => "shopping cart not found"]);
         }
         else{
-            ab_shoppingcart::destroy($cart->id);
+            $einträge = $cart->myarticles;
+            foreach($einträge as $eintrag)
+            {
+                $eintrag->article()->delete();
+            }
+            $cart->myarticles()->delete();
         }
-        return response()->json(["success" => "Shopping cart was removed"]);
+        return response()->json(["success" => "Article have been deleted and Shopping Cart was cleared"]);
     
     }
     

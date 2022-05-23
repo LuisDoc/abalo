@@ -72,13 +72,15 @@ export default {
             console.log("Check out for ShoppingCart with ID:  " + id);
             await fetch(`http://localhost:8000/api/shoppingcart/${this.user.data.id}`, {method:"DELETE"})
             .then(res=>res.json())
+            .then(() =>{
+                //Delete All Items from Database
+                console.log(this.shoppingcartItems);
+            })
             .then( () => this.shoppingcartItems = [])
             .then( () =>this.shoppingcartmessage = "Einkauf erfolgreich" )
             .catch(err=>console.log(err))
             //Delete Items from Shop
 
-            //Clear shoppingcartItems array
-        
             //Implement Article Creator Notification Praktikum 5
         },     
     },
@@ -90,6 +92,7 @@ export default {
         }).then(data=>{
             this.shoppingcartItems = data;
         }).catch((err)=>{
+            this.shoppingcartItems = [];
             console.log(err);
         })
     }

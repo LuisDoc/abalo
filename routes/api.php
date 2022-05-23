@@ -44,7 +44,7 @@ Route::controller(ShoppingCartController::class)->group(function(){
     //Shopping Cart Update
     Route::post('/shoppingcart/{creator_id}',[ShoppingCartController::class,"postShoppingCart_api"]);
     //Delete whole Shopping Cart
-    Route::delete('/shoppingcart/{creator_id}',[ShoppingCartController::class,"deleteShoppingCart_api"]);
+    Route::delete('/shoppingcart/{creator_id}',[ShoppingCartController::class,"buyShoppingCart_api"]);
     //Delete article from Shopping Cart
     Route::delete('/shoppingcart/{creator_id}/articles/{article_id}',[ShoppingCartController::class,"deleteArticleFromShoppingCart"]);
 });
