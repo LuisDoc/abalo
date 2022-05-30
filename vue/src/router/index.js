@@ -85,6 +85,7 @@ const router = createRouter({
     
 })
 
+//Umsetzung einer Middleware-Weiterleitung
 router.beforeEach((to, from, next)=>{
     if(to.meta.requiresAuth && !store.state.user.token){
         next({name:'Login'});
