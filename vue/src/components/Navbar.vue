@@ -59,7 +59,7 @@
                 <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Home</router-link></li>
                 <li @click="navbar=!navbar"><router-link :to="{name:'Articles'}">Artikel</router-link></li>
                 <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Kategorien</router-link></li>
-                <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Verkaufen</router-link></li>
+                <li @click="navbar=!navbar"><router-link :to="{name:'NewArticle'}">Verkaufen</router-link></li>
                 <li @click="navbar=!navbar">Unternehmen</li>
                 <li @click="navbar=!navbar" class="sub-nav"><router-link :to="{name:'Home'}">Philosophie</router-link></li>
                 <li @click="navbar=!navbar" class="sub-nav"><router-link :to="{name:'Home'}">Karriere</router-link></li>
