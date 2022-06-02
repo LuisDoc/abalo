@@ -24,6 +24,13 @@ import CookieCheck from "./components/CookieCheck.vue"
         this.cookie = settings;
         window.sessionStorage.setItem("acceptCookies", this.cookie);
       }
+    },
+    mounted(){
+      Echo.private('Hello')
+      .listen('HelloWebsocket', (e)=>{
+          console.log("Check");
+          console.log(e);
+      });
     }
   }
 </script>

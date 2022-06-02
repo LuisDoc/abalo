@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "laravel-echo": "^1.11.7",
+    "pusher-js": "^7.1.1-beta",
     "vue": "^3.2.25",
     "vue-content-loader": "^2.0.1",
     "vue-router": "^4.0.13",
@@ -17,6 +19,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
+    "dotenv-webpack": "^7.1.0",
     "node-sass": "^7.0.1",
     "sass": "^1.52.1",
     "sass-loader": "^13.0.0",

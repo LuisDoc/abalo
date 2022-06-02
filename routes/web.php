@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Events\HelloWebsocket;
 
 //Einstiegsseite
 Route::view('/newsite',"tailwind.landingpage");
@@ -35,6 +36,13 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login','login');
     Route::post('/register','register');
     Route::get('/logout', 'logout')->middleware('auth');
+});
+
+
+//Websocket-Routen
+
+Route::get("/broadcast", function(){
+    broadcast(new HelloWebsocket());
 });
 
 
