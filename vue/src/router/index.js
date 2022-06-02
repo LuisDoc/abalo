@@ -11,7 +11,7 @@ import store from "../store";
 import ShoppingcartView from "../views/ShoppingcartView.vue"
 import MyArticlesView from "../views/MyArticlesView.vue"
 import AddNewArticlesView from "../views/AddNewArticlesView.vue"
-
+import ExampleComponentView from "../views/ExampleComponentView.vue"
 const routes =[
     
     {
@@ -75,6 +75,11 @@ const routes =[
         name:"NewArticle",
         component:AddNewArticlesView,
         meta:{requiresAuth:true}
+    },
+    {
+        path:"/example",
+        name: "Example",
+        component: ExampleComponentView
     }
 ];
 

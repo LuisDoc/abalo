@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div id=menu class="fixed top-0 left-0 h-full p-10 w-1/6 bg-purple z-50 text-white" :class="{hidden: !navbar}">
+    <div id=menu class="fixed top-0 left-0 h-full p-10 w-1/6 bg-purple z-50" :class="{hidden: !navbar}">
         <div class="relative">
             <div class="absolute -right-5 -top-5">
                 <svg id="close" xmlns="http://www.w3.org/2000/svg" @click="navbar=false"
@@ -54,15 +54,16 @@
                 </svg>
             </div>
         </div>
+        <!-- Drop Down Menu -->
         <div class="mt-2" id="mnav">
-            <ul >
-                <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Home</router-link></li>
-                <li @click="navbar=!navbar"><router-link :to="{name:'Articles'}">Artikel</router-link></li>
-                <li @click="navbar=!navbar"><router-link :to="{name:'Home'}">Kategorien</router-link></li>
-                <li @click="navbar=!navbar"><router-link :to="{name:'NewArticle'}">Verkaufen</router-link></li>
-                <li @click="navbar=!navbar">Unternehmen</li>
-                <li @click="navbar=!navbar" class="sub-nav"><router-link :to="{name:'Home'}">Philosophie</router-link></li>
-                <li @click="navbar=!navbar" class="sub-nav"><router-link :to="{name:'Home'}">Karriere</router-link></li>
+            <ul class="list">
+                <li class="list__item--yellow list__item" @click="navbar=!navbar"><router-link :to="{name:'Home'}">Home</router-link></li>
+                <li class="list__item--primary--1 list__item" @click="navbar=!navbar"><router-link :to="{name:'Articles'}">Artikel</router-link></li>
+                <li class="list__item--red--5 list__item" @click="navbar=!navbar"><router-link :to="{name:'Home'}">Kategorien</router-link></li>
+                <li class="list__item--secondary--6 list__item" @click="navbar=!navbar"><router-link :to="{name:'NewArticle'}">Verkaufen</router-link></li>
+                <li class="list__item--green--6 list__item" @click="navbar=!navbar">Unternehmen</li>
+                <li @click="navbar=!navbar" class="sub-nav list__item list__item--orange--6"><router-link :to="{name:'Home'}">Philosophie</router-link></li>
+                <li @click="navbar=!navbar" class="sub-nav list__item list__item--blue--6"><router-link :to="{name:'Home'}">Karriere</router-link></li>
             </ul>
         </div>
     </div>
@@ -131,19 +132,57 @@ export default {
 }
 </script>
 
-<style>
-@keyframes showBlock {
-    from { display: block; opacity: 0; }
-    to { opacity: 1; }
-}
-.login{
-    background: rgba(0,0,0,0.5);
-    position:fixed;
-    top:4.9rem;
-    left:0;
-    width:100%;
-    height:100%;
-    animation:showBlock 0.3s;
-}
+<style lang="scss">
+    $black: rgba(0,0,0,0.5);
 
+    @keyframes showBlock {
+        from { display: block; opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @mixin bg() {
+        background: $black;
+        position:fixed;
+        top:4.9rem;
+        left:0;
+    }
+
+    .login{
+        @include bg();
+        width:100%;
+        height:100%;
+        animation:showBlock 0.3s;
+    }
+
+    $colors: (
+        primary: #37E2D5,
+        secondary: #A760FF,
+        red: #F24C4C,
+        yellow: #F7D716,
+        green: #5FD068,
+        orange: #EC9B3B,
+        blue: #646FD4
+    );
+    
+
+    .list{
+        .list__item{
+            color:white;
+            
+            &:hover{
+                opacity: .8;
+            }
+        }
+        @each $key, $val in $colors{
+            .list__item--#{$key}{
+                color:$val;
+            }
+            @for $i from 1 through 9{
+                .list__item--#{$key}--#{$i}{
+                    color:mix(white, $val, $i*10);
+                }
+            }
+        }
+        
+    }
 </style>

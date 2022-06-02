@@ -7,7 +7,7 @@
         <div id=loader>
             <content-loader 
                 viewBox="0 0 476 124"
-                primaryColor="#977DE2"
+                primaryColor="#7497e8"
                 secondaryColor="#cccccc"
                 class="ml-64"
                 >

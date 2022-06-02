@@ -4,7 +4,7 @@
         <div class="relative">
             <div style="background-image: url('../../public/images/shop.jpg'); height:857px"></div>
             <div class="shade"></div>
-            <div class="absolute top-28 left-56">
+            <div class="absolute top-24 left-24">
                 <div class="text-purple text-5xl headline w-64">
                     ABALO - Der beste Gebrauchtwarenhändler
                 </div>
