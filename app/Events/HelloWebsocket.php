@@ -37,6 +37,6 @@ class HelloWebsocket implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('Hello');
+        return new Channel('Hello');
     }
 }

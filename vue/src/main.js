@@ -8,10 +8,12 @@ import Pusher from "pusher-js"
 
 window.Pusher = Pusher;
 
+
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: import.meta.env.VITE_APP_WEBSOCKETS_KEY,
-    wsHOST: import.meta.env.VITE_APP_WEBSOCKETS_SERVER,
+    wsHost: import.meta.env.VITE_APP_WEBSOCKETS_SERVER,
     wsPort: 6001,
     forceTLS: false,
     disableStats: true

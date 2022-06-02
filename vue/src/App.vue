@@ -26,7 +26,7 @@ import CookieCheck from "./components/CookieCheck.vue"
       }
     },
     mounted(){
-      Echo.private('Hello')
+      Echo.channel('Hello')
       .listen('HelloWebsocket', (e)=>{
           console.log("Check");
           console.log(e);
