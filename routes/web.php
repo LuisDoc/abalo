@@ -6,7 +6,7 @@ use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Events\HelloWebsocket;
-
+use App\Events\Maintenance;
 //Einstiegsseite
 Route::view('/newsite',"tailwind.landingpage");
 Route::redirect('/','/newsite');
@@ -45,5 +45,7 @@ Route::get("/broadcast", function(){
     broadcast(new HelloWebsocket());
 });
 
-
+Route::get("/maintenance", function(){
+    broadcast(new Maintenance("In Kürze verbessern wir Abalo für Sie!\nNach einer kurzen Pause sind wir wieder für sie da! Versprochen"));
+});
 

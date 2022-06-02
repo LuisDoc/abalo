@@ -12,27 +12,42 @@
 import Navbar from "./components/Navbar.vue"
 import Footer from "./components/Footer.vue"
 import CookieCheck from "./components/CookieCheck.vue"
-  export default{
-    components:{ Navbar, Footer ,CookieCheck},
-    data(){
-      return{
-        cookie :true
-      }
-    },  
-    methods:{
-      cookieSettings(settings){
-        this.cookie = settings;
-        window.sessionStorage.setItem("acceptCookies", this.cookie);
-      }
-    },
-    mounted(){
-      Echo.channel('Hello')
-      .listen('HelloWebsocket', (e)=>{
-          console.log("Check");
-          console.log(e);
-      });
+import { useToast } from "vue-toastification";
+
+export default{
+  setup(){
+    const toast = useToast();
+    return {toast}
+  },
+  components:{ Navbar, Footer ,CookieCheck},
+  data(){
+    return{
+      cookie :true,
     }
+  },  
+  methods:{
+    cookieSettings(settings){
+      this.cookie = settings;
+      window.sessionStorage.setItem("acceptCookies", this.cookie);
+    }
+  },
+  mounted(){
+    /*
+    Echo.channel('Hello')
+    .listen('HelloWebsocket', (e)=>{
+        console.log(e);
+    });*/
+    const toast =  this.toast;
+    Echo.channel('Maintenance')
+    .listen('Maintenance', function(e){
+        toast.warning(e.message);
+    });
+
+
+    
+
   }
+}
 </script>
 
 
