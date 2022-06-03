@@ -157,7 +157,7 @@ class ShoppingCartController extends Controller
             $einträge = $cart->myarticles;
             foreach($einträge as $eintrag)
             {   
-                $message = "Großartig, ". $user->ab_name. "! Ihr Artikel '" . $eintrag->article->first()->ab_name . "' wurde erfolgreich verkauft";
+                $message = "Großartig! Ihr Artikel '" . $eintrag->article->first()->ab_name . "' wurde erfolgreich verkauft";
                 $seller_id = $eintrag->article->first()->ab_creator_id;
                 broadcast(new Sold($message,$seller_id,"test"));
                 $eintrag->article()->delete();
