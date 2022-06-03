@@ -127,7 +127,10 @@ export default {
     },
     methods:{
         handleLogout(){
-            store.dispatch('logout');
+            store.dispatch('logout')
+            .then(()=>{
+                this.$router.push('/')
+            });
         }
     }
 }

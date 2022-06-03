@@ -13,6 +13,7 @@ import MyArticlesView from "../views/MyArticlesView.vue"
 import AddNewArticlesView from "../views/AddNewArticlesView.vue"
 import ExampleComponentView from "../views/ExampleComponentView.vue"
 import AdminPanelView from "../views/auth/AdminPanelView.vue"
+import SingleArticleView from "../views/SingleArticleView.vue"
 const routes =[
     
     {
@@ -87,6 +88,11 @@ const routes =[
         name:"Adminpanel",
         component: AdminPanelView,
         meta:{requiresAuth:true}
+    },
+    {
+        path:"/article/:id",
+        name:"Article",
+        component:  SingleArticleView
     }
 ];
 

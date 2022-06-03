@@ -3,10 +3,9 @@
     <h1 class="headline text-4xl pb-4 text-purple text-center">Anmelden</h1>
     <div>
         <form @submit.prevent="handleLogin" id="loginform">
-            <div v-if="errorMessage" class="flex justify-center mb-2 text-red-600">
+             <div v-for="error in errorMessage" :key="error" class="flex justify-center mb-2 text-red-600">
                 <!--Errors-->
-                {{errorMessage.email[0]}}
-                {{errorMessage.password[0]}}
+                <div>{{error[0]}}</div>
             </div>
             <div class="flex justify-center">
                 <input type="email" class="mb-2 py-2 px-5 inp" v-model="user.email" placeholder="E-Mail" id="email" name="email" required>
@@ -37,7 +36,6 @@ function handleLogin(){
     store.dispatch('login', user)
     .then(()=>router.push({name:"Home"}))
     .catch((err)=>{
-        console.log(err)
         errorMessage.value = err.response.data.errors;
     })
 

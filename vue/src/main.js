@@ -2,16 +2,17 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
-
+import VueConfetti from 'vue-confetti'
 import Echo from 'laravel-echo'
 import Pusher from "pusher-js"
-
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
 
 window.Pusher = Pusher;
 
+
+  
 
 
 window.Echo = new Echo({
@@ -30,4 +31,5 @@ createApp(App)
     .use(store)
     .use(router)
     .use(Toast)
+    .use(VueConfetti)
     .mount('#app')

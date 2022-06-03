@@ -31,7 +31,9 @@ Route::middleware('auth:sanctum')->group(function(){
 Route::controller(ArticleController::class)->group(function(){
     Route::match(['get', 'post'], '/articles', 'articles_api');
     Route::delete("/articles/{id}", 'delete_api');
+    Route::get("/article/{id}", 'article_api');
     Route::post('/createArticle', "addArticle");
+    Route::post("/promote/{id}", "promoteArticle_api");
 });
 
 
@@ -58,3 +60,4 @@ Route::controller(AuthController::class)->group(function(){
 Route::get("/maintenance", function(){
     broadcast(new Maintenance("In Kürze verbessern wir Abalo für Sie!\nNach einer kurzen Pause sind wir wieder für sie da! Versprochen"));
 });
+

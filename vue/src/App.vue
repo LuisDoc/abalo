@@ -1,7 +1,7 @@
 <template>
 <div>
   <Navbar/>
-  <router-view :cookie="cookie"/>
+  <router-view :cookie="cookie" :promote="promote"/>
   <Footer/>
   <CookieCheck @cookieevent="cookieSettings"/>
 </div>
@@ -15,6 +15,7 @@ import CookieCheck from "./components/CookieCheck.vue"
 import { useToast } from "vue-toastification";
 import {mapState} from 'vuex'
 export default{
+  emits:["promote"],
   setup(){
     const toast = useToast();
     return {toast}
@@ -29,7 +30,14 @@ export default{
     cookieSettings(settings){
       this.cookie = settings;
       window.sessionStorage.setItem("acceptCookies", this.cookie);
-    }
+    },
+    start() {
+        this.$confetti.start();
+        setTimeout(() => {
+            this.$confetti.stop();
+        }, 3500);
+        
+    },
   },
   computed:{
         ...mapState(['user'])
@@ -53,8 +61,16 @@ export default{
       }
     });
 
-    
-
+    const router = this.$router;
+    const start = this.start;
+    Echo.channel('Promotion')
+    .listen('Promotion', function(e){
+      let article = JSON.parse(e.article)
+      if(router.currentRoute._value.path == "/article/"+article.id){
+         toast.error(e.message);
+         start();
+      }
+    });
   }
 }
 </script>

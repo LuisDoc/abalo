@@ -26,7 +26,7 @@
             <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 p-32 px-64 pt-1 gap-4">
                 <!-- Artikel Anzeige-->
                 <div v-for="article in articles" :key="article.id" class="class= bg-white hover:shadow-lg hover:outline hover:outline-purple transition ease-in-out">
-                    <a  href="#" :id="'S'+article.id">
+                    <router-link :to="'/article/' + article.id" :id="'S'+article.id">
                         <div class="p-4">
                             <h1 class="headline font-bold mb-2 truncate text-purple">{{ article.ab_name }}</h1>
                             <p class="text-sm mt-4 text-gray-600 font-semibold mb-1"><b class="text-purple">Preis:</b> {{ article.ab_price.toFixed(2)/100 }}</p>
@@ -54,7 +54,7 @@
                                 </template>
                             </div>
                         </template> 
-                    </a>
+                    </router-link>
                     
                 </div>
             </div>

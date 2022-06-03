@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use File;
 use Response;
+use App\Events\Maintenance;
+use App\Events\Promotion;
 class ArticleController extends Controller
 {
     //returned die Artikel View mit allen Artikeln
@@ -126,6 +128,19 @@ class ArticleController extends Controller
             'message' => 'Artikel gelöscht'
         ],200);
         
+    }
+
+    public function promoteArticle_api($id){
+        $article = ab_article::find($id);
+
+        broadcast(new Promotion("Der Artikel '" .$article->ab_name . "' wird nun günstiger angeboten! Greifen Sie schnell zu!",$article->toJson()));
+        return response([
+            'message' => 'Artikel promoted'
+        ],200);
+    }
+
+    public function article_api($id){
+        return ab_article::find($id);
     }
 
     

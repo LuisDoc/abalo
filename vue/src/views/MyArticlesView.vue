@@ -7,7 +7,7 @@
         <div id=loader>
             <content-loader 
                 viewBox="0 0 476 124"
-                primaryColor="#977DE2"
+                primaryColor="#7497e8"
                 secondaryColor="#cccccc"
                 class="ml-64"
                 >
@@ -26,7 +26,7 @@
             <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 p-32 px-64 pt-1 gap-4">
                 <!-- Artikel Anzeige-->
                 <div  v-for="article in articles" :key="article.id" class="class= bg-white hover:shadow-lg hover:outline hover:outline-purple transition ease-in-out">
-                    <a  href="#" :id="'S'+article.id">
+                    <span  href="#" :id="'S'+article.id">
                         <div class="p-4">
                             <h1 class="headline font-bold mb-2 truncate text-purple">{{ article.ab_name }}</h1>
                             <p class="text-sm mt-4 text-gray-600 font-semibold mb-1"><b class="text-purple">Preis:</b> {{ article.ab_price.toFixed(2)/100 }}</p>
@@ -42,12 +42,15 @@
                         </div>
                          <div class ="p-4 flex justify-end">
                             <template v-if="user.data.id==article.ab_creator_id">
-                                    <span @click="deleteArticle(article.id)" :id="'buy'+ article.id" class ="w-14 h-15 rounded-full p-2 bg-white border-red-400 hover:bg-red-400 border-2 hover:border-red-400 transition duration-300 ease-out" href="/removeArticle/{{$article->id}}">
+                                    <span @click="deleteArticle(article.id)" :id="'buy'+ article.id" class ="w-14 h-15 rounded-full p-2 hover:cursor-pointer bg-white border-red-400 hover:bg-red-400 border-2 hover:border-red-400 transition duration-300 ease-out">
                                         <img src="/images/TrashCan.png" alt="">
+                                    </span>
+                                    <span @click="promoteArticle(article.id)" class ="w-14 ml-4 h-15 rounded-full p-2 bg-white hover:cursor-pointer border-blue-400 hover:bg-blue-400 border-2 hover:border-blue-400 transition duration-300 ease-out">
+                                        <img src="/images/promote.png" alt="">
                                     </span>
                             </template>
                         </div>
-                    </a>
+                    </span>
                 </div>
             </div>
         </div>
@@ -59,7 +62,7 @@
 import { ContentLoader } from 'vue-content-loader'
 import Navbar from "../components/Navbar.vue"
 import {mapState} from 'vuex'
-
+import axiosClient from '../axios'
 export default {
     components:{
         ContentLoader, Navbar
@@ -91,6 +94,9 @@ export default {
                     return element.id != id
                 })
             }).catch(err=>console.log(err))
+        },
+        promoteArticle(id){
+            axiosClient.post(`/promote/${id}`)
         }
     },
     async mounted(){
