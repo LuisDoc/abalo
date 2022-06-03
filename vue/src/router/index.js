@@ -12,6 +12,7 @@ import ShoppingcartView from "../views/ShoppingcartView.vue"
 import MyArticlesView from "../views/MyArticlesView.vue"
 import AddNewArticlesView from "../views/AddNewArticlesView.vue"
 import ExampleComponentView from "../views/ExampleComponentView.vue"
+import AdminPanelView from "../views/auth/AdminPanelView.vue"
 const routes =[
     
     {
@@ -80,6 +81,12 @@ const routes =[
         path:"/example",
         name: "Example",
         component: ExampleComponentView
+    },
+    {
+        path:"/adminpanel",
+        name:"Adminpanel",
+        component: AdminPanelView,
+        meta:{requiresAuth:true}
     }
 ];
 

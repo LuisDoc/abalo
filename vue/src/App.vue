@@ -13,7 +13,7 @@ import Navbar from "./components/Navbar.vue"
 import Footer from "./components/Footer.vue"
 import CookieCheck from "./components/CookieCheck.vue"
 import { useToast } from "vue-toastification";
-
+import {mapState} from 'vuex'
 export default{
   setup(){
     const toast = useToast();
@@ -30,6 +30,9 @@ export default{
       this.cookie = settings;
       window.sessionStorage.setItem("acceptCookies", this.cookie);
     }
+  },
+  computed:{
+        ...mapState(['user'])
   },
   mounted(){
     /*

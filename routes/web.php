@@ -45,7 +45,5 @@ Route::get("/broadcast", function(){
     broadcast(new HelloWebsocket());
 });
 
-Route::get("/maintenance", function(){
-    broadcast(new Maintenance("In Kürze verbessern wir Abalo für Sie!\nNach einer kurzen Pause sind wir wieder für sie da! Versprochen"));
-});
+
 

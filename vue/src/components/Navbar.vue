@@ -1,7 +1,7 @@
 <template>
 <div>
     <Searchbar :search="search"/>
-  <div id="nav" class="grid grid-cols-9">
+  <div id="nav" class="grid grid-cols-9 z-30" >
         <div class="col-span-1">
             <div class="pt-6 flex justify-end">
                 <span id=open @click="navbar=true"
@@ -93,8 +93,9 @@
                     </div>
                     <div v-else>
                         <div class="mt-5 text-xl font-bold text-gray-600 text-center">Wilkommen zurück</div>
-                        <router-link :to="{name:'MyArticles'}" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">Meine Artikel</router-link>
-                        <a href="/newarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Artikel hinzufügen</a>
+                        <router-link @click="showlogin=!showlogin" v-if="user.data.mail == 'root@mail.com' || user.data.ab_mail" :to="{name:'Adminpanel'}"  class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">Adminpanel</router-link>
+                        <router-link @click="showlogin=!showlogin" :to="{name:'MyArticles'}" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">Meine Artikel</router-link>
+                        <router-link @click="showlogin=!showlogin" to="/newarticle" class="my-2 block py-4 px-10 text-md headline btn border-purple border text-center font-semibold">Artikel hinzufügen</router-link>
                         <span  @click="handleLogout" class="block py-4 px-10 text-md headline btn border-purple border text-center font-semibold hover:cursor-pointer">
                             Abmelden
                         </span>
@@ -174,11 +175,11 @@ export default {
             }
         }
         @each $key, $val in $colors{
-            .list__item--#{$key}{
+            .list__item--#{"" + $key}{
                 color:$val;
             }
             @for $i from 1 through 9{
-                .list__item--#{$key}--#{$i}{
+                .list__item--#{""+ $key}--#{$i}{
                     color:mix(white, $val, $i*10);
                 }
             }

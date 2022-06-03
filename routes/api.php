@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
-
+use App\Events\Maintenance;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,4 +53,8 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/register', 'api_register');
     Route::post('/login', 'api_login');
     
+});
+
+Route::get("/maintenance", function(){
+    broadcast(new Maintenance("In Kürze verbessern wir Abalo für Sie!\nNach einer kurzen Pause sind wir wieder für sie da! Versprochen"));
 });

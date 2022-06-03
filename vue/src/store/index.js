@@ -6,6 +6,7 @@ const store = createStore({
         user:{
             data:{
                 id: sessionStorage.getItem("USER_ID"),
+                mail: sessionStorage.getItem("USER_AB_MAIL"),
             },
             token:sessionStorage.getItem("TOKEN")
         }
