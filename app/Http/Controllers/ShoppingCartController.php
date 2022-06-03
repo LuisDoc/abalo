@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\ab_shoppingcart;
 use App\Models\ab_shoppingcart_item;
 use App\Models\User;
+use App\Events\Sold;
+use App\Events\Maintenance;
 class ShoppingCartController extends Controller
 {
     public function getShoppingCart(){        
@@ -154,7 +156,10 @@ class ShoppingCartController extends Controller
         else{
             $einträge = $cart->myarticles;
             foreach($einträge as $eintrag)
-            {
+            {   
+                $message = "Großartig, ". $user->ab_name. "! Ihr Artikel '" . $eintrag->article->first()->ab_name . "' wurde erfolgreich verkauft";
+                $seller_id = $eintrag->article->first()->ab_creator_id;
+                broadcast(new Sold($message,$seller_id,"test"));
                 $eintrag->article()->delete();
             }
             $cart->myarticles()->delete();

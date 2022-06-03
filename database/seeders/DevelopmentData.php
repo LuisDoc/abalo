@@ -22,7 +22,11 @@ class DevelopmentData extends Seeder
         $userCSV = fopen(base_path("/resources/seeders/user.csv"),"r");
 
         $firstLine = true;
-
+        User::create([
+            "ab_name"=>"admin",
+            "ab_mail"=>"admin@mail.com",
+            "ab_password"=>Hash::make("admin"),
+        ]);
         while(($data = fgetcsv($userCSV, 2000, ";")) !== FALSE){
             if(!$firstLine){
                 User::create([
