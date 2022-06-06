@@ -67,8 +67,12 @@
 import { ContentLoader } from 'vue-content-loader'
 import Navbar from "../components/Navbar.vue"
 import {mapState} from 'vuex'
-
+import { useToast } from "vue-toastification";
 export default {
+    setup(){
+        const toast = useToast();
+        return {toast}
+    },
     components:{
         ContentLoader, Navbar
     },
@@ -114,6 +118,9 @@ export default {
                 console.warn("Fehler beim laden des Artikelcounters");
             }
             xhr.send(params);
+        },
+        updateArticles(id){
+            this.articles = this.articles.filter(article => article.id != id);
         }
     },
     async mounted(){
@@ -134,8 +141,23 @@ export default {
             let json = res.json();
             return json;
         }).then(data=>{
-            this.shoppingcartItems = data;
+            if(Array.isArray(data)){
+                this.shoppingcartItems = data;
+            }
         })
+
+        const user = this.user;
+        const toast = this.toast;
+        const updateArticles = this.updateArticles;
+        Echo.channel('Sale')
+        .listen('Sold', function(e){
+            //Update Articles
+            updateArticles(e.article);
+            //Notify Article Creator only
+            if(user && user.data.id == e.userid){
+                toast.success(e.message);
+            }
+        });
     }
 }
 </script>

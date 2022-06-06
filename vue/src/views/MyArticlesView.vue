@@ -63,7 +63,12 @@ import { ContentLoader } from 'vue-content-loader'
 import Navbar from "../components/Navbar.vue"
 import {mapState} from 'vuex'
 import axiosClient from '../axios'
+import { useToast } from "vue-toastification";
 export default {
+    setup(){
+        const toast = useToast();
+        return {toast}
+    },
     components:{
         ContentLoader, Navbar
     },
@@ -97,7 +102,10 @@ export default {
         },
         promoteArticle(id){
             axiosClient.post(`/promote/${id}`)
-        }
+        },
+        updateArticles(id){
+            this.articles = this.articles.filter(article => article.id != id);
+        } 
     },
     async mounted(){
         window.scrollTo(0, 0);
@@ -118,6 +126,19 @@ export default {
         let loader =document.getElementById("loader");
         loader.classList.add("hidden");
 
+        //Listen to sold Article Event
+        const updateArticles = this.updateArticles;
+        const toast = this.toast;
+        const user = this.user;
+        Echo.channel('Sale')
+        .listen('Sold', function(e){
+            //Update Articles
+            updateArticles(e.article);
+            //Notify Article Creator only
+            if(user && user.data.id == e.userid){
+                toast.success(e.message);
+            }
+        });
 
     }
 

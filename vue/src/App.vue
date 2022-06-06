@@ -47,15 +47,6 @@ export default{
     .listen('Maintenance', function(e){
         toast.warning(e.message);
     });
-    const user = this.user;
-    Echo.channel('Sale')
-    .listen('Sold', function(e){
-      if(user && user.data.id == e.userid){
-        toast.success(e.message);
-      }
-    });
-
-    
   }
 }
 </script>

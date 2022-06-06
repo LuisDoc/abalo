@@ -21,7 +21,7 @@ window.Echo = new Echo({
     wsHost: import.meta.env.VITE_APP_WEBSOCKETS_SERVER,
     wsPort: 6001,
     forceTLS: false,
-    disableStats: true
+    disableStats: true,
 })
 
 
