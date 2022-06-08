@@ -57,6 +57,7 @@ import {mapState} from 'vuex'
 import gql from 'graphql-tag'
 
 export default {
+    props: ['discount'],
     setup(){
         const toast = useToast();
         return {toast}
@@ -95,7 +96,7 @@ export default {
     data(){
          return{
             article: {},
-            discount: false,
+            //discount: false,
             count: -1,
         }
     },
@@ -126,22 +127,13 @@ export default {
             }
             xhr.send(params);
         },
-        start(e) {
-            if(this.count==-1){
-                this.toast.error(e.message);
-                this.discount = !this.discount;
-                this.$confetti.start();
-                setTimeout(() => {
-                    this.$confetti.stop();
-                }, 3500);
-            }
-            this.count++;
-            
-            
-        },
+    },
+    updated(){
+        console.log("updated")
     },
     mounted(){
         window.scrollTo(0, 0);
+        console.log("mounted");
         /*
         fetch("http://localhost:8000/api/article/"+ this.currentUserId)
         .then(res => {
@@ -155,15 +147,7 @@ export default {
         })
         .catch(err=>console.log(err));
         */
-        const router = this.$router;
-        const start = this.start;
-        Echo.channel('Promotion')
-        .listen('Promotion', function(e){
-            let article = JSON.parse(e.article)
-            if(router.currentRoute._value.path == "/article/"+article.id){
-                start(e);
-            }
-        });
+        
     }
 }
 </script>

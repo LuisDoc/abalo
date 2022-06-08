@@ -1,7 +1,7 @@
 <template>
 <div>
   <Navbar/>
-  <router-view :cookie="cookie" :promote="promote"/>
+  <router-view :cookie="cookie" :promote="promote" :discount="discount"/>
   <Footer/>
   <CookieCheck @cookieevent="cookieSettings"/>
 </div>
@@ -24,6 +24,7 @@ export default{
   data(){
     return{
       cookie :true,
+      discount: false
     }
   },  
   methods:{
@@ -31,6 +32,14 @@ export default{
       this.cookie = settings;
       window.sessionStorage.setItem("acceptCookies", this.cookie);
     },
+      start(e) {
+          this.toast.error(e.message);
+          this.discount = !this.discount;
+          this.$confetti.start();
+          setTimeout(() => {
+              this.$confetti.stop();
+          }, 3500);
+      },
     
   },
   computed:{
@@ -47,6 +56,16 @@ export default{
     .listen('Maintenance', function(e){
         toast.warning(e.message);
     });
+
+    const router = this.$router;
+    const start = this.start;
+    Echo.channel('Promotion')
+    .listen('Promotion', function(e){
+        let article = JSON.parse(e.article)
+        if(router.currentRoute._value.path == "/article/"+article.id){
+            start(e);
+        }
+    })
   }
 }
 </script>
