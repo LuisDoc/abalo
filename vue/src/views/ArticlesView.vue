@@ -4,7 +4,7 @@
         <div class="text-6xl headline ml-64 pt-20 mb-20 text-purple">
             Alle Artikel im Überblick
         </div>
-        <div id=loader>
+        <div id=loader v-if="$apollo.loading">
             <content-loader 
                 viewBox="0 0 476 124"
                 primaryColor="#7497e8"
@@ -21,19 +21,18 @@
         </div>
         
         <!-- Anzeige aller Inserate -->
-        
-        <div class="mt-20">
+        <div class="mt-20" v-else>
             <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 p-32 px-64 pt-1 gap-4">
                 <!-- Artikel Anzeige-->
-                <div v-for="article in articles" :key="article.id" class="class= bg-white hover:shadow-lg hover:outline hover:outline-purple transition ease-in-out">
+                <div v-for="article in ab_articles" :key="article.id" class="class= bg-white hover:shadow-lg hover:outline hover:outline-purple transition ease-in-out">
                     <router-link :to="'/article/' + article.id" :id="'S'+article.id">
                         <div class="p-4">
                             <h1 class="headline font-bold mb-2 truncate text-purple">{{ article.ab_name }}</h1>
-                            <p class="text-sm mt-4 text-gray-600 font-semibold mb-1"><b class="text-purple">Preis:</b> {{ article.ab_price.toFixed(2)/100 }}</p>
+                            <p class="text-sm mt-4 text-gray-600 font-semibold mb-1"><b class="text-purple">Preis:</b> {{ article.ab_price.toFixed(2) /100 }}</p>
                             <p class="text-sm text-gray-600 mb-1 truncate"><b class="text-purple">About:</b>
                                 {{ article.ab_description }}</p>
                             <p class="text-sm text-gray-600 mb-1"><b class="text-purple">Creator:</b>
-                                {{ article.ab_creator_id }}</p>
+                                {{ article.owner.id }}</p>
                             <p class="text-sm text-gray-600 mb-1"><b class="text-purple">Created at:</b>
                                 {{ article.ab_createdate }}</p>
 
@@ -68,6 +67,7 @@ import { ContentLoader } from 'vue-content-loader'
 import Navbar from "../components/Navbar.vue"
 import {mapState} from 'vuex'
 import { useToast } from "vue-toastification";
+import gql from 'graphql-tag'
 export default {
     setup(){
         const toast = useToast();
@@ -76,10 +76,26 @@ export default {
     components:{
         ContentLoader, Navbar
     },
+    apollo: {
+        ab_articles: gql`{
+            ab_articles{
+                id
+                ab_name
+                ab_description
+                ab_price
+                ab_createdate
+                owner{
+                    id
+                    ab_name
+                }
+            }
+        }`
+    },
     data(){
         return{
-            articles: [],
-            shoppingcartItems: []
+            //articles: [],
+            shoppingcartItems: [],
+            count: 0
         }
         
     },
@@ -125,7 +141,7 @@ export default {
     },
     async mounted(){
         window.scrollTo(0, 0);
-        await fetch("http://localhost:8000/api/articles")
+        /*await fetch("http://localhost:8000/api/articles")
         .then(res => {
             let json = res.json();
             return json;
@@ -133,7 +149,7 @@ export default {
         .catch(err=>console.log(err));
         
         let loader =document.getElementById("loader");
-        loader.classList.add("hidden");
+        loader.classList.add("hidden");*/
 
 
         await fetch("http://localhost:8000/api/shoppingcart/"+ this.user.data.id)
@@ -149,13 +165,15 @@ export default {
         const user = this.user;
         const toast = this.toast;
         const updateArticles = this.updateArticles;
+        let count = this.count;
         Echo.channel('Sale')
         .listen('Sold', function(e){
             //Update Articles
             updateArticles(e.article);
             //Notify Article Creator only
-            if(user && user.data.id == e.userid){
+            if(user && user.data.id == e.userid && count == 0){
                 toast.success(e.message);
+                count++;
             }
         });
     }

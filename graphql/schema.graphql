@@ -1,0 +1,63 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Find a single user by an identifying attribute."
+    user(
+      "Search by primary key."
+      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+
+      "Search by email address."
+      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
+    ): User @find
+
+    "List multiple users."
+    users(
+      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+      name: String @where(operator: "like")
+    ): [User!]! @paginate(defaultCount: 10)
+
+    ab_users: [Ab_user!]! @all
+    ab_user(id: ID! @eq): Ab_user! @Find
+    ab_articles: [Ab_article!]! @all
+    ab_article(id: ID! @eq): Ab_article! @find
+}
+
+"Account of a person who utilizes this application."
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    name: String!
+
+    "Unique email address."
+    email: String!
+
+    "When the email was verified."
+    email_verified_at: DateTime
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}
+
+type Ab_user{
+    id: ID!
+    ab_name: String!
+    ab_password: String!
+    ab_mail: String!
+    myarticles: [Ab_article!]! @hasMany
+}
+
+type Ab_article{
+    id: ID!
+    ab_createdate: DateTime
+    ab_price: Int!
+    ab_description: String!
+    ab_name: String!
+    owner: Ab_user! @belongsTo
+}
