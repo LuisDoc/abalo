@@ -28,7 +28,7 @@
                     <router-link :to="'/article/' + article.id" :id="'S'+article.id">
                         <div class="p-4">
                             <h1 class="headline font-bold mb-2 truncate text-purple">{{ article.ab_name }}</h1>
-                            <p class="text-sm mt-4 text-gray-600 font-semibold mb-1"><b class="text-purple">Preis:</b> {{ article.ab_price.toFixed(2) /100 }}</p>
+                            <p class="text-sm mt-4 text-gray-600 font-semibold mb-1"><b class="text-purple">Preis:</b> {{ article.ab_price }}</p>
                             <p class="text-sm text-gray-600 mb-1 truncate"><b class="text-purple">About:</b>
                                 {{ article.ab_description }}</p>
                             <p class="text-sm text-gray-600 mb-1"><b class="text-purple">Creator:</b>
