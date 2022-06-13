@@ -103,9 +103,22 @@ export default {
             }
             xhr.send(params);
         },
+        //Start Konfetti-Effekt
         start() {
             this.discount = !this.discount;
-            this.$confetti.start();
+            // Konfiguration
+            this.$confetti.start(
+              {
+                    particles : [
+                        { type: 'heart',},
+                        { type: 'circle'},
+                    ],
+                    defaultColors: [
+                        'Gold',
+                        '#7497e8',
+                    ],
+                }  
+            );
             setTimeout(() => {
                 this.$confetti.stop();
             }, 3500);
@@ -134,6 +147,7 @@ export default {
             let article = JSON.parse(e.article)
             if(router.currentRoute._value.path == "/article/"+article.id){
                 toast.error(e.message);
+                //Konfetti-Effekt
                 start();
             }
         });
