@@ -109,16 +109,19 @@ export default {
             // Konfiguration
             this.$confetti.start(
               {
+                    //Partikelformen
                     particles : [
                         { type: 'heart',},
                         { type: 'circle'},
                     ],
+                    //Partikelfarben
                     defaultColors: [
                         'Gold',
                         '#7497e8',
                     ],
                 }  
             );
+            //Stoppe Konfetti-Effekt nach 3500 Millisekunden
             setTimeout(() => {
                 this.$confetti.stop();
             }, 3500);
@@ -142,9 +145,12 @@ export default {
         const toast =  this.toast;
         const router = this.$router;
         const start = this.start;
+        //Websocket Verbindung zum Server
+        //Abhören des Promotion Channel
         Echo.channel('Promotion')
         .listen('Promotion', function(e){
             let article = JSON.parse(e.article)
+            //Wenn der User den Artikel betrachtet, wird der Konfetti-Effekt gestartet
             if(router.currentRoute._value.path == "/article/"+article.id){
                 toast.error(e.message);
                 //Konfetti-Effekt
