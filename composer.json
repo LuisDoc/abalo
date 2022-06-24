@@ -15,6 +15,7 @@
         "laravel/ui": "^3.4",
         "mll-lab/laravel-graphql-playground": "^2.6",
         "nuwave/lighthouse": "^5.52",
+        "predis/predis": "^2.0",
         "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {

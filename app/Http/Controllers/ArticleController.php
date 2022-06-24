@@ -11,6 +11,7 @@ use File;
 use Response;
 use App\Events\Maintenance;
 use App\Events\Promotion;
+use Illuminate\Support\Facades\Redis;
 class ArticleController extends Controller
 {
     //returned die Artikel View mit allen Artikeln
@@ -81,8 +82,11 @@ class ArticleController extends Controller
         //Es wurde ein Suchbegriff angegeben
         if($request->search){
             //Suche in Datenbank nach Suchbegriff
+            Redis::set('lastarticlesearch', $request->search);
+            $test = Redis::get('pageviews:05:1');
             $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->paginate(5);
-            return response()->json(['articles'=>$articles], 200);
+            return response()->json(['articles'=>$articles, $test], 200);
+            
         }
         //Anfrage zur Erstellung eines Artikels wurde hochgeladen
         else if($request->input('name') != null && $request->input('price') != null && $request->input('creator_id') != null){
