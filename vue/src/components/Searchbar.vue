@@ -11,7 +11,7 @@
             <div class="m-5">
                 <form action="" method="" @submit.prevent="paginationSearch">
                     <div class="relative border-b-2 border-gray-600 hover:border-gray-800">
-                        <input type="text" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple" v-model="searchvalue" @keyup="paginationSearch" @keydown="paginationSearch">
+                        <input type="text" name="search" placeholder="z.B Delorean" class="w-full pl-8 p-2 text-purple" v-model="searchvalue" @keyup.enter="paginationSearch">
                         <span class="absolute left-0 mr-6 mt-2 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -32,8 +32,16 @@
             <div class="m-5">
             </div>
         </div>
+         
+         <div  class="mb-4 ml-64 mr-64"> 
+            Recent searches: 
+            <span v-for="rs in recentSearches" :key="rs">
+                <span class="bg-purple p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer">{{rs}}</span>
+            </span>          
+         </div>
         <div class="grid-cols-2  ml-64 mr-64 mt-12 mb-12 gap-4" v-if="showResults">
-            <template v-if="size > 0">
+            <template v-if="size > 0" class="mt-2">
+            
                 <span v-for="(link,index) in links.slice(0,-1)" :key="link.label" class="mt-10">
                     <span v-if="index>0 && link.url!=null && link.label!='Next &raquo;'" @click="nextPage(link.label)" :id="link.label" 
                     :class="[link.active==true? 'bg-red-600 p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer':'bg-purple p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer' ]" class="bg-purple p-2 rounded-md  mr-1 text-white hover:bg-white hover:text-purple hover:cursor-pointer" v-text="index"></span>
@@ -76,7 +84,7 @@
 import { ContentLoader } from 'vue-content-loader'
 export default {
     name: "Searchbar",
-    props:["search"],
+    props:["search", "recentSearches"],
     components:{
         ContentLoader
     },
@@ -106,6 +114,8 @@ export default {
                 this.articlesearch= []
                 this.size = 0;
             }
+            
+            
             
         },
         //Paginated Search

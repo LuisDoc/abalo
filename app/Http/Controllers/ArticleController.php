@@ -11,6 +11,7 @@ use File;
 use Response;
 use App\Events\Maintenance;
 use App\Events\Promotion;
+use App\Events\Search;
 use Illuminate\Support\Facades\Redis;
 class ArticleController extends Controller
 {
@@ -83,9 +84,26 @@ class ArticleController extends Controller
         if($request->search){
             //Suche in Datenbank nach Suchbegriff
             Redis::set('lastarticlesearch', $request->search);
-            $test = Redis::get('pageviews:05:1');
+            //get max score
+            $current_max = Redis::zrevrangebyscore('recentsearches', '+inf', '-inf', ['withscores' => true, 'limit' => [0, 1]])?? 0;
+            $num_of_searches = Redis::zcard('recentsearches');
+            $new_search_exists = Redis::zrank('recentsearches', $request->search); 
+            if($num_of_searches >= 4 && !$new_search_exists){
+                //If set is full decrement all scores and add new search
+                Redis::zremrangebyscore('recentsearches', 0, 0);
+                $members= Redis::zrange('recentsearches', 0, -1);
+                foreach($members as $member){
+                    Redis::zincrby('recentsearches', -1, $member);
+                }
+            }
+
+            //Add new search to set
+            Redis::zadd('recentsearches', current($current_max)+ 1, $request->search);
+            $recentsearches = Redis::zrevrange('recentsearches', 0, -1);
+            broadcast(new Search($recentsearches));
+            
             $articles = ab_article::where('ab_name','ilike','%'.$request->search.'%')->paginate(5);
-            return response()->json(['articles'=>$articles, $test], 200);
+            return response()->json(['articles'=>$articles], 200);
             
         }
         //Anfrage zur Erstellung eines Artikels wurde hochgeladen
@@ -113,8 +131,12 @@ class ArticleController extends Controller
             ]);
         }
         else{
+            $recentsearches = Redis::zrevrange('recentsearches', 0, -1);
+            broadcast(new Search($recentsearches));
             return ab_article::all();
         }
+        
+        
         
     }
 

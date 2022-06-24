@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Navbar/>
+  <Navbar :searches="searches"/>
   <router-view :cookie="cookie" :promote="promote" :discount="discount"/>
   <Footer/>
   <CookieCheck @cookieevent="cookieSettings"/>
@@ -24,7 +24,8 @@ export default{
   data(){
     return{
       cookie :true,
-      discount: false
+      discount: false,
+      searches:[]
     }
   },  
   methods:{
@@ -40,6 +41,14 @@ export default{
               this.$confetti.stop();
           }, 3500);
       },
+      addtoRecentSearches(search){
+        console.log(search) 
+        if(search.length> 5){
+          search =search.slice(0,5);
+        }
+        console.log(search)
+        this.searches = search
+      }
     
   },
   computed:{
@@ -65,6 +74,12 @@ export default{
         if(router.currentRoute._value.path == "/article/"+article.id){
             start(e);
         }
+    })
+
+    const add = this.addtoRecentSearches;
+    Echo.channel('Search')
+    .listen('Search', function(e){
+        add(e.searches); 
     })
   }
 }
