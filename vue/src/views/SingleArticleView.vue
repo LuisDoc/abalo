@@ -128,32 +128,28 @@ export default {
             xhr.send(params);
         },
     },
-    updated(){
-        console.log("updated")
-        //Start Konfetti-Effekt
-        start() {
-            this.discount = !this.discount;
-            // Konfiguration
-            this.$confetti.start(
-              {
-                    //Partikelformen
-                    particles : [
-                        { type: 'heart',},
-                        { type: 'circle'},
-                    ],
-                    //Partikelfarben
-                    defaultColors: [
-                        'Gold',
-                        '#7497e8',
-                    ],
-                }  
-            );
-            //Stoppe Konfetti-Effekt nach 3500 Millisekunden
-            setTimeout(() => {
-                this.$confetti.stop();
-            }, 3500);
-            
-        },
+    start() {
+        this.discount = !this.discount;
+        // Konfiguration
+        this.$confetti.start(
+            {
+                //Partikelformen
+                particles : [
+                    { type: 'heart',},
+                    { type: 'circle'},
+                ],
+                //Partikelfarben
+                defaultColors: [
+                    'Gold',
+                    '#7497e8',
+                ],
+            }  
+        );
+        //Stoppe Konfetti-Effekt nach 3500 Millisekunden
+        setTimeout(() => {
+            this.$confetti.stop();
+        }, 3500);
+        
     },
     mounted(){
         window.scrollTo(0, 0);
@@ -170,6 +166,7 @@ export default {
 
         })
         .catch(err=>console.log(err));
+        */
         const toast =  this.toast;
         const router = this.$router;
         const start = this.start;
