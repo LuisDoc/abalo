@@ -1,6 +1,6 @@
 <template>
 <div>
-    <Searchbar :search="search"/>
+    <Searchbar :search="search" :recentSearches="searches"/>
   <div id="nav" class="grid grid-cols-9 z-30" >
         <div class="col-span-1">
             <div class="pt-6 flex justify-end">
@@ -113,6 +113,7 @@ import {mapState} from 'vuex'
 import Searchbar from "../components/Searchbar.vue"
 import store from "../store";
 export default {
+    props:['searches'],
     components:{ Searchbar},
     name:"Navbar",
     computed: {

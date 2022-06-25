@@ -14,6 +14,7 @@ import AddNewArticlesView from "../views/AddNewArticlesView.vue"
 import ExampleComponentView from "../views/ExampleComponentView.vue"
 import AdminPanelView from "../views/auth/AdminPanelView.vue"
 import SingleArticleView from "../views/SingleArticleView.vue"
+import StatisticsView from "../views/StatisticsView.vue"
 const routes =[
     
     {
@@ -93,6 +94,11 @@ const routes =[
         path:"/article/:id",
         name:"Article",
         component:  SingleArticleView
+    },
+    {
+        path:"/statistics",
+        name:"Statistic",
+        component: StatisticsView
     }
 ];
 
